@@ -18,9 +18,11 @@ Current stage:
 
 ```text
 PDF -> page text/images -> product records -> validation report -> manual review Markdown
+    -> mock product/query embeddings -> mock retrieval evaluation
 ```
 
-Embeddings are intentionally not implemented yet. We first want a clean enough product catalogue.
+The current embedding step uses a deterministic mock model. It is only for testing the data flow,
+array storage, and later retrieval code before connecting a real embedding provider.
 
 ## Setup
 
@@ -57,6 +59,39 @@ data/raw/Great Whiskeys.pdf
 
 The raw PDF is not committed by default. `data/raw/.gitkeep` only keeps the directory present.
 
+## Code Organization
+
+Reusable pipeline code lives in the package under:
+
+```text
+src/rs_demo/
+```
+
+The codebase is organized as a library first. Command-line access is exposed through the package
+CLI:
+
+```bash
+python -m rs_demo --help
+```
+
+Current library entry points:
+
+```text
+rs_demo.pdf_extraction.PdfExtractor
+rs_demo.product_parser.ProductParser
+rs_demo.image_cropping.ProductImageCropper
+rs_demo.catalogue_validation.CatalogueValidator
+rs_demo.markdown_export.ProductMarkdownExporter
+rs_demo.embeddings.MockEmbeddingPipeline
+rs_demo.embeddings.MockQueryEmbeddingPipeline
+rs_demo.queries.EvalQueryLoader
+rs_demo.retrieval.ProductRetriever
+rs_demo.evaluation.RetrievalEvaluator
+```
+
+This keeps the code easier to test and lets later retrieval/evaluation code call the same pipeline
+directly as Python classes.
+
 ## Full Pipeline
 
 Run these commands from the repo root.
@@ -64,7 +99,7 @@ Run these commands from the repo root.
 ### 1. Extract Page Text And Images
 
 ```bash
-python scripts/probe_pdf_extraction.py data/raw/Great\ Whiskeys.pdf --max-pages 1000
+python -m rs_demo extract-pdf data/raw/Great\ Whiskeys.pdf --max-pages 1000
 ```
 
 Outputs:
@@ -86,7 +121,7 @@ Purpose:
 ### 2. Parse Product Records
 
 ```bash
-python scripts/prototype_product_parser.py
+python -m rs_demo parse-products
 ```
 
 Output:
@@ -113,7 +148,7 @@ These are front matter, tour/map pages, indexes, acknowledgments, or credits.
 ### 3. Crop Product Images
 
 ```bash
-python scripts/crop_product_images.py
+python -m rs_demo crop-images
 ```
 
 Outputs:
@@ -135,7 +170,7 @@ connected component in each embedded image.
 ### 4. Generate Validation Report
 
 ```bash
-python scripts/validate_catalogue.py
+python -m rs_demo validate-catalogue
 ```
 
 Output:
@@ -157,7 +192,7 @@ Use this report to inspect:
 ### 5. Generate Product Markdown For Manual Review
 
 ```bash
-python scripts/export_product_markdown.py
+python -m rs_demo export-markdown
 ```
 
 Outputs:
@@ -183,21 +218,128 @@ Each product Markdown file contains:
 - full page render;
 - raw parsed block.
 
+### 6. Generate Mock Embeddings
+
+```bash
+python -m rs_demo build-mock-embeddings
+```
+
+Outputs:
+
+```text
+data/embeddings/mock/metadata.jsonl
+data/embeddings/mock/text_embeddings.npy
+data/embeddings/mock/image_embeddings.npy
+data/embeddings/mock/multimodal_embeddings.npy
+data/embeddings/mock/manifest.json
+```
+
+The mock model is deterministic and local. It writes three aligned NumPy arrays:
+
+- `text_embeddings.npy`: product text only;
+- `image_embeddings.npy`: product image path/content only;
+- `multimodal_embeddings.npy`: product text and image evidence together.
+
+Use this stage to test loading, ranking, and evaluation code without paying for or depending on a
+remote embedding API.
+
+### 7. Generate Mock Query Embeddings
+
+```bash
+python -m rs_demo build-mock-query-embeddings
+```
+
+Inputs:
+
+```text
+data/eval/text_queries.jsonl
+data/eval/image_queries.jsonl
+data/eval/image_text_queries.jsonl
+```
+
+Outputs:
+
+```text
+data/embeddings/mock/queries/text/
+data/embeddings/mock/queries/image/
+data/embeddings/mock/queries/image_text/
+```
+
+The three query modes are intentionally separate:
+
+- `text`: natural language only;
+- `image`: cropped bottle image or whole scene image only;
+- `image_text`: whole scene image plus the question `What is the whisky in this image?`.
+
+### 8. Run Mock Retrieval Evaluation
+
+```bash
+python -m rs_demo run-mock-evaluation
+```
+
+Output:
+
+```text
+data/eval/mock_retrieval_report.json
+```
+
+This ranks products with cosine similarity and reports `hit@1`, `hit@5`, `hit@10`, and `MRR`.
+The current mock model is hash-based, so these scores are only a pipeline sanity check. They are
+not evidence of real retrieval quality.
+
 ## Common Development Loop
 
 When fixing parser behavior:
 
 ```bash
-python scripts/prototype_product_parser.py
-python scripts/crop_product_images.py
-python scripts/validate_catalogue.py
-python scripts/export_product_markdown.py
+python -m rs_demo parse-products
+python -m rs_demo crop-images
+python -m rs_demo validate-catalogue
+python -m rs_demo export-markdown
+python -m rs_demo build-mock-embeddings
+python -m rs_demo build-mock-query-embeddings
+python -m rs_demo run-mock-evaluation
 pytest -q
 ruff check .
 ```
 
 If the parser change only affects text fields and not image paths, the crop step can be skipped
 temporarily. Run it again before treating generated Markdown as final for review.
+
+## Evaluation Query Seed
+
+The first evaluation seeds are:
+
+```text
+data/eval/text_queries.jsonl
+data/eval/image_queries.jsonl
+data/eval/image_text_queries.jsonl
+```
+
+Text queries contain:
+
+- `query_id`;
+- `query_type`;
+- `query_style`;
+- text `query`;
+- `relevant_product_ids`;
+- a `label_generation` note describing the rule-based keyword search used to select positives.
+
+Image and image+text queries are built from the reviewed movie/TV scene image set:
+
+```text
+data/eval/movie_scene_query_images/
+data/eval/movie_scene_bottle_crops/
+```
+
+For the main multimodal benchmark, image-only queries include both:
+
+- manually cropped bottle images;
+- whole movie/TV scene images.
+
+Image+text queries use the whole scene image plus a natural identification question. These are not
+final human relevance judgments. They are controlled seed labels so retrieval code can be tested
+before calling a real embedding API.
 
 ## Important Design Notes
 
@@ -227,12 +369,15 @@ docs/raw_data_characteristics.md
 
 ## Next Planned Stage
 
-After manual validation, create embedding input files:
+After the mock embedding pipeline is stable, replace the mock model with real embedding providers
+while keeping the same output contract:
 
 ```text
-data/catalogue/whisky_products.jsonl
-data/catalogue/embedding_inputs.jsonl
+metadata.jsonl
+text_embeddings.npy
+image_embeddings.npy
+multimodal_embeddings.npy
 ```
 
-The embedding design should keep product text, brand context, and image evidence separate at
-first, then combine scores during retrieval/ranking.
+This lets us compare text-only, image-only, late-fusion, and native multimodal retrieval using the
+same product records.

@@ -1,11 +1,24 @@
 from __future__ import annotations
 
-import argparse
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 import fitz
+
+
+@dataclass(frozen=True)
+class PdfExtractionConfig:
+    pdf_path: Path
+    output_dir: Path = Path("data/extracted/pymupdf_probe")
+    max_pages: int = 5
+    zoom: float = 2.0
+
+
+class PdfExtractor:
+    def extract(self, config: PdfExtractionConfig) -> list[dict[str, Any]]:
+        return probe_pdf(config.pdf_path, config.output_dir, config.max_pages, config.zoom)
 
 
 def clean_snippet(text: str, limit: int = 700) -> str:
@@ -80,38 +93,3 @@ def probe_pdf(pdf_path: Path, output_dir: Path, max_pages: int, zoom: float) -> 
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(rows, indent=2), encoding="utf-8")
     return rows
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Probe PDF text and image extraction with PyMuPDF.")
-    parser.add_argument("pdf", type=Path, help="Path to the PDF to inspect.")
-    parser.add_argument(
-        "--out-dir",
-        type=Path,
-        default=Path("data/extracted/pymupdf_probe"),
-        help="Directory for rendered pages, extracted images, and manifest.",
-    )
-    parser.add_argument("--max-pages", type=int, default=5, help="Maximum pages to inspect.")
-    parser.add_argument("--zoom", type=float, default=2.0, help="Page render zoom factor.")
-    return parser.parse_args()
-
-
-def main() -> None:
-    args = parse_args()
-    rows = probe_pdf(args.pdf, args.out_dir, args.max_pages, args.zoom)
-
-    for row in rows:
-        print(
-            f"page={row['page']} "
-            f"text_chars={row['text_chars']} "
-            f"embedded_images={row['embedded_image_count']}"
-        )
-        if row["text_snippet"]:
-            print(f"  text: {row['text_snippet']}")
-        print(f"  render: {row['rendered_page_path']}")
-
-    print(f"\nManifest written to {args.out_dir / 'manifest.json'}")
-
-
-if __name__ == "__main__":
-    main()

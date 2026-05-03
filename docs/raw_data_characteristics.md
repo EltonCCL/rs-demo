@@ -254,7 +254,7 @@ The raw embedded images often contain the bottle plus unnecessary whitespace or 
 We generate rough crops with:
 
 ```bash
-python scripts/crop_product_images.py
+python -m rs_demo crop-images
 ```
 
 The cropper finds the largest non-white connected component in each embedded image, adds padding,

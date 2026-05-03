@@ -5,7 +5,10 @@ description = "Multimodal whisky recommendation demo."
 authors = [{ name = "Elton Li" }]
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
-dependencies = ["pymupdf==1.27.2.3"]
+dependencies = ["google-genai==1.74.0", "numpy==2.2.6", "pymupdf==1.27.2.3"]
+
+[project.scripts]
+rs-demo = "rs_demo.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest==8.4.2", "ruff==0.11.13"]

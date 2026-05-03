@@ -1,12 +1,58 @@
 from __future__ import annotations
 
-import argparse
 import json
 from collections import deque
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 import fitz
+
+
+@dataclass(frozen=True)
+class ImageCropperConfig:
+    catalogue_path: Path = Path("data/extracted/product_parse_sample.jsonl")
+    output_catalogue_path: Path = Path("data/extracted/product_parse_sample.jsonl")
+    output_dir: Path = Path("data/extracted/product_image_crops")
+    manifest_path: Path = Path("data/extracted/product_image_crops_manifest.json")
+    source_root: Path = Path("data/extracted/pymupdf_probe")
+    white_threshold: int = 245
+    padding: int = 18
+    min_component_pixels: int = 250
+
+
+class ProductImageCropper:
+    def crop_records(
+        self,
+        records: list[dict[str, Any]],
+        source_root: Path,
+        output_dir: Path,
+        white_threshold: int,
+        padding: int,
+        min_component_pixels: int,
+    ) -> list[dict[str, Any]]:
+        return crop_catalogue_images(
+            records,
+            source_root,
+            output_dir,
+            white_threshold,
+            padding,
+            min_component_pixels,
+        )
+
+    def run(self, config: ImageCropperConfig) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+        records = load_jsonl(config.catalogue_path)
+        results = self.crop_records(
+            records,
+            config.source_root.resolve(),
+            config.output_dir,
+            config.white_threshold,
+            config.padding,
+            config.min_component_pixels,
+        )
+        write_jsonl(config.output_catalogue_path, records)
+        config.manifest_path.write_text(json.dumps(results, indent=2), encoding="utf-8")
+        return records, results
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -194,63 +240,3 @@ def crop_catalogue_images(
             record["cropped_product_image_path"] = None
 
     return list(crop_results.values())
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Crop whitespace from extracted product images.")
-    parser.add_argument(
-        "--catalogue",
-        type=Path,
-        default=Path("data/extracted/product_parse_sample.jsonl"),
-        help="Input product JSONL path.",
-    )
-    parser.add_argument(
-        "--out-catalogue",
-        type=Path,
-        default=Path("data/extracted/product_parse_sample.jsonl"),
-        help="Output product JSONL path with cropped image paths.",
-    )
-    parser.add_argument(
-        "--out-dir",
-        type=Path,
-        default=Path("data/extracted/product_image_crops"),
-        help="Output directory for cropped images.",
-    )
-    parser.add_argument(
-        "--manifest",
-        type=Path,
-        default=Path("data/extracted/product_image_crops_manifest.json"),
-        help="Output JSON crop manifest.",
-    )
-    parser.add_argument(
-        "--source-root",
-        type=Path,
-        default=Path("data/extracted/pymupdf_probe"),
-        help="Root directory of extracted source images.",
-    )
-    parser.add_argument("--white-threshold", type=int, default=245)
-    parser.add_argument("--padding", type=int, default=18)
-    parser.add_argument("--min-component-pixels", type=int, default=250)
-    return parser.parse_args()
-
-
-def main() -> None:
-    args = parse_args()
-    records = load_jsonl(args.catalogue)
-    results = crop_catalogue_images(
-        records,
-        args.source_root.resolve(),
-        args.out_dir,
-        args.white_threshold,
-        args.padding,
-        args.min_component_pixels,
-    )
-    write_jsonl(args.out_catalogue, records)
-    args.manifest.write_text(json.dumps(results, indent=2), encoding="utf-8")
-
-    cropped = sum(1 for result in results if result["status"] == "cropped")
-    print(f"cropped={cropped} images={len(results)} catalogue={args.out_catalogue}")
-
-
-if __name__ == "__main__":
-    main()

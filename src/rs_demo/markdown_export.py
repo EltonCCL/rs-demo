@@ -1,10 +1,33 @@
 from __future__ import annotations
 
-import argparse
 import json
 import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+
+@dataclass(frozen=True)
+class MarkdownExportConfig:
+    catalogue_path: Path = Path("data/extracted/product_parse_sample.jsonl")
+    output_dir: Path = Path("data/extracted/product_markdown")
+
+
+class ProductMarkdownExporter:
+    def render_product(self, record: dict[str, Any], out_dir: Path) -> str:
+        return product_markdown(record, out_dir)
+
+    def write_products(self, records: list[dict[str, Any]], out_dir: Path) -> None:
+        write_product_markdown(records, out_dir)
+
+    def write_index(self, records: list[dict[str, Any]], out_dir: Path) -> None:
+        write_index(records, out_dir)
+
+    def run(self, config: MarkdownExportConfig) -> list[dict[str, Any]]:
+        records = load_jsonl(config.catalogue_path)
+        self.write_products(records, config.output_dir)
+        self.write_index(records, config.output_dir)
+        return records
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -127,32 +150,3 @@ def write_index(records: list[dict[str, Any]], out_dir: Path) -> None:
         lines.append("| " + " | ".join(value.replace("|", "\\|") for value in row) + " |")
 
     (out_dir / "index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Export one manual-review Markdown file per product.")
-    parser.add_argument(
-        "--catalogue",
-        type=Path,
-        default=Path("data/extracted/product_parse_sample.jsonl"),
-        help="Input product JSONL path.",
-    )
-    parser.add_argument(
-        "--out-dir",
-        type=Path,
-        default=Path("data/extracted/product_markdown"),
-        help="Output directory for product Markdown files.",
-    )
-    return parser.parse_args()
-
-
-def main() -> None:
-    args = parse_args()
-    records = load_jsonl(args.catalogue)
-    write_product_markdown(records, args.out_dir)
-    write_index(records, args.out_dir)
-    print(f"out_dir={args.out_dir} products={len(records)}")
-
-
-if __name__ == "__main__":
-    main()

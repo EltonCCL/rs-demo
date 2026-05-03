@@ -1,0 +1,55 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage[utf8] {inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[hidelinks,linktoc=all]{hyperref}
+\usepackage{graphicx}
+\usepackage{csquotes}
+
+\usepackage{datetime2}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% \rfoot{Compiled: \today\ at \DTMcurrenttime}
+
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{myref.bib}
+
+\usepackage{setspace}
+\setstretch{1.2}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em plus 3pt minus 2pt}
+
+\usepackage{tocloft}
+\renewcommand{\cftpartpresnum}{Part~}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem {remark}{Remark}
+\newtheorem{proposition}{Proposition}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\title{A Exploration on Vector Embedding Backed Recommendation System}
+\author{Elton Chun-Chai Li}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\clearpage
+
+\part{Experiment}
+\input{experiment.tex}
+\input{problem_definition.tex}
+\input{experiment_setup.tex}
+\input{experiment_results.tex}
+
+\clearpage
+% \printbibliography % Prints the bibliography
+\end{document}

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import argparse
 import json
 import re
 import unicodedata
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -56,6 +56,32 @@ NOISE_LINES = {
     "W H I S K E Y S",
     "G R E A T",
 }
+
+
+@dataclass(frozen=True)
+class ProductParserConfig:
+    input_dir: Path = Path("data/extracted/pymupdf_probe")
+    output_path: Path = Path("data/extracted/product_parse_sample.jsonl")
+
+
+class ProductParser:
+    def parse_page(self, page_dir: Path) -> list[dict[str, Any]]:
+        return parse_page(page_dir)
+
+    def parse_pages(self, input_dir: Path) -> list[dict[str, Any]]:
+        return parse_pages(input_dir)
+
+    def write_records(self, records: list[dict[str, Any]], output_path: Path) -> None:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(
+            "".join(json.dumps(record, ensure_ascii=False) + "\n" for record in records),
+            encoding="utf-8",
+        )
+
+    def run(self, config: ProductParserConfig) -> list[dict[str, Any]]:
+        records = self.parse_pages(config.input_dir)
+        self.write_records(records, config.output_path)
+        return records
 
 
 def normalize_text(text: str) -> str:
@@ -389,44 +415,3 @@ def parse_pages(input_dir: Path) -> list[dict[str, Any]]:
         if page_dir.is_dir() and (page_dir / "text.txt").exists():
             records.extend(parse_page(page_dir))
     return enrich_records_by_brand(records)
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Prototype product parser for PyMuPDF page text.")
-    parser.add_argument(
-        "--input-dir",
-        type=Path,
-        default=Path("data/extracted/pymupdf_probe"),
-        help="Directory containing page_XXXX/text.txt outputs from the PyMuPDF probe.",
-    )
-    parser.add_argument(
-        "--out",
-        type=Path,
-        default=Path("data/extracted/product_parse_sample.jsonl"),
-        help="JSONL path for parsed product records.",
-    )
-    return parser.parse_args()
-
-
-def main() -> None:
-    args = parse_args()
-    records = parse_pages(args.input_dir)
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(
-        "".join(json.dumps(record, ensure_ascii=False) + "\n" for record in records),
-        encoding="utf-8",
-    )
-
-    pages = sorted({record["source_page"] for record in records})
-    print(f"records={len(records)} pages={len(pages)} out={args.out}")
-    for record in records[:10]:
-        print(
-            f"page={record['source_page']} name={record['name']} "
-            f"style={record['style']} region={record['region']} abv={record['abv']} "
-            f"parse_confidence={record['parse_confidence']} "
-            f"image_confidence={record['image_confidence']}"
-        )
-
-
-if __name__ == "__main__":
-    main()

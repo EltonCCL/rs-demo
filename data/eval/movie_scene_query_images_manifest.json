@@ -1,0 +1,154 @@
+{
+  "created_for": "Manual review of movie and TV whisky scene candidates before designing image and image+text queries.",
+  "source_page": "https://spiritory.com/blog/whisky-in-movies-iconic-bottles-and-film-appearances-en",
+  "copyright_note": "Downloaded for local research/demo review only. Keep source URLs; do not redistribute or commit image assets unless rights are confirmed.",
+  "items": [
+    {
+      "image_id": "msq001",
+      "local_path": "data/eval/movie_scene_query_images/msq001-skyfall-macallan.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bidl_1_194b0061e9.jpg",
+      "screen_reference": "Skyfall",
+      "whisky_reference": "Macallan 1962 Fine & Rare",
+      "candidate_catalogue_product_ids": [
+        "p0243-the-macallan-10-year-old",
+        "p0243-the-macallan-fine-oak-10-year-old",
+        "p0244-the-macallan-25-year-old",
+        "p0244-the-macallan-30-year-old"
+      ],
+      "review_note": "Catalogue has Macallan products but not the exact 1962 Fine & Rare bottle."
+    },
+    {
+      "image_id": "msq002",
+      "local_path": "data/eval/movie_scene_query_images/msq002-lost-in-translation-hibiki.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild_2_bc87e05a66.jpg",
+      "screen_reference": "Lost in Translation",
+      "whisky_reference": "Suntory Hibiki 17",
+      "candidate_catalogue_product_ids": [
+        "p0334-suntory-hibiki-17-year-old",
+        "p0334-suntory-hibiki-30-year-old"
+      ],
+      "review_note": "Good candidate because the exact Hibiki 17 product exists in the catalogue."
+    },
+    {
+      "image_id": "msq003",
+      "local_path": "data/eval/movie_scene_query_images/msq003-blade-runner-johnnie-walker.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild_4_5888585df9.jpg",
+      "screen_reference": "Blade Runner",
+      "whisky_reference": "Johnnie Walker Black Label",
+      "candidate_catalogue_product_ids": [
+        "p0208-johnnie-walker-black-label",
+        "p0208-johnnie-walker-green-label",
+        "p0209-johnnie-walker-gold-label",
+        "p0209-johnnie-walker-blue-label"
+      ],
+      "review_note": "Good brand-family query candidate; movie bottle design may differ from normal catalogue bottle."
+    },
+    {
+      "image_id": "msq004",
+      "local_path": "data/eval/movie_scene_query_images/msq004-john-wick-blantons.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bid_5_e90060345d.jpg",
+      "screen_reference": "John Wick",
+      "whisky_reference": "Blanton's Bourbon",
+      "candidate_catalogue_product_ids": [
+        "p0057-blanton-s-single-barrel"
+      ],
+      "review_note": "Good exact-product visual query candidate."
+    },
+    {
+      "image_id": "msq005",
+      "local_path": "data/eval/movie_scene_query_images/msq005-the-shining-jack-daniels.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild_5_86b18312f4.jpg",
+      "screen_reference": "The Shining",
+      "whisky_reference": "Jack Daniel's Old No. 7",
+      "candidate_catalogue_product_ids": [
+        "p0199-jack-daniel-s-old-no-7",
+        "p0199-jack-daniel-s-single-barrel"
+      ],
+      "review_note": "Likely useful for brand recognition, though scene framing may make bottle details harder."
+    },
+    {
+      "image_id": "msq006",
+      "local_path": "data/eval/movie_scene_query_images/msq006-last-of-us-laphroaig.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild_7_fdd8cc8977.jpg",
+      "screen_reference": "The Last of Us",
+      "whisky_reference": "Laphroaig",
+      "candidate_catalogue_product_ids": [
+        "p0228-laphroaig10-year-old",
+        "p0228-laphroaig-10-year-old-cask-strength",
+        "p0229-laphroaig-quarter-cask",
+        "p0229-laphroaig-25-year-old"
+      ],
+      "review_note": "Good image+text candidate if the text asks for smoky, peaty, or stronger Laphroaig."
+    },
+    {
+      "image_id": "msq007",
+      "local_path": "data/eval/movie_scene_query_images/msq007-lagavulin-screen-reference.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild_8_6a65abe136.jpg",
+      "screen_reference": "28 Days Later / Parks and Recreation",
+      "whisky_reference": "Lagavulin",
+      "candidate_catalogue_product_ids": [
+        "p0224-lagavulin-16-year-old",
+        "p0224-lagavulin-12-year-old",
+        "p0225-lagavulin-distillers-edition",
+        "p0225-lagavulin-21-year-old"
+      ],
+      "review_note": "Good brand-family query candidate for Lagavulin."
+    },
+    {
+      "image_id": "msq008",
+      "local_path": "data/eval/movie_scene_query_images/msq008-constantine-ardbeg.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild_11_51adfca0db.jpg",
+      "screen_reference": "Constantine",
+      "whisky_reference": "Ardbeg 10",
+      "candidate_catalogue_product_ids": [
+        "p0021-ardbeg-10-year-old",
+        "p0021-ardbeg-airigh-nam-beist",
+        "p0022-ardbeg-blasda",
+        "p0022-ardbeg-uigeadail"
+      ],
+      "review_note": "Good image+text candidate for asking for gentler, stronger, or sherried Ardbeg variants."
+    },
+    {
+      "image_id": "msq009",
+      "local_path": "data/eval/movie_scene_query_images/msq009-suits-macallan.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild11_d3f946dce4.jpg",
+      "screen_reference": "Suits",
+      "whisky_reference": "Macallan 18",
+      "candidate_catalogue_product_ids": [
+        "p0243-the-macallan-10-year-old",
+        "p0243-the-macallan-fine-oak-10-year-old",
+        "p0244-the-macallan-25-year-old",
+        "p0244-the-macallan-30-year-old"
+      ],
+      "review_note": "Catalogue has Macallan products but not Macallan 18; better as a brand-family query."
+    },
+    {
+      "image_id": "msq010",
+      "local_path": "data/eval/movie_scene_query_images/msq010-mad-men-canadian-club.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild10_62b2989f72.jpg",
+      "screen_reference": "Mad Men",
+      "whisky_reference": "Canadian Club",
+      "candidate_catalogue_product_ids": [
+        "p0074-canadian-club-reserve",
+        "p0074-canadian-club-6-year-old-100-proof",
+        "p0075-canadian-club-premium",
+        "p0075-canadian-club-classic"
+      ],
+      "review_note": "Good brand-family candidate; some parsed Canadian Club brand fields are noisy."
+    },
+    {
+      "image_id": "msq011",
+      "local_path": "data/eval/movie_scene_query_images/msq011-west-wing-johnnie-walker-blue.jpg",
+      "source_image_url": "https://strapi.spiritory.com/uploads/Bild_9_e4b3c03a47.jpg",
+      "screen_reference": "The West Wing",
+      "whisky_reference": "Johnnie Walker Blue Label",
+      "candidate_catalogue_product_ids": [
+        "p0209-johnnie-walker-blue-label",
+        "p0208-johnnie-walker-black-label",
+        "p0208-johnnie-walker-green-label",
+        "p0209-johnnie-walker-gold-label"
+      ],
+      "review_note": "Good candidate for premium-version or same-brand multimodal queries."
+    }
+  ]
+}

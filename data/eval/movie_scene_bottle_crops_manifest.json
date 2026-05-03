@@ -1,0 +1,175 @@
+{
+  "created_for": "Manual bottle crops from movie/TV scene query images.",
+  "source_manifest": "data/eval/movie_scene_query_images_manifest.json",
+  "items": [
+    {
+      "image_id": "msq001",
+      "screen_reference": "Skyfall",
+      "whisky_reference": "Macallan 1962 Fine & Rare",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq001-skyfall-macallan.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq001-skyfall-macallan.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0243-the-macallan-10-year-old",
+        "p0243-the-macallan-fine-oak-10-year-old",
+        "p0244-the-macallan-25-year-old",
+        "p0244-the-macallan-30-year-old"
+      ]
+    },
+    {
+      "image_id": "msq002",
+      "screen_reference": "Lost in Translation",
+      "whisky_reference": "Suntory Hibiki 17",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq002-lost-in-translation-hibiki.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq002-lost-in-translation-hibiki.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0334-suntory-hibiki-17-year-old",
+        "p0334-suntory-hibiki-30-year-old"
+      ]
+    },
+    {
+      "image_id": "msq003",
+      "screen_reference": "Blade Runner",
+      "whisky_reference": "Johnnie Walker Black Label",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq003-blade-runner-johnnie-walker.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq003-blade-runner-johnnie-walker.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0208-johnnie-walker-black-label",
+        "p0208-johnnie-walker-green-label",
+        "p0209-johnnie-walker-gold-label",
+        "p0209-johnnie-walker-blue-label"
+      ]
+    },
+    {
+      "image_id": "msq004",
+      "screen_reference": "John Wick",
+      "whisky_reference": "Blanton's Bourbon",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq004-john-wick-blantons.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq004-john-wick-blantons.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0057-blanton-s-single-barrel"
+      ]
+    },
+    {
+      "image_id": "msq005",
+      "screen_reference": "The Shining",
+      "whisky_reference": "Jack Daniel's Old No. 7",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq005-the-shining-jack-daniels.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq005-the-shining-jack-daniels.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0199-jack-daniel-s-old-no-7",
+        "p0199-jack-daniel-s-single-barrel"
+      ]
+    },
+    {
+      "image_id": "msq006",
+      "screen_reference": "The Last of Us",
+      "whisky_reference": "Laphroaig",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq006-last-of-us-laphroaig.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq006-last-of-us-laphroaig.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0228-laphroaig10-year-old",
+        "p0228-laphroaig-10-year-old-cask-strength",
+        "p0229-laphroaig-quarter-cask",
+        "p0229-laphroaig-25-year-old"
+      ]
+    },
+    {
+      "image_id": "msq007",
+      "screen_reference": "28 Days Later / Parks and Recreation",
+      "whisky_reference": "Lagavulin",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq007-lagavulin-screen-reference.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq007-lagavulin-screen-reference.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0224-lagavulin-16-year-old",
+        "p0224-lagavulin-12-year-old",
+        "p0225-lagavulin-distillers-edition",
+        "p0225-lagavulin-21-year-old"
+      ]
+    },
+    {
+      "image_id": "msq008",
+      "screen_reference": "Constantine",
+      "whisky_reference": "Ardbeg 10",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq008-constantine-ardbeg.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq008-constantine-ardbeg.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0021-ardbeg-10-year-old",
+        "p0021-ardbeg-airigh-nam-beist",
+        "p0022-ardbeg-blasda",
+        "p0022-ardbeg-uigeadail"
+      ]
+    },
+    {
+      "image_id": "msq009",
+      "screen_reference": "Suits",
+      "whisky_reference": "Macallan 18",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq009-suits-macallan.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq009-suits-macallan.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0243-the-macallan-10-year-old",
+        "p0243-the-macallan-fine-oak-10-year-old",
+        "p0244-the-macallan-25-year-old",
+        "p0244-the-macallan-30-year-old"
+      ]
+    },
+    {
+      "image_id": "msq010",
+      "screen_reference": "Mad Men",
+      "whisky_reference": "Canadian Club",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq010-mad-men-canadian-club.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq010-mad-men-canadian-club.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0074-canadian-club-reserve",
+        "p0074-canadian-club-6-year-old-100-proof",
+        "p0075-canadian-club-premium",
+        "p0075-canadian-club-classic"
+      ]
+    },
+    {
+      "image_id": "msq011",
+      "screen_reference": "The West Wing",
+      "whisky_reference": "Johnnie Walker Blue Label",
+      "scene_image_path": "data/eval/movie_scene_query_images/msq011-west-wing-johnnie-walker-blue.jpg",
+      "bottle_crop_path": "data/eval/movie_scene_bottle_crops/msq011-west-wing-johnnie-walker-blue.crop.jpg",
+      "crop_status": "ready_for_review",
+      "crop_source": "manual_user_crop",
+      "crop_note": "Manual crop supplied by user; bbox not recorded.",
+      "candidate_catalogue_product_ids": [
+        "p0209-johnnie-walker-blue-label",
+        "p0208-johnnie-walker-black-label",
+        "p0208-johnnie-walker-green-label",
+        "p0209-johnnie-walker-gold-label"
+      ]
+    }
+  ]
+}

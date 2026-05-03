@@ -1,10 +1,30 @@
 from __future__ import annotations
 
-import argparse
 import json
 from collections import Counter, defaultdict
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+
+@dataclass(frozen=True)
+class CatalogueValidationConfig:
+    catalogue_path: Path = Path("data/extracted/product_parse_sample.jsonl")
+    manifest_path: Path = Path("data/extracted/pymupdf_probe/manifest.json")
+    output_path: Path = Path("data/extracted/catalogue_validation_report.md")
+
+
+class CatalogueValidator:
+    def build_report(self, records: list[dict[str, Any]], manifest: list[dict[str, Any]]) -> str:
+        return build_report(records, manifest)
+
+    def run(self, config: CatalogueValidationConfig) -> str:
+        records = load_jsonl(config.catalogue_path)
+        manifest = load_manifest(config.manifest_path)
+        report = self.build_report(records, manifest)
+        config.output_path.parent.mkdir(parents=True, exist_ok=True)
+        config.output_path.write_text(report, encoding="utf-8")
+        return report
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -169,40 +189,3 @@ def build_report(records: list[dict[str, Any]], manifest: list[dict[str, Any]]) 
         "",
     ]
     return "\n".join(sections)
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate a validation report for parsed products.")
-    parser.add_argument(
-        "--catalogue",
-        type=Path,
-        default=Path("data/extracted/product_parse_sample.jsonl"),
-        help="Input product JSONL path.",
-    )
-    parser.add_argument(
-        "--manifest",
-        type=Path,
-        default=Path("data/extracted/pymupdf_probe/manifest.json"),
-        help="PyMuPDF extraction manifest path.",
-    )
-    parser.add_argument(
-        "--out",
-        type=Path,
-        default=Path("data/extracted/catalogue_validation_report.md"),
-        help="Output Markdown report path.",
-    )
-    return parser.parse_args()
-
-
-def main() -> None:
-    args = parse_args()
-    records = load_jsonl(args.catalogue)
-    manifest = load_manifest(args.manifest)
-    report = build_report(records, manifest)
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(report, encoding="utf-8")
-    print(f"report={args.out} records={len(records)}")
-
-
-if __name__ == "__main__":
-    main()

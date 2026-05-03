@@ -4,7 +4,14 @@ import unittest
 from pathlib import Path
 from typing import Any
 
-from scripts.prototype_product_parser import clean_lines, parse_age, parse_page, parse_pages, parse_spec
+from rs_demo.product_parser import (
+    ProductParser,
+    clean_lines,
+    parse_age,
+    parse_page,
+    parse_pages,
+    parse_spec,
+)
 
 
 FIXTURE_ROOT = Path("data/extracted/pymupdf_probe")
@@ -39,6 +46,9 @@ class ParserPrimitiveTests(unittest.TestCase):
 
     def test_parse_age_from_product_name(self) -> None:
         self.assertEqual(parse_age("ARDBEG 10-YEAR-OLD"), 10)
+
+    def test_product_parser_class_matches_function_api(self) -> None:
+        self.assertEqual(ProductParser().parse_page(require_page(24)), parse_page(require_page(24)))
 
 
 class PageParserRegressionTests(unittest.TestCase):
