@@ -3,6 +3,9 @@
 
 Copies movie-scene query images into docs/ so GitHub can render them from the markdown file.
 Run from repo root: python scripts/render_evaluation_query_docs.py
+
+Change (2026-05): text / image / image+text sections each use one main HTML table; paths, rules, notes,
+and JSONL IDs live in appendix <details> blocks.
 """
 from __future__ import annotations
 
@@ -21,47 +24,249 @@ def load_jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
-def label_generation_block(record: dict) -> list[str] | None:
+def esc_html(s: object) -> str:
+    t = "" if s is None else str(s)
+    return (
+        t.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
+
+
+def _label_rule_text(record: dict) -> str:
     lg = record.get("label_generation")
     if not lg:
-        return None
+        return ""
     method = lg.get("method", "")
     rule = lg.get("rule") or lg.get("source_fields")
-    lines = [
-        "<details>",
-        "<summary>Label rule (how positives were chosen)</summary>",
-        "",
-        f"*Method:* `{method}`",
-        "",
-        f"*Rule / fields:* {rule}",
-        "",
-        "</details>",
-        "",
-    ]
-    return lines
+    return f"{method} — {rule}"
 
 
-def relevant_products_section(pids: list[str], products: dict[str, str]) -> list[str]:
-    """Readable names by default; IDs only inside a collapsed block."""
-    lines: list[str] = []
-    lines.append("**Expected positives (catalogue products):**")
-    lines.append("")
+def positives_ul(pids: list[str], products: dict[str, str]) -> str:
+    parts = ["<ul>"]
     for pid in pids:
         nm = products.get(pid)
         if nm:
-            lines.append(f"- **{nm}**")
+            parts.append(f"<li><strong>{esc_html(nm)}</strong></li>")
         else:
-            lines.append(f"- **(unknown name)** — not found in local `product_parse_sample.jsonl`")
-    lines.append("")
-    lines.append("<details>")
-    lines.append("<summary>Product IDs (<code>relevant_product_ids</code> in JSONL)</summary>")
-    lines.append("")
-    for pid in pids:
-        lines.append(f"- `{pid}`")
-    lines.append("")
-    lines.append("</details>")
-    lines.append("")
-    return lines
+            parts.append("<li><em>(unknown in local catalogue)</em></li>")
+    parts.append("</ul>")
+    return "".join(parts)
+
+
+def text_queries_main_table(text_q: list[dict], products: dict[str, str]) -> list[str]:
+    """Single scan-friendly HTML table for all text evaluation queries."""
+    out: list[str] = []
+    out.append(
+        "One row per benchmark query. **Expected positives** lists catalogue names that count as a hit "
+        "(Hit@k / MRR). Notes and technical IDs are in the appendix below."
+    )
+    out.append("")
+    out.append('<table>')
+    out.append("<thead><tr>")
+    out.append("<th align='left'>ID</th>")
+    out.append("<th align='left'>Style</th>")
+    out.append("<th align='left'>Query</th>")
+    out.append("<th align='left'>Expected positives</th>")
+    out.append("</tr></thead>")
+    out.append("<tbody>")
+    for r in text_q:
+        qid = esc_html(r["query_id"])
+        style = esc_html(r.get("query_style", ""))
+        query = esc_html(r.get("query", ""))
+        pids = r.get("relevant_product_ids") or []
+        pos = positives_ul(pids, products)
+        out.append("<tr>")
+        out.append(f"<td valign='top'><code>{qid}</code></td>")
+        out.append(f"<td valign='top'><code>{style}</code></td>")
+        out.append(f"<td valign='top'>{query}</td>")
+        out.append(f"<td valign='top'>{pos}</td>")
+        out.append("</tr>")
+    out.append("</tbody></table>")
+    out.append("")
+    return out
+
+
+def text_queries_appendix_details(text_q: list[dict], products: dict[str, str]) -> list[str]:
+    """Collapsed table: notes, how labelled, product IDs."""
+    out: list[str] = []
+    out.append("<details>")
+    out.append("<summary><strong>Appendix (text queries):</strong> notes, label rules, product IDs</summary>")
+    out.append("")
+    out.append('<table>')
+    out.append("<thead><tr>")
+    out.append("<th align='left'>ID</th>")
+    out.append("<th align='left'>Notes</th>")
+    out.append("<th align='left'>How labelled</th>")
+    out.append("<th align='left'>Product IDs</th>")
+    out.append("</tr></thead><tbody>")
+    for r in text_q:
+        qid = esc_html(r["query_id"])
+        notes = esc_html(r.get("notes") or "—")
+        rule = esc_html(_label_rule_text(r) or "—")
+        pids = r.get("relevant_product_ids") or []
+        ids_cell = ", ".join(f"<code>{esc_html(pid)}</code>" for pid in pids)
+        out.append("<tr>")
+        out.append(f"<td valign='top'><code>{qid}</code></td>")
+        out.append(f"<td valign='top'>{notes}</td>")
+        out.append(f"<td valign='top'>{rule}</td>")
+        out.append(f"<td valign='top'>{ids_cell}</td>")
+        out.append("</tr>")
+    out.append("</tbody></table>")
+    out.append("")
+    out.append("</details>")
+    out.append("")
+    return out
+
+
+def image_query_pairs(img_q: list[dict]) -> OrderedDict[str, list[dict]]:
+    pairs: OrderedDict[str, list[dict]] = OrderedDict()
+    for r in img_q:
+        sid = r.get("source_image_id") or r["query_id"].rsplit("_", 1)[0]
+        pairs.setdefault(sid, []).append(r)
+    return pairs
+
+
+def image_queries_main_table(
+    pairs: OrderedDict[str, list[dict]],
+    url_by_rel: dict[str, str | None],
+    products: dict[str, str],
+) -> list[str]:
+    out: list[str] = []
+    out.append(
+        "One row per movie/TV still. **Crop** vs **scene** are two image-only evaluation queries on the same "
+        "frame; expected positives match. File paths and JSONL product IDs are in the appendix."
+    )
+    out.append("")
+    out.append("<table>")
+    out.append("<thead><tr>")
+    for h in ("Still", "Screen", "Whisky (annotation)", "Query IDs", "Crop", "Scene", "Expected positives"):
+        out.append(f"<th align='left'>{h}</th>")
+    out.append("</tr></thead><tbody>")
+    for _sid, group in pairs.items():
+        group = sorted(group, key=lambda x: x["query_id"])
+        first = group[0]
+        crop_row = next((x for x in group if str(x["query_id"]).endswith("_crop")), group[0])
+        scene_row = next((x for x in group if str(x["query_id"]).endswith("_scene")), group[-1])
+        crop_path = str(crop_row.get("query_image_path") or "")
+        scene_path = str(scene_row.get("query_image_path") or "")
+        cu = url_by_rel.get(crop_path)
+        su = url_by_rel.get(scene_path)
+        still = esc_html(first.get("source_image_id", ""))
+        screen = esc_html(first.get("screen_reference", ""))
+        wref = esc_html(first.get("whisky_reference", ""))
+        ids = ", ".join(f"<code>{esc_html(x['query_id'])}</code>" for x in group)
+        rel = first.get("relevant_product_ids") or []
+        pos = positives_ul(rel, products)
+        out.append("<tr>")
+        out.append(f"<td valign='top'><code>{still}</code></td>")
+        out.append(f"<td valign='top'>{screen}</td>")
+        out.append(f"<td valign='top'>{wref}</td>")
+        out.append(f"<td valign='top'>{ids}</td>")
+        out.append(f"<td valign='top'>{img_tag(cu, 'Bottle crop', 130)}</td>")
+        out.append(f"<td valign='top'>{img_tag(su, 'Whole scene', 240)}</td>")
+        out.append(f"<td valign='top'>{pos}</td>")
+        out.append("</tr>")
+    out.append("</tbody></table>")
+    out.append("")
+    return out
+
+
+def image_queries_appendix_details(pairs: OrderedDict[str, list[dict]]) -> list[str]:
+    out: list[str] = []
+    out.append("<details>")
+    out.append("<summary><strong>Appendix (image queries):</strong> paths and product IDs</summary>")
+    out.append("")
+    out.append("<table>")
+    out.append("<thead><tr>")
+    for h in ("Still", "Crop path", "Scene path", "Product IDs"):
+        out.append(f"<th align='left'>{h}</th>")
+    out.append("</tr></thead><tbody>")
+    for _sid, group in pairs.items():
+        group = sorted(group, key=lambda x: x["query_id"])
+        first = group[0]
+        crop_row = next((x for x in group if str(x["query_id"]).endswith("_crop")), group[0])
+        scene_row = next((x for x in group if str(x["query_id"]).endswith("_scene")), group[-1])
+        crop_path = str(crop_row.get("query_image_path") or "")
+        scene_path = str(scene_row.get("query_image_path") or "")
+        still = esc_html(first.get("source_image_id", ""))
+        pids = ", ".join(
+            f"<code>{esc_html(p)}</code>" for p in (first.get("relevant_product_ids") or [])
+        )
+        out.append("<tr>")
+        out.append(f"<td valign='top'><code>{still}</code></td>")
+        out.append(f"<td valign='top'><code>{esc_html(crop_path)}</code></td>")
+        out.append(f"<td valign='top'><code>{esc_html(scene_path)}</code></td>")
+        out.append(f"<td valign='top'>{pids}</td>")
+        out.append("</tr>")
+    out.append("</tbody></table>")
+    out.append("")
+    out.append("</details>")
+    out.append("")
+    return out
+
+
+def image_text_main_table(
+    it_q: list[dict],
+    url_by_rel: dict[str, str | None],
+    products: dict[str, str],
+) -> list[str]:
+    out: list[str] = []
+    out.append("<table>")
+    out.append("<thead><tr>")
+    for h in ("ID", "Screen", "Whisky (annotation)", "Scene", "Expected positives"):
+        out.append(f"<th align='left'>{h}</th>")
+    out.append("</tr></thead><tbody>")
+    for r in it_q:
+        qid = esc_html(r["query_id"])
+        screen = esc_html(r.get("screen_reference", ""))
+        wref = esc_html(r.get("whisky_reference", ""))
+        ip = str(r.get("query_image_path") or "")
+        iu = url_by_rel.get(ip)
+        rel = r.get("relevant_product_ids") or []
+        pos = positives_ul(rel, products)
+        out.append("<tr>")
+        out.append(f"<td valign='top'><code>{qid}</code></td>")
+        out.append(f"<td valign='top'>{screen}</td>")
+        out.append(f"<td valign='top'>{wref}</td>")
+        rq = r["query_id"]
+        out.append(f"<td valign='top'>{img_tag(iu, f'{rq} scene', 260)}</td>")
+        out.append(f"<td valign='top'>{pos}</td>")
+        out.append("</tr>")
+    out.append("</tbody></table>")
+    out.append("")
+    return out
+
+
+def image_text_appendix_details(it_q: list[dict]) -> list[str]:
+    out: list[str] = []
+    out.append("<details>")
+    out.append("<summary><strong>Appendix (image + text):</strong> paths, notes, product IDs</summary>")
+    out.append("")
+    out.append("<table>")
+    out.append("<thead><tr>")
+    for h in ("ID", "Source image path", "Notes", "Product IDs"):
+        out.append(f"<th align='left'>{h}</th>")
+    out.append("</tr></thead><tbody>")
+    for r in it_q:
+        qid = esc_html(r["query_id"])
+        path = esc_html(str(r.get("query_image_path") or ""))
+        notes = esc_html(r.get("notes") or "—")
+        pids = ", ".join(
+            f"<code>{esc_html(p)}</code>" for p in (r.get("relevant_product_ids") or [])
+        )
+        out.append("<tr>")
+        out.append(f"<td valign='top'><code>{qid}</code></td>")
+        out.append(f"<td valign='top'><code>{path}</code></td>")
+        out.append(f"<td valign='top'>{notes}</td>")
+        out.append(f"<td valign='top'>{pids}</td>")
+        out.append("</tr>")
+    out.append("</tbody></table>")
+    out.append("")
+    out.append("</details>")
+    out.append("")
+    return out
 
 
 def copy_image_for_docs(rel_path: str, log: list[str]) -> str | None:
@@ -116,10 +321,10 @@ def render() -> str:
     lines.append("# Evaluation queries and expected labels")
     lines.append("")
     lines.append(
-        "Human-readable view of the evaluation queries in `data/eval/`: what each query asks, which "
-        "catalogue products count as a hit, and (for visual queries) the stills used. Positives are **controlled "
-        "seeds** (rules or manual scene mapping), not full human relevance judgments. Technical IDs and file "
-        "paths are tucked under “details” blocks so this page stays easy to scan."
+        "Human-readable view of the evaluation queries in `data/eval/`. **Text**, **image** (crop/scene pairs), "
+        "and **image + text** benchmarks are each a single HTML table (queries, thumbnails where relevant, "
+        "expected catalogue names). Positives are **controlled seeds** (rules or manual scene mapping), not full "
+        "human relevance judgments. Paths, notes, rules, and JSONL product IDs sit in collapsed **appendix** blocks."
     )
     lines.append("")
     lines.append(
@@ -146,71 +351,17 @@ def render() -> str:
     lines.append('<a id="text-queries"></a>')
     lines.append("## Text queries")
     lines.append("")
-    for r in text_q:
-        qid = r["query_id"]
-        lines.append(f"### {qid} — `{r.get('query_style', '')}`")
-        lines.append("")
-        lines.append(f"**Query:** {r.get('query', '')}")
-        lines.append("")
-        if r.get("notes"):
-            lines.append(f"*Notes:* {r['notes']}")
-            lines.append("")
-        lg_block = label_generation_block(r)
-        if lg_block:
-            lines.extend(lg_block)
-        lines.extend(relevant_products_section(r.get("relevant_product_ids") or [], products))
+    lines.extend(text_queries_main_table(text_q, products))
+    lines.extend(text_queries_appendix_details(text_q, products))
 
     lines.append("---")
     lines.append("")
     lines.append('<a id="image-queries"></a>')
     lines.append("## Image queries (cropped bottle and whole scene)")
     lines.append("")
-    lines.append(
-        "Each screen reference appears twice: `*_crop` (bottle crop) and `*_scene` (full still). "
-        "**Expected relevant products** are the same for the pair."
-    )
-    lines.append("")
-    pairs: OrderedDict[str, list[dict]] = OrderedDict()
-    for r in img_q:
-        sid = r.get("source_image_id") or r["query_id"].rsplit("_", 1)[0]
-        pairs.setdefault(sid, []).append(r)
-
-    for _sid, group in pairs.items():
-        group = sorted(group, key=lambda x: x["query_id"])
-        first = group[0]
-        crop_row = next((x for x in group if str(x["query_id"]).endswith("_crop")), group[0])
-        scene_row = next((x for x in group if str(x["query_id"]).endswith("_scene")), group[-1])
-        crop_path = str(crop_row.get("query_image_path") or "")
-        scene_path = str(scene_row.get("query_image_path") or "")
-
-        lines.append(f"### {first.get('source_image_id', '')} — {first.get('screen_reference', '')}")
-        lines.append("")
-        lines.append(f"**Whisky reference (annotation):** {first.get('whisky_reference', '')}")
-        lines.append("")
-        lines.append("| Cropped bottle | Whole scene |")
-        lines.append("|:--:|:--:|")
-        cu = url_by_rel.get(crop_path)
-        su = url_by_rel.get(scene_path)
-        lines.append(
-            f"| {img_tag(cu, 'Cropped bottle', 200)} | {img_tag(su, 'Whole scene', 360)} |"
-        )
-        lines.append("")
-        ids = [r["query_id"] for r in group]
-        lines.append(
-            f"*Retrieval query IDs:* {', '.join(f'`{q}`' for q in ids)} "
-            f"({crop_row.get('query_style', '')} / {scene_row.get('query_style', '')})."
-        )
-        lines.append("")
-        lines.append("<details>")
-        lines.append("<summary>Source image paths (under <code>data/eval/</code>)</summary>")
-        lines.append("")
-        for r in group:
-            lines.append(f"- `{r.get('query_image_path', '')}`")
-        lines.append("")
-        lines.append("</details>")
-        lines.append("")
-        rel = first.get("relevant_product_ids") or []
-        lines.extend(relevant_products_section(rel, products))
+    pairs = image_query_pairs(img_q)
+    lines.extend(image_queries_main_table(pairs, url_by_rel, products))
+    lines.extend(image_queries_appendix_details(pairs))
 
     lines.append("---")
     lines.append("")
@@ -218,32 +369,12 @@ def render() -> str:
     lines.append("## Image + text queries (whole scene + question)")
     lines.append("")
     lines.append(
-        "Fixed question text: **What is the whisky in this image?** "
-        "Each row uses the whole-scene image (same stills as the `*_scene` image-only queries where applicable)."
+        "Fixed question for every row: **What is the whisky in this image?** "
+        "Scenes align with the image-only `*_scene` queries where the source still is shared."
     )
     lines.append("")
-    for r in it_q:
-        qid = r["query_id"]
-        lines.append(f"### {qid}")
-        lines.append("")
-        lines.append(f"**Screen:** {r.get('screen_reference', '')}  ")
-        lines.append(f"**Whisky reference (annotation):** {r.get('whisky_reference', '')}")
-        lines.append("")
-        ip = str(r.get("query_image_path") or "")
-        iu = url_by_rel.get(ip)
-        lines.append(img_tag(iu, f"{qid} scene", 420))
-        lines.append("")
-        if r.get("notes"):
-            lines.append(f"*Notes:* {r['notes']}")
-            lines.append("")
-        lines.append("<details>")
-        lines.append("<summary>Source image path</summary>")
-        lines.append("")
-        lines.append(f"`{ip}`")
-        lines.append("")
-        lines.append("</details>")
-        lines.append("")
-        lines.extend(relevant_products_section(r.get("relevant_product_ids") or [], products))
+    lines.extend(image_text_main_table(it_q, url_by_rel, products))
+    lines.extend(image_text_appendix_details(it_q))
 
     lines.append("---")
     lines.append("")

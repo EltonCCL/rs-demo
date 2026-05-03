@@ -20,5 +20,8 @@ def test_render_evaluation_query_docs_script_runs() -> None:
     assert '[Image + text queries](#image-text-queries)' in md
     assert '<a id="text-queries"></a>' in md
     assert "eval_query_images/" in md
+    assert "<details>" in md
+    assert "Product IDs" in md
+    assert "<table>" in md
     imgs = list((ROOT / "docs" / "eval_query_images").glob("*"))
     assert len(imgs) >= 10
