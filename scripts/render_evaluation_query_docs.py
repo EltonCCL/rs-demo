@@ -291,6 +291,39 @@ def _escape_attr(s: str) -> str:
     return s.replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;")
 
 
+# One notebook per retrieval setting; paths are repo-relative (links from docs/ use ../notebooks/).
+GEMINI_REVIEW_NOTEBOOKS: list[tuple[str, str, str]] = [
+    ("1", "Text query → product text", "gemini_review_01_text_to_product_text.ipynb"),
+    ("2", "Text query → product multimodal", "gemini_review_02_text_to_product_multimodal.ipynb"),
+    ("3", "Cropped image → product image", "gemini_review_03_cropped_image_to_product_image.ipynb"),
+    ("4", "Whole scene image → product image", "gemini_review_04_whole_image_to_product_image.ipynb"),
+    ("5", "Cropped image → product multimodal", "gemini_review_05_cropped_image_to_product_multimodal.ipynb"),
+    ("6", "Whole scene image → product multimodal", "gemini_review_06_whole_image_to_product_multimodal.ipynb"),
+    ("7", "Image + text → product multimodal", "gemini_review_07_image_text_to_product_multimodal.ipynb"),
+]
+
+
+def gemini_review_notebooks_section() -> list[str]:
+    lines: list[str] = []
+    lines.append('<a id="gemini-ranking-notebooks"></a>')
+    lines.append("## Inspect Gemini retrieval output (notebooks)")
+    lines.append("")
+    lines.append(
+        "After you have run Gemini evaluation, open a notebook under `notebooks/` to browse **real rankings** "
+        "per setting. Each loads `data/eval/gemini_retrieval_report.json`, the matching query/product embeddings, "
+        "and catalogue rows **offline** (no API calls)."
+    )
+    lines.append("")
+    lines.append("| # | Retrieval setting | Notebook |")
+    lines.append("|---|------------------|----------|")
+    for num, title, filename in GEMINI_REVIEW_NOTEBOOKS:
+        lines.append(
+            f"| {num} | {title} | [`{filename}`](../notebooks/{filename}) |"
+        )
+    lines.append("")
+    return lines
+
+
 def render() -> str:
     log: list[str] = []
     products: dict[str, str] = {}
@@ -337,6 +370,7 @@ def render() -> str:
     lines.append("- [Text queries](#text-queries)")
     lines.append("- [Image queries](#image-queries)")
     lines.append("- [Image + text queries](#image-text-queries)")
+    lines.append("- [Gemini ranking notebooks](#gemini-ranking-notebooks)")
     lines.append("")
     lines.append("## Source files")
     lines.append("")
@@ -346,6 +380,7 @@ def render() -> str:
     lines.append(f"| `data/eval/image_queries.jsonl` | image (crop + scene pairs) | {len(img_q)} |")
     lines.append(f"| `data/eval/image_text_queries.jsonl` | image + text | {len(it_q)} |")
     lines.append("")
+    lines.extend(gemini_review_notebooks_section())
     lines.append("---")
     lines.append("")
     lines.append('<a id="text-queries"></a>')

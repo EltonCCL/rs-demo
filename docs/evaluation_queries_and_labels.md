@@ -9,6 +9,7 @@ Scene and crop pictures are copied into [`docs/eval_query_images/`](eval_query_i
 - [Text queries](#text-queries)
 - [Image queries](#image-queries)
 - [Image + text queries](#image-text-queries)
+- [Gemini ranking notebooks](#gemini-ranking-notebooks)
 
 ## Source files
 
@@ -17,6 +18,21 @@ Scene and crop pictures are copied into [`docs/eval_query_images/`](eval_query_i
 | `data/eval/text_queries.jsonl` | text | 20 |
 | `data/eval/image_queries.jsonl` | image (crop + scene pairs) | 22 |
 | `data/eval/image_text_queries.jsonl` | image + text | 11 |
+
+<a id="gemini-ranking-notebooks"></a>
+## Inspect Gemini retrieval output (notebooks)
+
+After you have run Gemini evaluation, open a notebook under `notebooks/` to browse **real rankings** per setting. Each loads `data/eval/gemini_retrieval_report.json`, the matching query/product embeddings, and catalogue rows **offline** (no API calls).
+
+| # | Retrieval setting | Notebook |
+|---|------------------|----------|
+| 1 | Text query → product text | [`gemini_review_01_text_to_product_text.ipynb`](../notebooks/gemini_review_01_text_to_product_text.ipynb) |
+| 2 | Text query → product multimodal | [`gemini_review_02_text_to_product_multimodal.ipynb`](../notebooks/gemini_review_02_text_to_product_multimodal.ipynb) |
+| 3 | Cropped image → product image | [`gemini_review_03_cropped_image_to_product_image.ipynb`](../notebooks/gemini_review_03_cropped_image_to_product_image.ipynb) |
+| 4 | Whole scene image → product image | [`gemini_review_04_whole_image_to_product_image.ipynb`](../notebooks/gemini_review_04_whole_image_to_product_image.ipynb) |
+| 5 | Cropped image → product multimodal | [`gemini_review_05_cropped_image_to_product_multimodal.ipynb`](../notebooks/gemini_review_05_cropped_image_to_product_multimodal.ipynb) |
+| 6 | Whole scene image → product multimodal | [`gemini_review_06_whole_image_to_product_multimodal.ipynb`](../notebooks/gemini_review_06_whole_image_to_product_multimodal.ipynb) |
+| 7 | Image + text → product multimodal | [`gemini_review_07_image_text_to_product_multimodal.ipynb`](../notebooks/gemini_review_07_image_text_to_product_multimodal.ipynb) |
 
 ---
 

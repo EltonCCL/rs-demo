@@ -23,5 +23,7 @@ def test_render_evaluation_query_docs_script_runs() -> None:
     assert "<details>" in md
     assert "Product IDs" in md
     assert "<table>" in md
+    assert "gemini_review_01_text_to_product_text.ipynb" in md
+    assert "gemini-ranking-notebooks" in md
     imgs = list((ROOT / "docs" / "eval_query_images").glob("*"))
     assert len(imgs) >= 10
