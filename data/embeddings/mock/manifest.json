@@ -1,0 +1,9 @@
+{
+  "arrays": {
+    "image": "image_embeddings.npy",
+    "multimodal": "multimodal_embeddings.npy",
+    "text": "text_embeddings.npy"
+  },
+  "dimension": 32,
+  "record_count": 533
+}

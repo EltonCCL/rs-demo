@@ -1,0 +1,16 @@
+{
+  "arrays": {
+    "image": "image_embeddings.npy",
+    "multimodal": "multimodal_embeddings.npy",
+    "text": "text_embeddings.npy"
+  },
+  "completed_modes": [
+    "image",
+    "multimodal",
+    "text"
+  ],
+  "dimension": 768,
+  "model": "gemini-embedding-2",
+  "provider": "google",
+  "record_count": 533
+}

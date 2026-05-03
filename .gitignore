@@ -18,6 +18,10 @@ data/extracted/*
 !data/extracted/.gitkeep
 data/embeddings/*
 !data/embeddings/.gitkeep
+!data/embeddings/gemini/
+!data/embeddings/gemini/**
+!data/embeddings/mock/
+!data/embeddings/mock/**
 data/demo_notebook/*
 
 .env.*
