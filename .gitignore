@@ -10,8 +10,35 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.pyc
+*.egg-info/
 
 data/raw/*
 !data/raw/.gitkeep
 data/extracted/*
 !data/extracted/.gitkeep
+data/embeddings/*
+!data/embeddings/.gitkeep
+data/demo_notebook/*
+
+.env.*
+!.env.example
+
+## Core latex/pdflatex auxiliary files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+
+## Bibliography auxiliary files
+*.bbl
+*.blg
+
+## Listings, indexes, and other artifacts
+*.lof
+*.lot
+*.synctex.gz
+*.pdf
+*.bcf
+*.run.xml
