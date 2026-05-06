@@ -14,6 +14,7 @@ SUPPORTED_QUERY_STYLES = {
     "semantic_flavour",
     "cropped_bottle_identification",
     "whole_scene_identification",
+    "cropped_bottle_question",
     "whole_scene_question",
 }
 

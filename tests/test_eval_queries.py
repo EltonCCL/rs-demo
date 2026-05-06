@@ -7,6 +7,7 @@ CATALOGUE_PATH = Path("data/extracted/product_parse_sample.jsonl")
 TEXT_QUERIES_PATH = Path("data/eval/text_queries.jsonl")
 IMAGE_QUERIES_PATH = Path("data/eval/image_queries.jsonl")
 IMAGE_TEXT_QUERIES_PATH = Path("data/eval/image_text_queries.jsonl")
+CROPPED_IMAGE_TEXT_QUERIES_PATH = Path("data/eval/cropped_image_text_queries.jsonl")
 TEXT_QUERY_STYLES = {
     "metadata_brand",
     "semantic_brand_description",
@@ -19,6 +20,9 @@ IMAGE_QUERY_STYLES = {
 }
 IMAGE_TEXT_QUERY_STYLES = {
     "whole_scene_question",
+}
+CROPPED_IMAGE_TEXT_QUERY_STYLES = {
+    "cropped_bottle_question",
 }
 
 
@@ -108,6 +112,38 @@ def test_image_text_eval_queries_reference_existing_products_and_images() -> Non
         assert query["query_type"] == "image_text"
         assert query["query_style"] in IMAGE_TEXT_QUERY_STYLES
         assert query["query"].strip()
+        assert Path(query["query_image_path"]).exists()
+        assert query["relevant_product_ids"]
+        assert set(query["relevant_product_ids"]) <= product_ids
+        assert query["label_generation"]["method"] == "manual_movie_scene_reference_mapping"
+
+
+def test_cropped_image_text_eval_queries_reference_existing_products_and_images() -> None:
+    products = load_jsonl(CATALOGUE_PATH)
+    product_ids = {product["product_id"] for product in products}
+    queries = load_jsonl(CROPPED_IMAGE_TEXT_QUERIES_PATH)
+
+    assert len(queries) == 11
+    assert len({query["query_id"] for query in queries}) == len(queries)
+
+    for query in queries:
+        assert set(query) == {
+            "query_id",
+            "query_type",
+            "query_style",
+            "query",
+            "query_image_path",
+            "label_generation",
+            "relevant_product_ids",
+            "notes",
+            "source_image_id",
+            "screen_reference",
+            "whisky_reference",
+        }
+        assert query["query_type"] == "image_text"
+        assert query["query_style"] in CROPPED_IMAGE_TEXT_QUERY_STYLES
+        assert query["query"] == "What is the whisky in this image?"
+        assert "movie_scene_bottle_crops" in query["query_image_path"]
         assert Path(query["query_image_path"]).exists()
         assert query["relevant_product_ids"]
         assert set(query["relevant_product_ids"]) <= product_ids

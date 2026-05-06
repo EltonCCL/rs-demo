@@ -18,12 +18,16 @@ def test_render_evaluation_query_docs_script_runs() -> None:
     assert '[Text queries](#text-queries)' in md
     assert '[Image queries](#image-queries)' in md
     assert '[Image + text queries](#image-text-queries)' in md
+    assert '[Cropped image + text queries](#cropped-image-text-queries)' in md
     assert '<a id="text-queries"></a>' in md
+    assert '<a id="cropped-image-text-queries"></a>' in md
     assert "eval_query_images/" in md
     assert "<details>" in md
     assert "Product IDs" in md
     assert "<table>" in md
     assert "gemini_review_01_text_to_product_text.ipynb" in md
+    assert "gemini_review_08_cropped_image_text_to_product_image.ipynb" in md
+    assert "gemini_review_09_cropped_image_text_to_product_multimodal.ipynb" in md
     assert "gemini-ranking-notebooks" in md
     imgs = list((ROOT / "docs" / "eval_query_images").glob("*"))
     assert len(imgs) >= 10

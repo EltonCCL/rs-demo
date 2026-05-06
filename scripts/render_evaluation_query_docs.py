@@ -211,11 +211,13 @@ def image_text_main_table(
     it_q: list[dict],
     url_by_rel: dict[str, str | None],
     products: dict[str, str],
+    image_column: str,
+    image_width: int,
 ) -> list[str]:
     out: list[str] = []
     out.append("<table>")
     out.append("<thead><tr>")
-    for h in ("ID", "Screen", "Whisky (annotation)", "Scene", "Expected positives"):
+    for h in ("ID", "Screen", "Whisky (annotation)", image_column, "Expected positives"):
         out.append(f"<th align='left'>{h}</th>")
     out.append("</tr></thead><tbody>")
     for r in it_q:
@@ -231,7 +233,7 @@ def image_text_main_table(
         out.append(f"<td valign='top'>{screen}</td>")
         out.append(f"<td valign='top'>{wref}</td>")
         rq = r["query_id"]
-        out.append(f"<td valign='top'>{img_tag(iu, f'{rq} scene', 260)}</td>")
+        out.append(f"<td valign='top'>{img_tag(iu, f'{rq} image', image_width)}</td>")
         out.append(f"<td valign='top'>{pos}</td>")
         out.append("</tr>")
     out.append("</tbody></table>")
@@ -239,10 +241,10 @@ def image_text_main_table(
     return out
 
 
-def image_text_appendix_details(it_q: list[dict]) -> list[str]:
+def image_text_appendix_details(it_q: list[dict], label: str) -> list[str]:
     out: list[str] = []
     out.append("<details>")
-    out.append("<summary><strong>Appendix (image + text):</strong> paths, notes, product IDs</summary>")
+    out.append(f"<summary><strong>Appendix ({label}):</strong> paths, notes, product IDs</summary>")
     out.append("")
     out.append("<table>")
     out.append("<thead><tr>")
@@ -299,7 +301,17 @@ GEMINI_REVIEW_NOTEBOOKS: list[tuple[str, str, str]] = [
     ("4", "Whole scene image → product image", "gemini_review_04_whole_image_to_product_image.ipynb"),
     ("5", "Cropped image → product multimodal", "gemini_review_05_cropped_image_to_product_multimodal.ipynb"),
     ("6", "Whole scene image → product multimodal", "gemini_review_06_whole_image_to_product_multimodal.ipynb"),
-    ("7", "Image + text → product multimodal", "gemini_review_07_image_text_to_product_multimodal.ipynb"),
+    ("7", "Whole image + text → product multimodal", "gemini_review_07_image_text_to_product_multimodal.ipynb"),
+    (
+        "8",
+        "Cropped image + text → product image",
+        "gemini_review_08_cropped_image_text_to_product_image.ipynb",
+    ),
+    (
+        "9",
+        "Cropped image + text → product multimodal",
+        "gemini_review_09_cropped_image_text_to_product_multimodal.ipynb",
+    ),
 ]
 
 
@@ -335,6 +347,7 @@ def render() -> str:
     text_q = load_jsonl(ROOT / "data/eval/text_queries.jsonl")
     img_q = load_jsonl(ROOT / "data/eval/image_queries.jsonl")
     it_q = load_jsonl(ROOT / "data/eval/image_text_queries.jsonl")
+    crop_it_q = load_jsonl(ROOT / "data/eval/cropped_image_text_queries.jsonl")
 
     image_rel_paths: set[str] = set()
     for r in img_q:
@@ -342,6 +355,10 @@ def render() -> str:
         if p:
             image_rel_paths.add(str(p))
     for r in it_q:
+        p = r.get("query_image_path")
+        if p:
+            image_rel_paths.add(str(p))
+    for r in crop_it_q:
         p = r.get("query_image_path")
         if p:
             image_rel_paths.add(str(p))
@@ -355,9 +372,10 @@ def render() -> str:
     lines.append("")
     lines.append(
         "Human-readable view of the evaluation queries in `data/eval/`. **Text**, **image** (crop/scene pairs), "
-        "and **image + text** benchmarks are each a single HTML table (queries, thumbnails where relevant, "
-        "expected catalogue names). Positives are **controlled seeds** (rules or manual scene mapping), not full "
-        "human relevance judgments. Paths, notes, rules, and JSONL product IDs sit in collapsed **appendix** blocks."
+        "**whole image + text**, and **cropped image + text** benchmarks are each a single HTML table "
+        "(queries, thumbnails where relevant, expected catalogue names). Positives are **controlled seeds** "
+        "(rules or manual scene mapping), not full human relevance judgments. Paths, notes, rules, and JSONL "
+        "product IDs sit in collapsed **appendix** blocks."
     )
     lines.append("")
     lines.append(
@@ -370,6 +388,7 @@ def render() -> str:
     lines.append("- [Text queries](#text-queries)")
     lines.append("- [Image queries](#image-queries)")
     lines.append("- [Image + text queries](#image-text-queries)")
+    lines.append("- [Cropped image + text queries](#cropped-image-text-queries)")
     lines.append("- [Gemini ranking notebooks](#gemini-ranking-notebooks)")
     lines.append("")
     lines.append("## Source files")
@@ -378,7 +397,10 @@ def render() -> str:
     lines.append("|------|------------|-------|")
     lines.append(f"| `data/eval/text_queries.jsonl` | text | {len(text_q)} |")
     lines.append(f"| `data/eval/image_queries.jsonl` | image (crop + scene pairs) | {len(img_q)} |")
-    lines.append(f"| `data/eval/image_text_queries.jsonl` | image + text | {len(it_q)} |")
+    lines.append(f"| `data/eval/image_text_queries.jsonl` | whole image + text | {len(it_q)} |")
+    lines.append(
+        f"| `data/eval/cropped_image_text_queries.jsonl` | cropped image + text | {len(crop_it_q)} |"
+    )
     lines.append("")
     lines.extend(gemini_review_notebooks_section())
     lines.append("---")
@@ -408,8 +430,23 @@ def render() -> str:
         "Scenes align with the image-only `*_scene` queries where the source still is shared."
     )
     lines.append("")
-    lines.extend(image_text_main_table(it_q, url_by_rel, products))
-    lines.extend(image_text_appendix_details(it_q))
+    lines.extend(image_text_main_table(it_q, url_by_rel, products, "Scene", 260))
+    lines.extend(image_text_appendix_details(it_q, "whole image + text"))
+
+    lines.append("---")
+    lines.append("")
+    lines.append('<a id="cropped-image-text-queries"></a>')
+    lines.append("## Cropped image + text queries (bottle crop + same question)")
+    lines.append("")
+    lines.append(
+        "Fixed question for every row: **What is the whisky in this image?** "
+        "These queries use the same bottle crops as the image-only `*_crop` queries. "
+        "The text is intentionally identical to the whole-scene image-text set so the experiment can isolate "
+        "the effect of query-image cleanliness."
+    )
+    lines.append("")
+    lines.extend(image_text_main_table(crop_it_q, url_by_rel, products, "Crop", 140))
+    lines.extend(image_text_appendix_details(crop_it_q, "cropped image + text"))
 
     lines.append("---")
     lines.append("")

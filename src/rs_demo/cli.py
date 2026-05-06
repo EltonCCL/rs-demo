@@ -89,6 +89,11 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path("data/eval/image_text_queries.jsonl"),
     )
+    query_embeddings.add_argument(
+        "--cropped-image-text-queries",
+        type=Path,
+        default=Path("data/eval/cropped_image_text_queries.jsonl"),
+    )
     query_embeddings.add_argument("--output-dir", type=Path, default=Path("data/embeddings/mock/queries"))
     query_embeddings.add_argument("--dimension", type=int, default=32)
     query_embeddings.add_argument(
@@ -109,6 +114,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--image-text-queries",
         type=Path,
         default=Path("data/eval/image_text_queries.jsonl"),
+    )
+    evaluate.add_argument(
+        "--cropped-image-text-queries",
+        type=Path,
+        default=Path("data/eval/cropped_image_text_queries.jsonl"),
     )
     evaluate.add_argument("--out", type=Path, default=Path("data/eval/mock_retrieval_report.json"))
     evaluate.add_argument("--top-k", type=int, default=10)
@@ -135,13 +145,22 @@ def build_parser() -> argparse.ArgumentParser:
         "build-gemini-query-embeddings",
         help="Build real Gemini query embeddings for one query mode.",
     )
-    gemini_queries.add_argument("--mode", choices=["text", "image", "image_text"], default="text")
+    gemini_queries.add_argument(
+        "--mode",
+        choices=["text", "image", "image_text", "cropped_image_text"],
+        default="text",
+    )
     gemini_queries.add_argument("--text-queries", type=Path, default=Path("data/eval/text_queries.jsonl"))
     gemini_queries.add_argument("--image-queries", type=Path, default=Path("data/eval/image_queries.jsonl"))
     gemini_queries.add_argument(
         "--image-text-queries",
         type=Path,
         default=Path("data/eval/image_text_queries.jsonl"),
+    )
+    gemini_queries.add_argument(
+        "--cropped-image-text-queries",
+        type=Path,
+        default=Path("data/eval/cropped_image_text_queries.jsonl"),
     )
     gemini_queries.add_argument("--output-dir", type=Path, default=Path("data/embeddings/gemini/queries"))
     gemini_queries.add_argument("--dimension", type=int, default=768)
@@ -154,7 +173,17 @@ def build_parser() -> argparse.ArgumentParser:
         "run-gemini-evaluation",
         help="Rank products for Gemini embeddings and write retrieval metrics for one mode.",
     )
-    gemini_eval.add_argument("--mode", choices=["text", "image", "image_text"], default="text")
+    gemini_eval.add_argument(
+        "--mode",
+        choices=[
+            "text",
+            "image",
+            "image_text",
+            "cropped_image_text_to_image",
+            "cropped_image_text_to_multimodal",
+        ],
+        default="text",
+    )
     gemini_eval.add_argument("--product-embeddings", type=Path, default=Path("data/embeddings/gemini"))
     gemini_eval.add_argument("--query-embeddings", type=Path, default=Path("data/embeddings/gemini/queries"))
     gemini_eval.add_argument("--text-queries", type=Path, default=Path("data/eval/text_queries.jsonl"))
@@ -163,6 +192,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--image-text-queries",
         type=Path,
         default=Path("data/eval/image_text_queries.jsonl"),
+    )
+    gemini_eval.add_argument(
+        "--cropped-image-text-queries",
+        type=Path,
+        default=Path("data/eval/cropped_image_text_queries.jsonl"),
     )
     gemini_eval.add_argument("--out", type=Path, default=Path("data/eval/gemini_retrieval_report.json"))
     gemini_eval.add_argument("--top-k", type=int, default=10)
@@ -255,6 +289,7 @@ def main(argv: list[str] | None = None) -> None:
             "text": args.text_queries,
             "image": args.image_queries,
             "image_text": args.image_text_queries,
+            "cropped_image_text": args.cropped_image_text_queries,
         }
         for name, query_path in specs.items():
             if not query_path.exists():
@@ -286,6 +321,16 @@ def main(argv: list[str] | None = None) -> None:
             "image_text": (
                 args.image_text_queries,
                 args.query_embeddings / "image_text",
+                retriever.rank_multimodal,
+            ),
+            "cropped_image_text_to_image": (
+                args.cropped_image_text_queries,
+                args.query_embeddings / "cropped_image_text",
+                retriever.rank_image,
+            ),
+            "cropped_image_text_to_multimodal": (
+                args.cropped_image_text_queries,
+                args.query_embeddings / "cropped_image_text",
                 retriever.rank_multimodal,
             ),
         }
@@ -329,6 +374,7 @@ def main(argv: list[str] | None = None) -> None:
             "text": args.text_queries,
             "image": args.image_queries,
             "image_text": args.image_text_queries,
+            "cropped_image_text": args.cropped_image_text_queries,
         }
         query_path = query_paths[args.mode]
         output_dir = args.output_dir / args.mode
@@ -347,22 +393,32 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     if args.command == "run-gemini-evaluation":
-        query_paths = {
-            "text": args.text_queries,
-            "image": args.image_queries,
-            "image_text": args.image_text_queries,
-        }
-        rankers = {
-            "text": ProductRetriever.rank_text,
-            "image": ProductRetriever.rank_image,
-            "image_text": ProductRetriever.rank_multimodal,
+        eval_specs = {
+            "text": (args.text_queries, args.query_embeddings / "text", ProductRetriever.rank_text),
+            "image": (args.image_queries, args.query_embeddings / "image", ProductRetriever.rank_image),
+            "image_text": (
+                args.image_text_queries,
+                args.query_embeddings / "image_text",
+                ProductRetriever.rank_multimodal,
+            ),
+            "cropped_image_text_to_image": (
+                args.cropped_image_text_queries,
+                args.query_embeddings / "cropped_image_text",
+                ProductRetriever.rank_image,
+            ),
+            "cropped_image_text_to_multimodal": (
+                args.cropped_image_text_queries,
+                args.query_embeddings / "cropped_image_text",
+                ProductRetriever.rank_multimodal,
+            ),
         }
         product_batch = NumpyEmbeddingStore(args.product_embeddings).read()
         retriever = ProductRetriever(product_batch)
-        queries = EvalQueryLoader().load(query_paths[args.mode])
-        query_batch = NumpyQueryEmbeddingStore(args.query_embeddings / args.mode).read()
+        query_path, embedding_dir, ranker = eval_specs[args.mode]
+        queries = EvalQueryLoader().load(query_path)
+        query_batch = NumpyQueryEmbeddingStore(embedding_dir).read()
         validate_query_embedding_alignment(queries, query_batch)
-        rankings = rankers[args.mode](retriever, query_batch, top_k=args.top_k)
+        rankings = ranker(retriever, query_batch, top_k=args.top_k)
         report = RetrievalEvaluator(k_values=(1, 5, args.top_k)).evaluate(queries, rankings)
         reports = {}
         if args.out.exists():

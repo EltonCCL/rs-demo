@@ -53,7 +53,7 @@ direction arrows such as ▶ and ◀
 
 ## Atomic Product Unit
 
-The recommendation unit should be one whisky expression, not one page.
+The retrieval unit should be one whisky expression, not one page.
 
 One page can contain multiple product records. For example, page 21 contains:
 
@@ -130,7 +130,7 @@ Current heuristic:
 - multiple products on page, later products: image confidence `low`;
 - no embedded image: image confidence `none`.
 
-This is only a prototype heuristic. For recommendation, image evidence should be treated as weak
+This is only a prototype heuristic. For similarity search, image evidence should be treated as weak
 unless the image-product relationship is visually confirmed.
 
 ## Parser Regression Pages
@@ -287,5 +287,6 @@ The full pass exposed several parser issues to revisit:
 - Index and tour pages are currently skipped by pattern behavior, but should eventually be
   excluded by an explicit page classifier.
 
-Before embeddings, we should add a validation stage that samples records from early, middle, late,
-tour-adjacent, and index-adjacent pages.
+Before treating a regenerated catalogue as stable, sample records from early, middle, late,
+tour-adjacent, and index-adjacent pages. The current embedding/evaluation pipeline assumes the
+parsed product IDs, shared brand text, and cropped image paths remain stable across these checks.

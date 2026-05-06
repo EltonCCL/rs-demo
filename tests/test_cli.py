@@ -36,9 +36,17 @@ def test_cli_exposes_pipeline_commands() -> None:
     assert args.command == "build-gemini-query-embeddings"
     assert args.mode == "text"
 
+    args = parser.parse_args(["build-gemini-query-embeddings", "--mode", "cropped_image_text"])
+    assert args.command == "build-gemini-query-embeddings"
+    assert args.mode == "cropped_image_text"
+
     args = parser.parse_args(["run-gemini-evaluation", "--mode", "text"])
     assert args.command == "run-gemini-evaluation"
     assert args.mode == "text"
+
+    args = parser.parse_args(["run-gemini-evaluation", "--mode", "cropped_image_text_to_image"])
+    assert args.command == "run-gemini-evaluation"
+    assert args.mode == "cropped_image_text_to_image"
 
 
 def test_build_mock_query_embeddings_fails_on_missing_modalities(tmp_path: Path) -> None:

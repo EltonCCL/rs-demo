@@ -1,6 +1,6 @@
 # Evaluation queries and expected labels
 
-Human-readable view of the evaluation queries in `data/eval/`. **Text**, **image** (crop/scene pairs), and **image + text** benchmarks are each a single HTML table (queries, thumbnails where relevant, expected catalogue names). Positives are **controlled seeds** (rules or manual scene mapping), not full human relevance judgments. Paths, notes, rules, and JSONL product IDs sit in collapsed **appendix** blocks.
+Human-readable view of the evaluation queries in `data/eval/`. **Text**, **image** (crop/scene pairs), **whole image + text**, and **cropped image + text** benchmarks are each a single HTML table (queries, thumbnails where relevant, expected catalogue names). Positives are **controlled seeds** (rules or manual scene mapping), not full human relevance judgments. Paths, notes, rules, and JSONL product IDs sit in collapsed **appendix** blocks.
 
 Scene and crop pictures are copied into [`docs/eval_query_images/`](eval_query_images/) so they display on GitHub.
 
@@ -9,6 +9,7 @@ Scene and crop pictures are copied into [`docs/eval_query_images/`](eval_query_i
 - [Text queries](#text-queries)
 - [Image queries](#image-queries)
 - [Image + text queries](#image-text-queries)
+- [Cropped image + text queries](#cropped-image-text-queries)
 - [Gemini ranking notebooks](#gemini-ranking-notebooks)
 
 ## Source files
@@ -17,7 +18,8 @@ Scene and crop pictures are copied into [`docs/eval_query_images/`](eval_query_i
 |------|------------|-------|
 | `data/eval/text_queries.jsonl` | text | 20 |
 | `data/eval/image_queries.jsonl` | image (crop + scene pairs) | 22 |
-| `data/eval/image_text_queries.jsonl` | image + text | 11 |
+| `data/eval/image_text_queries.jsonl` | whole image + text | 11 |
+| `data/eval/cropped_image_text_queries.jsonl` | cropped image + text | 11 |
 
 <a id="gemini-ranking-notebooks"></a>
 ## Inspect Gemini retrieval output (notebooks)
@@ -32,7 +34,9 @@ After you have run Gemini evaluation, open a notebook under `notebooks/` to brow
 | 4 | Whole scene image → product image | [`gemini_review_04_whole_image_to_product_image.ipynb`](../notebooks/gemini_review_04_whole_image_to_product_image.ipynb) |
 | 5 | Cropped image → product multimodal | [`gemini_review_05_cropped_image_to_product_multimodal.ipynb`](../notebooks/gemini_review_05_cropped_image_to_product_multimodal.ipynb) |
 | 6 | Whole scene image → product multimodal | [`gemini_review_06_whole_image_to_product_multimodal.ipynb`](../notebooks/gemini_review_06_whole_image_to_product_multimodal.ipynb) |
-| 7 | Image + text → product multimodal | [`gemini_review_07_image_text_to_product_multimodal.ipynb`](../notebooks/gemini_review_07_image_text_to_product_multimodal.ipynb) |
+| 7 | Whole image + text → product multimodal | [`gemini_review_07_image_text_to_product_multimodal.ipynb`](../notebooks/gemini_review_07_image_text_to_product_multimodal.ipynb) |
+| 8 | Cropped image + text → product image | [`gemini_review_08_cropped_image_text_to_product_image.ipynb`](../notebooks/gemini_review_08_cropped_image_text_to_product_image.ipynb) |
+| 9 | Cropped image + text → product multimodal | [`gemini_review_09_cropped_image_text_to_product_multimodal.ipynb`](../notebooks/gemini_review_09_cropped_image_text_to_product_multimodal.ipynb) |
 
 ---
 
@@ -522,83 +526,83 @@ Fixed question for every row: **What is the whisky in this image?** Scenes align
 <td valign='top'><code>itq001</code></td>
 <td valign='top'>Skyfall</td>
 <td valign='top'>Macallan 1962 Fine &amp; Rare</td>
-<td valign='top'><img src="eval_query_images/msq001-skyfall-macallan.jpg" alt="itq001 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq001-skyfall-macallan.jpg" alt="itq001 image" width="260" /></td>
 <td valign='top'><ul><li><strong>THE MACALLAN 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN FINE OAK 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN 25-YEAR-OLD</strong></li><li><strong>THE MACALLAN 30-YEAR-OLD</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq002</code></td>
 <td valign='top'>Lost in Translation</td>
 <td valign='top'>Suntory Hibiki 17</td>
-<td valign='top'><img src="eval_query_images/msq002-lost-in-translation-hibiki.jpg" alt="itq002 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq002-lost-in-translation-hibiki.jpg" alt="itq002 image" width="260" /></td>
 <td valign='top'><ul><li><strong>SUNTORY HIBIKI 17-YEAR-OLD</strong></li><li><strong>SUNTORY HIBIKI 30-YEAR-OLD</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq003</code></td>
 <td valign='top'>Blade Runner</td>
 <td valign='top'>Johnnie Walker Black Label</td>
-<td valign='top'><img src="eval_query_images/msq003-blade-runner-johnnie-walker.jpg" alt="itq003 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq003-blade-runner-johnnie-walker.jpg" alt="itq003 image" width="260" /></td>
 <td valign='top'><ul><li><strong>JOHNNIE WALKER BLACK LABEL</strong></li><li><strong>JOHNNIE WALKER GREEN LABEL</strong></li><li><strong>JOHNNIE WALKER GOLD LABEL</strong></li><li><strong>JOHNNIE WALKER BLUE LABEL</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq004</code></td>
 <td valign='top'>John Wick</td>
 <td valign='top'>Blanton's Bourbon</td>
-<td valign='top'><img src="eval_query_images/msq004-john-wick-blantons.jpg" alt="itq004 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq004-john-wick-blantons.jpg" alt="itq004 image" width="260" /></td>
 <td valign='top'><ul><li><strong>BLANTON’S SINGLE BARREL</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq005</code></td>
 <td valign='top'>The Shining</td>
 <td valign='top'>Jack Daniel's Old No. 7</td>
-<td valign='top'><img src="eval_query_images/msq005-the-shining-jack-daniels.jpg" alt="itq005 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq005-the-shining-jack-daniels.jpg" alt="itq005 image" width="260" /></td>
 <td valign='top'><ul><li><strong>JACK DANIEL’S OLD NO. 7</strong></li><li><strong>JACK DANIEL’S SINGLE BARREL</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq006</code></td>
 <td valign='top'>The Last of Us</td>
 <td valign='top'>Laphroaig</td>
-<td valign='top'><img src="eval_query_images/msq006-last-of-us-laphroaig.jpg" alt="itq006 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq006-last-of-us-laphroaig.jpg" alt="itq006 image" width="260" /></td>
 <td valign='top'><ul><li><strong>LAPHROAIG10-YEAR-OLD</strong></li><li><strong>LAPHROAIG 10-YEAR-OLD CASK STRENGTH</strong></li><li><strong>LAPHROAIG QUARTER CASK</strong></li><li><strong>LAPHROAIG 25-YEAR-OLD</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq007</code></td>
 <td valign='top'>28 Days Later / Parks and Recreation</td>
 <td valign='top'>Lagavulin</td>
-<td valign='top'><img src="eval_query_images/msq007-lagavulin-screen-reference.jpg" alt="itq007 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq007-lagavulin-screen-reference.jpg" alt="itq007 image" width="260" /></td>
 <td valign='top'><ul><li><strong>LAGAVULIN 16-YEAR-OLD</strong></li><li><strong>LAGAVULIN 12-YEAR-OLD</strong></li><li><strong>LAGAVULIN DISTILLERS EDITION</strong></li><li><strong>LAGAVULIN 21-YEAR-OLD</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq008</code></td>
 <td valign='top'>Constantine</td>
 <td valign='top'>Ardbeg 10</td>
-<td valign='top'><img src="eval_query_images/msq008-constantine-ardbeg.jpg" alt="itq008 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq008-constantine-ardbeg.jpg" alt="itq008 image" width="260" /></td>
 <td valign='top'><ul><li><strong>ARDBEG 10-YEAR-OLD</strong></li><li><strong>ARDBEG AIRIGH NAM BEIST</strong></li><li><strong>ARDBEG BLASDA</strong></li><li><strong>ARDBEG UIGEADAIL</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq009</code></td>
 <td valign='top'>Suits</td>
 <td valign='top'>Macallan 18</td>
-<td valign='top'><img src="eval_query_images/msq009-suits-macallan.jpg" alt="itq009 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq009-suits-macallan.jpg" alt="itq009 image" width="260" /></td>
 <td valign='top'><ul><li><strong>THE MACALLAN 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN FINE OAK 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN 25-YEAR-OLD</strong></li><li><strong>THE MACALLAN 30-YEAR-OLD</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq010</code></td>
 <td valign='top'>Mad Men</td>
 <td valign='top'>Canadian Club</td>
-<td valign='top'><img src="eval_query_images/msq010-mad-men-canadian-club.jpg" alt="itq010 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq010-mad-men-canadian-club.jpg" alt="itq010 image" width="260" /></td>
 <td valign='top'><ul><li><strong>CANADIAN CLUB RESERVE</strong></li><li><strong>CANADIAN CLUB 6-YEAR-OLD 100 PROOF</strong></li><li><strong>CANADIAN CLUB PREMIUM</strong></li><li><strong>CANADIAN CLUB CLASSIC</strong></li></ul></td>
 </tr>
 <tr>
 <td valign='top'><code>itq011</code></td>
 <td valign='top'>The West Wing</td>
 <td valign='top'>Johnnie Walker Blue Label</td>
-<td valign='top'><img src="eval_query_images/msq011-west-wing-johnnie-walker-blue.jpg" alt="itq011 scene" width="260" /></td>
+<td valign='top'><img src="eval_query_images/msq011-west-wing-johnnie-walker-blue.jpg" alt="itq011 image" width="260" /></td>
 <td valign='top'><ul><li><strong>JOHNNIE WALKER BLUE LABEL</strong></li><li><strong>JOHNNIE WALKER BLACK LABEL</strong></li><li><strong>JOHNNIE WALKER GREEN LABEL</strong></li><li><strong>JOHNNIE WALKER GOLD LABEL</strong></li></ul></td>
 </tr>
 </tbody></table>
 
 <details>
-<summary><strong>Appendix (image + text):</strong> paths, notes, product IDs</summary>
+<summary><strong>Appendix (whole image + text):</strong> paths, notes, product IDs</summary>
 
 <table>
 <thead><tr>
@@ -671,6 +675,180 @@ Fixed question for every row: **What is the whisky in this image?** Scenes align
 <td valign='top'><code>itq011</code></td>
 <td valign='top'><code>data/eval/movie_scene_query_images/msq011-west-wing-johnnie-walker-blue.jpg</code></td>
 <td valign='top'>Native multimodal query using the whole scene plus a natural identification question.</td>
+<td valign='top'><code>p0209-johnnie-walker-blue-label</code>, <code>p0208-johnnie-walker-black-label</code>, <code>p0208-johnnie-walker-green-label</code>, <code>p0209-johnnie-walker-gold-label</code></td>
+</tr>
+</tbody></table>
+
+</details>
+
+---
+
+<a id="cropped-image-text-queries"></a>
+## Cropped image + text queries (bottle crop + same question)
+
+Fixed question for every row: **What is the whisky in this image?** These queries use the same bottle crops as the image-only `*_crop` queries. The text is intentionally identical to the whole-scene image-text set so the experiment can isolate the effect of query-image cleanliness.
+
+<table>
+<thead><tr>
+<th align='left'>ID</th>
+<th align='left'>Screen</th>
+<th align='left'>Whisky (annotation)</th>
+<th align='left'>Crop</th>
+<th align='left'>Expected positives</th>
+</tr></thead><tbody>
+<tr>
+<td valign='top'><code>citq001</code></td>
+<td valign='top'>Skyfall</td>
+<td valign='top'>Macallan 1962 Fine &amp; Rare</td>
+<td valign='top'><img src="eval_query_images/msq001-skyfall-macallan.crop.jpg" alt="citq001 image" width="140" /></td>
+<td valign='top'><ul><li><strong>THE MACALLAN 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN FINE OAK 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN 25-YEAR-OLD</strong></li><li><strong>THE MACALLAN 30-YEAR-OLD</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq002</code></td>
+<td valign='top'>Lost in Translation</td>
+<td valign='top'>Suntory Hibiki 17</td>
+<td valign='top'><img src="eval_query_images/msq002-lost-in-translation-hibiki.crop.jpg" alt="citq002 image" width="140" /></td>
+<td valign='top'><ul><li><strong>SUNTORY HIBIKI 17-YEAR-OLD</strong></li><li><strong>SUNTORY HIBIKI 30-YEAR-OLD</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq003</code></td>
+<td valign='top'>Blade Runner</td>
+<td valign='top'>Johnnie Walker Black Label</td>
+<td valign='top'><img src="eval_query_images/msq003-blade-runner-johnnie-walker.crop.jpg" alt="citq003 image" width="140" /></td>
+<td valign='top'><ul><li><strong>JOHNNIE WALKER BLACK LABEL</strong></li><li><strong>JOHNNIE WALKER GREEN LABEL</strong></li><li><strong>JOHNNIE WALKER GOLD LABEL</strong></li><li><strong>JOHNNIE WALKER BLUE LABEL</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq004</code></td>
+<td valign='top'>John Wick</td>
+<td valign='top'>Blanton's Bourbon</td>
+<td valign='top'><img src="eval_query_images/msq004-john-wick-blantons.crop.jpg" alt="citq004 image" width="140" /></td>
+<td valign='top'><ul><li><strong>BLANTON’S SINGLE BARREL</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq005</code></td>
+<td valign='top'>The Shining</td>
+<td valign='top'>Jack Daniel's Old No. 7</td>
+<td valign='top'><img src="eval_query_images/msq005-the-shining-jack-daniels.crop.jpg" alt="citq005 image" width="140" /></td>
+<td valign='top'><ul><li><strong>JACK DANIEL’S OLD NO. 7</strong></li><li><strong>JACK DANIEL’S SINGLE BARREL</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq006</code></td>
+<td valign='top'>The Last of Us</td>
+<td valign='top'>Laphroaig</td>
+<td valign='top'><img src="eval_query_images/msq006-last-of-us-laphroaig.crop.jpg" alt="citq006 image" width="140" /></td>
+<td valign='top'><ul><li><strong>LAPHROAIG10-YEAR-OLD</strong></li><li><strong>LAPHROAIG 10-YEAR-OLD CASK STRENGTH</strong></li><li><strong>LAPHROAIG QUARTER CASK</strong></li><li><strong>LAPHROAIG 25-YEAR-OLD</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq007</code></td>
+<td valign='top'>28 Days Later / Parks and Recreation</td>
+<td valign='top'>Lagavulin</td>
+<td valign='top'><img src="eval_query_images/msq007-lagavulin-screen-reference.crop.jpg" alt="citq007 image" width="140" /></td>
+<td valign='top'><ul><li><strong>LAGAVULIN 16-YEAR-OLD</strong></li><li><strong>LAGAVULIN 12-YEAR-OLD</strong></li><li><strong>LAGAVULIN DISTILLERS EDITION</strong></li><li><strong>LAGAVULIN 21-YEAR-OLD</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq008</code></td>
+<td valign='top'>Constantine</td>
+<td valign='top'>Ardbeg 10</td>
+<td valign='top'><img src="eval_query_images/msq008-constantine-ardbeg.crop.jpg" alt="citq008 image" width="140" /></td>
+<td valign='top'><ul><li><strong>ARDBEG 10-YEAR-OLD</strong></li><li><strong>ARDBEG AIRIGH NAM BEIST</strong></li><li><strong>ARDBEG BLASDA</strong></li><li><strong>ARDBEG UIGEADAIL</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq009</code></td>
+<td valign='top'>Suits</td>
+<td valign='top'>Macallan 18</td>
+<td valign='top'><img src="eval_query_images/msq009-suits-macallan.crop.jpg" alt="citq009 image" width="140" /></td>
+<td valign='top'><ul><li><strong>THE MACALLAN 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN FINE OAK 10-YEAR-OLD</strong></li><li><strong>THE MACALLAN 25-YEAR-OLD</strong></li><li><strong>THE MACALLAN 30-YEAR-OLD</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq010</code></td>
+<td valign='top'>Mad Men</td>
+<td valign='top'>Canadian Club</td>
+<td valign='top'><img src="eval_query_images/msq010-mad-men-canadian-club.crop.jpg" alt="citq010 image" width="140" /></td>
+<td valign='top'><ul><li><strong>CANADIAN CLUB RESERVE</strong></li><li><strong>CANADIAN CLUB 6-YEAR-OLD 100 PROOF</strong></li><li><strong>CANADIAN CLUB PREMIUM</strong></li><li><strong>CANADIAN CLUB CLASSIC</strong></li></ul></td>
+</tr>
+<tr>
+<td valign='top'><code>citq011</code></td>
+<td valign='top'>The West Wing</td>
+<td valign='top'>Johnnie Walker Blue Label</td>
+<td valign='top'><img src="eval_query_images/msq011-west-wing-johnnie-walker-blue.crop.jpg" alt="citq011 image" width="140" /></td>
+<td valign='top'><ul><li><strong>JOHNNIE WALKER BLUE LABEL</strong></li><li><strong>JOHNNIE WALKER BLACK LABEL</strong></li><li><strong>JOHNNIE WALKER GREEN LABEL</strong></li><li><strong>JOHNNIE WALKER GOLD LABEL</strong></li></ul></td>
+</tr>
+</tbody></table>
+
+<details>
+<summary><strong>Appendix (cropped image + text):</strong> paths, notes, product IDs</summary>
+
+<table>
+<thead><tr>
+<th align='left'>ID</th>
+<th align='left'>Source image path</th>
+<th align='left'>Notes</th>
+<th align='left'>Product IDs</th>
+</tr></thead><tbody>
+<tr>
+<td valign='top'><code>citq001</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq001-skyfall-macallan.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0243-the-macallan-10-year-old</code>, <code>p0243-the-macallan-fine-oak-10-year-old</code>, <code>p0244-the-macallan-25-year-old</code>, <code>p0244-the-macallan-30-year-old</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq002</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq002-lost-in-translation-hibiki.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0334-suntory-hibiki-17-year-old</code>, <code>p0334-suntory-hibiki-30-year-old</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq003</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq003-blade-runner-johnnie-walker.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0208-johnnie-walker-black-label</code>, <code>p0208-johnnie-walker-green-label</code>, <code>p0209-johnnie-walker-gold-label</code>, <code>p0209-johnnie-walker-blue-label</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq004</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq004-john-wick-blantons.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0057-blanton-s-single-barrel</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq005</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq005-the-shining-jack-daniels.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0199-jack-daniel-s-old-no-7</code>, <code>p0199-jack-daniel-s-single-barrel</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq006</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq006-last-of-us-laphroaig.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0228-laphroaig10-year-old</code>, <code>p0228-laphroaig-10-year-old-cask-strength</code>, <code>p0229-laphroaig-quarter-cask</code>, <code>p0229-laphroaig-25-year-old</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq007</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq007-lagavulin-screen-reference.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0224-lagavulin-16-year-old</code>, <code>p0224-lagavulin-12-year-old</code>, <code>p0225-lagavulin-distillers-edition</code>, <code>p0225-lagavulin-21-year-old</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq008</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq008-constantine-ardbeg.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0021-ardbeg-10-year-old</code>, <code>p0021-ardbeg-airigh-nam-beist</code>, <code>p0022-ardbeg-blasda</code>, <code>p0022-ardbeg-uigeadail</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq009</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq009-suits-macallan.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0243-the-macallan-10-year-old</code>, <code>p0243-the-macallan-fine-oak-10-year-old</code>, <code>p0244-the-macallan-25-year-old</code>, <code>p0244-the-macallan-30-year-old</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq010</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq010-mad-men-canadian-club.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
+<td valign='top'><code>p0074-canadian-club-reserve</code>, <code>p0074-canadian-club-6-year-old-100-proof</code>, <code>p0075-canadian-club-premium</code>, <code>p0075-canadian-club-classic</code></td>
+</tr>
+<tr>
+<td valign='top'><code>citq011</code></td>
+<td valign='top'><code>data/eval/movie_scene_bottle_crops/msq011-west-wing-johnnie-walker-blue.crop.jpg</code></td>
+<td valign='top'>Cropped bottle image paired with the same natural identification question used for whole-scene image-text queries.</td>
 <td valign='top'><code>p0209-johnnie-walker-blue-label</code>, <code>p0208-johnnie-walker-black-label</code>, <code>p0208-johnnie-walker-green-label</code>, <code>p0209-johnnie-walker-gold-label</code></td>
 </tr>
 </tbody></table>

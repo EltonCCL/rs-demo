@@ -1,4 +1,622 @@
 {
+  "cropped_image_text_to_image": {
+    "metrics": {
+      "hit_at_1": 0.6363636363636364,
+      "hit_at_10": 0.8181818181818182,
+      "hit_at_5": 0.7272727272727273,
+      "mrr": 0.6720779220779222
+    },
+    "metrics_by_query_style": {
+      "cropped_bottle_question": {
+        "hit_at_1": 0.6363636363636364,
+        "hit_at_10": 0.8181818181818182,
+        "hit_at_5": 0.7272727272727273,
+        "mrr": 0.6720779220779222
+      }
+    },
+    "query_count": 11,
+    "query_results": [
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq001",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0244-the-macallan-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0244-the-macallan-30-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0195-invergordon-clan-denny-1966",
+          "p0293-port-ellen-douglas-laing-26-year-old",
+          "p0110-dungourney-1964",
+          "p0305-rosebank-douglas-laing-16-year-old",
+          "p0182-highland-park-25-year-old",
+          "p0182-highland-park-30-year-old",
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq002",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0334-suntory-hibiki-17-year-old",
+          "p0334-suntory-hibiki-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0334-suntory-hibiki-17-year-old",
+          "p0334-suntory-hibiki-30-year-old",
+          "p0335-the-yamazaki-12-year-old",
+          "p0335-the-yamazaki-18-year-old",
+          "p0270-nikka-taketsuru-17-year-old",
+          "p0270-nikka-taketsuru-21-year-old",
+          "p0331-suntory-hakushu-12-year-old",
+          "p0331-suntory-hakushu-18-year-old",
+          "p0267-nikka-whiskey-from-the-barrel",
+          "p0267-nikka-all-malt"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq003",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label",
+          "p0209-johnnie-walker-blue-label"
+        ],
+        "retrieved_product_ids": [
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label",
+          "p0209-johnnie-walker-blue-label",
+          "p0052-black-bottle",
+          "p0052-black-bottle-10-year-old",
+          "p0058-blenders-pride",
+          "p0053-black-dog-centenary",
+          "p0054-black-velvet-reserve",
+          "p0307-royal-challenge"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq004",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0057-blanton-s-single-barrel"
+        ],
+        "retrieved_product_ids": [
+          "p0057-blanton-s-single-barrel",
+          "p0175-hancock-s-reserve-president-s-single-barrel",
+          "p0108-dimple-12-year-old",
+          "p0108-dimple-15-year-old",
+          "p0359-pappy-van-winkle-s-family-reserve-15-year-old",
+          "p0359-old-rip-van-winkle-10-year-old",
+          "p0251-mccarthy-s-oregon",
+          "p0279-grand-old-parr-12-year-old",
+          "p0268-nikka-pure-malt-red",
+          "p0318-signature"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq005",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0199-jack-daniel-s-old-no-7",
+          "p0199-jack-daniel-s-single-barrel"
+        ],
+        "retrieved_product_ids": [
+          "p0199-jack-daniel-s-old-no-7",
+          "p0199-jack-daniel-s-single-barrel",
+          "p0248-maker-s-mark",
+          "p0128-george-dickel-no-12",
+          "p0128-george-dickel-barrel-select",
+          "p0213-kentucky-gentleman",
+          "p0059-booker-s-kentucky-straight",
+          "p0277-old-forester",
+          "p0277-old-forester-birthday-bourbon-2007",
+          "p0278-old-grand-dad"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq006",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0228-laphroaig10-year-old",
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0229-laphroaig-quarter-cask",
+          "p0229-laphroaig-25-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0228-laphroaig10-year-old",
+          "p0229-laphroaig-quarter-cask",
+          "p0229-laphroaig-25-year-old",
+          "p0224-lagavulin-16-year-old",
+          "p0224-lagavulin-12-year-old",
+          "p0318-signature",
+          "p0374-william-lawson-s-finest",
+          "p0374-william-lawson-s-scottish-gold-12-year-old",
+          "p0361-vat-69"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq007",
+        "reciprocal_rank": 0.25,
+        "relevant_product_ids": [
+          "p0224-lagavulin-16-year-old",
+          "p0224-lagavulin-12-year-old",
+          "p0225-lagavulin-distillers-edition",
+          "p0225-lagavulin-21-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0177-hanyu-1988-cask-9501",
+          "p0230-lark-s-single-malt",
+          "p0230-lark-s-pm",
+          "p0224-lagavulin-16-year-old",
+          "p0224-lagavulin-12-year-old",
+          "p0231-the-last-drop",
+          "p0251-mccarthy-s-oregon",
+          "p0189-king-of-diamonds-distilled-1988-bottled-2006",
+          "p0189-ace-of-diamonds-distilled-1986-bottled-2008",
+          "p0268-nikka-pure-malt-red"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq008",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-blasda",
+          "p0022-ardbeg-uigeadail"
+        ],
+        "retrieved_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-blasda",
+          "p0022-ardbeg-uigeadail",
+          "p0070-bunnahabhain-12-year-old",
+          "p0070-bunnahabhain-18-year-old",
+          "p0303-robert-burns-blend",
+          "p0303-robert-burns-single-malt",
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0228-laphroaig10-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": true,
+          "hit_at_5": false
+        },
+        "query_id": "citq009",
+        "reciprocal_rank": 0.14285714285714285,
+        "relevant_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0244-the-macallan-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0013-aberlour-12-year-old-sherry-matured",
+          "p0013-aberlour-a-bunadh",
+          "p0335-the-yamazaki-12-year-old",
+          "p0335-the-yamazaki-18-year-old",
+          "p0253-mcclelland-s-lowland",
+          "p0253-mcclelland-s-speyside",
+          "p0244-the-macallan-30-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0134-glen-elgin-12-year-old",
+          "p0134-glen-elgin-16-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq010",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0074-canadian-club-reserve",
+          "p0074-canadian-club-6-year-old-100-proof",
+          "p0075-canadian-club-premium",
+          "p0075-canadian-club-classic"
+        ],
+        "retrieved_product_ids": [
+          "p0293-port-ellen-douglas-laing-26-year-old",
+          "p0264-mortlach-flora-fauna-16-year-old",
+          "p0264-mortlach-21-year-old",
+          "p0273-oban-14-year-old",
+          "p0273-oban-distillers-edition-1992",
+          "p0305-rosebank-douglas-laing-16-year-old",
+          "p0141-glenallachie-16-year-old-1990",
+          "p0195-invergordon-clan-denny-1966",
+          "p0055-bladnoch-18-year-old",
+          "p0055-bladnoch-15-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq011",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0209-johnnie-walker-blue-label",
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label"
+        ],
+        "retrieved_product_ids": [
+          "p0267-nikka-whiskey-from-the-barrel",
+          "p0267-nikka-all-malt",
+          "p0318-signature",
+          "p0335-the-yamazaki-12-year-old",
+          "p0335-the-yamazaki-18-year-old",
+          "p0038-the-balvenie-doublewood-12-year-old",
+          "p0038-the-balvenie-signature-12-year-old",
+          "p0158-glenmorangie-original",
+          "p0158-glenmorangie-18-year-old",
+          "p0212-kavalan-classic"
+        ]
+      }
+    ]
+  },
+  "cropped_image_text_to_multimodal": {
+    "metrics": {
+      "hit_at_1": 0.5454545454545454,
+      "hit_at_10": 0.7272727272727273,
+      "hit_at_5": 0.7272727272727273,
+      "mrr": 0.5984848484848485
+    },
+    "metrics_by_query_style": {
+      "cropped_bottle_question": {
+        "hit_at_1": 0.5454545454545454,
+        "hit_at_10": 0.7272727272727273,
+        "hit_at_5": 0.7272727272727273,
+        "mrr": 0.5984848484848485
+      }
+    },
+    "query_count": 11,
+    "query_results": [
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq001",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0244-the-macallan-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0244-the-macallan-30-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0131-girvan-1964",
+          "p0195-invergordon-clan-denny-1966",
+          "p0243-the-macallan-10-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0153-glengoyne-21-year-old",
+          "p0223-ladyburn-1973",
+          "p0338-talisker-distillers-edition-1996",
+          "p0235-linkwood-rare-malts-26-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq002",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0334-suntory-hibiki-17-year-old",
+          "p0334-suntory-hibiki-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0334-suntory-hibiki-17-year-old",
+          "p0334-suntory-hibiki-30-year-old",
+          "p0331-suntory-hakushu-12-year-old",
+          "p0335-the-yamazaki-18-year-old",
+          "p0331-suntory-hakushu-18-year-old",
+          "p0335-the-yamazaki-12-year-old",
+          "p0336-suntory-vintage-1984",
+          "p0270-nikka-taketsuru-17-year-old",
+          "p0270-nikka-taketsuru-21-year-old",
+          "p0269-nikka-miyagikyo"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq003",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label",
+          "p0209-johnnie-walker-blue-label"
+        ],
+        "retrieved_product_ids": [
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-blue-label",
+          "p0209-johnnie-walker-gold-label",
+          "p0207-jim-beam-black-label-8-year-old",
+          "p0053-black-dog-centenary",
+          "p0052-black-bottle",
+          "p0198-j-b-jet",
+          "p0169-grant-s-ale-cask-reserve",
+          "p0250-masterstroke"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq004",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0057-blanton-s-single-barrel"
+        ],
+        "retrieved_product_ids": [
+          "p0153-glengoyne-21-year-old",
+          "p0099-cutty-sark-original",
+          "p0161-the-glenrothes-select-reserve",
+          "p0359-pappy-van-winkle-s-family-reserve-15-year-old",
+          "p0277-old-forester-birthday-bourbon-2007",
+          "p0035-ballantine-s-finest",
+          "p0147-glenfarclas-12-year-old",
+          "p0146-glenfarclas-105",
+          "p0161-the-glenrothes-1975",
+          "p0146-glenfarclas-10-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq005",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0199-jack-daniel-s-old-no-7",
+          "p0199-jack-daniel-s-single-barrel"
+        ],
+        "retrieved_product_ids": [
+          "p0199-jack-daniel-s-old-no-7",
+          "p0199-jack-daniel-s-single-barrel",
+          "p0213-kentucky-gentleman",
+          "p0248-maker-s-mark",
+          "p0129-george-t-stagg-2008-edition",
+          "p0370-wild-turkey-80-proof",
+          "p0128-george-dickel-no-12",
+          "p0113-early-times",
+          "p0057-blanton-s-single-barrel",
+          "p0224-lagavulin-16-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq006",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0228-laphroaig10-year-old",
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0229-laphroaig-quarter-cask",
+          "p0229-laphroaig-25-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0228-laphroaig10-year-old",
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0224-lagavulin-16-year-old",
+          "p0229-laphroaig-quarter-cask",
+          "p0223-ladyburn-1973",
+          "p0229-laphroaig-25-year-old",
+          "p0225-lagavulin-distillers-edition",
+          "p0161-the-glenrothes-select-reserve",
+          "p0094-craigellachie-14-year-old",
+          "p0147-glenfarclas-12-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq007",
+        "reciprocal_rank": 0.25,
+        "relevant_product_ids": [
+          "p0224-lagavulin-16-year-old",
+          "p0224-lagavulin-12-year-old",
+          "p0225-lagavulin-distillers-edition",
+          "p0225-lagavulin-21-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0223-ladyburn-1973",
+          "p0218-karuizawa-1986-cask-no-7387-bottled-2008",
+          "p0077-caol-ila-12-year-old",
+          "p0224-lagavulin-16-year-old",
+          "p0077-caol-ila-distillers-edition-1995",
+          "p0190-five-of-spades-distilled-2000-bottled-2008",
+          "p0225-lagavulin-distillers-edition",
+          "p0336-the-cask-of-yamazaki-1990-sherry-butt",
+          "p0224-lagavulin-12-year-old",
+          "p0293-port-ellen-douglas-laing-26-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq008",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-blasda",
+          "p0022-ardbeg-uigeadail"
+        ],
+        "retrieved_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-uigeadail",
+          "p0022-ardbeg-blasda",
+          "p0023-ardmore-traditional-cask",
+          "p0338-talisker-57o-north",
+          "p0228-laphroaig10-year-old",
+          "p0025-arran-10-year-old",
+          "p0338-talisker-distillers-edition-1996",
+          "p0228-laphroaig-10-year-old-cask-strength"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq009",
+        "reciprocal_rank": 0.3333333333333333,
+        "relevant_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0244-the-macallan-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0147-glenfarclas-12-year-old",
+          "p0124-fettercairn-12-year-old",
+          "p0243-the-macallan-10-year-old",
+          "p0253-mcclelland-s-speyside",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0253-mcclelland-s-lowland",
+          "p0161-the-glenrothes-select-reserve",
+          "p0244-the-macallan-25-year-old",
+          "p0161-the-glenrothes-1975",
+          "p0029-aultmore-flora-fauna-12-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq010",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0074-canadian-club-reserve",
+          "p0074-canadian-club-6-year-old-100-proof",
+          "p0075-canadian-club-premium",
+          "p0075-canadian-club-classic"
+        ],
+        "retrieved_product_ids": [
+          "p0089-clynelish-14-year-old",
+          "p0153-glengoyne-21-year-old",
+          "p0293-port-ellen-douglas-laing-26-year-old",
+          "p0145-glendullan-flora-fauna-12-year-old",
+          "p0101-dallas-dhu-rare-malts-21-year-old",
+          "p0141-glenallachie-16-year-old-1990",
+          "p0147-glenfarclas-12-year-old",
+          "p0195-invergordon-clan-denny-1966",
+          "p0077-caol-ila-12-year-old",
+          "p0100-dailuaine-gordon-macphail-1993"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_10": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq011",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0209-johnnie-walker-blue-label",
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label"
+        ],
+        "retrieved_product_ids": [
+          "p0161-the-glenrothes-select-reserve",
+          "p0153-glengoyne-21-year-old",
+          "p0156-the-glenlivet-xxv",
+          "p0147-glenfarclas-12-year-old",
+          "p0169-grant-s-ale-cask-reserve",
+          "p0202-jameson-special-reserve-12-year-old",
+          "p0338-talisker-distillers-edition-1996",
+          "p0161-the-glenrothes-1975",
+          "p0149-glenfiddich-18-year-old-solera-reserve",
+          "p0099-cutty-sark-original"
+        ]
+      }
+    ]
+  },
   "image": {
     "metrics": {
       "hit_at_1": 0.5909090909090909,

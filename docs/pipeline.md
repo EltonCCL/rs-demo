@@ -1,8 +1,8 @@
 # Pipeline and tooling
 
-Step-by-step CLI flow from the PDF through mock embeddings and retrieval evaluation. Run commands from the repository root unless noted.
+Step-by-step CLI flow from the PDF through product extraction, mock embeddings, Gemini embeddings, and retrieval evaluation. Run commands from the repository root unless noted.
 
-For **evaluation benchmark queries** (text, image, expected positives) and **links to the seven Gemini ranking notebooks** (`notebooks/gemini_review_*.ipynb`), see [evaluation_queries_and_labels.md](evaluation_queries_and_labels.md). For **PDF layout and parser context**, see [raw_data_characteristics.md](raw_data_characteristics.md).
+For **evaluation benchmark queries** (text, image, expected positives) and **links to the Gemini ranking notebooks** (`notebooks/gemini_review_*.ipynb`), see [evaluation_queries_and_labels.md](evaluation_queries_and_labels.md). For **PDF layout and parser context**, see [raw_data_characteristics.md](raw_data_characteristics.md).
 
 ---
 
@@ -42,6 +42,8 @@ rs_demo.catalogue_validation.CatalogueValidator
 rs_demo.markdown_export.ProductMarkdownExporter
 rs_demo.embeddings.MockEmbeddingPipeline
 rs_demo.embeddings.MockQueryEmbeddingPipeline
+rs_demo.gemini_embeddings.GeminiProductEmbeddingPipeline
+rs_demo.gemini_embeddings.GeminiQueryEmbeddingPipeline
 rs_demo.queries.EvalQueryLoader
 rs_demo.retrieval.ProductRetriever
 rs_demo.evaluation.RetrievalEvaluator
@@ -147,7 +149,7 @@ data/extracted/product_markdown/pXXXX-product-id.md
 
 Start manual review from `data/extracted/product_markdown/index.md`. Each product Markdown file contains structured fields, descriptions, brand text, cropped and original images, full page render, and raw parsed block.
 
-### 6. Generate mock embeddings
+### 6. Generate mock product embeddings
 
 ```bash
 python -m rs_demo build-mock-embeddings
@@ -177,6 +179,7 @@ Inputs:
 data/eval/text_queries.jsonl
 data/eval/image_queries.jsonl
 data/eval/image_text_queries.jsonl
+data/eval/cropped_image_text_queries.jsonl
 ```
 
 Outputs:
@@ -185,9 +188,15 @@ Outputs:
 data/embeddings/mock/queries/text/
 data/embeddings/mock/queries/image/
 data/embeddings/mock/queries/image_text/
+data/embeddings/mock/queries/cropped_image_text/
 ```
 
-The three query modes are intentionally separate: text only; image only (crop or scene); whole scene plus the question “What is the whisky in this image?” for image+text.
+The query modes are intentionally separate:
+
+- text only;
+- image only, including cropped bottle and whole scene images;
+- whole scene plus the question “What is the whisky in this image?”;
+- cropped bottle plus the same question.
 
 ### 8. Run mock retrieval evaluation
 
@@ -202,6 +211,78 @@ data/eval/mock_retrieval_report.json
 ```
 
 This ranks products with cosine similarity and reports `hit@1`, `hit@5`, `hit@10`, and `MRR`. The current mock model is hash-based, so these scores are only a pipeline sanity check, not evidence of real retrieval quality.
+
+### 9. Generate Gemini product embeddings
+
+Real embeddings require `GOOGLE_API_KEY` or `GEMINI_API_KEY` in your shell environment or local `.env`. The code writes separate product arrays for text, image, and multimodal product representations:
+
+```bash
+python -m rs_demo build-gemini-embeddings --mode text --sleep-seconds 0.8
+python -m rs_demo build-gemini-embeddings --mode image --sleep-seconds 0.8
+python -m rs_demo build-gemini-embeddings --mode multimodal --sleep-seconds 0.8
+```
+
+Outputs:
+
+```text
+data/embeddings/gemini/metadata.jsonl
+data/embeddings/gemini/text_embeddings.npy
+data/embeddings/gemini/image_embeddings.npy
+data/embeddings/gemini/multimodal_embeddings.npy
+data/embeddings/gemini/manifest.json
+```
+
+The product metadata order is shared by all three arrays. The pipeline fails if existing arrays do not match the current product order, unless `--force` is used.
+
+### 10. Generate Gemini query embeddings
+
+```bash
+python -m rs_demo build-gemini-query-embeddings --mode text --sleep-seconds 0.8
+python -m rs_demo build-gemini-query-embeddings --mode image --sleep-seconds 0.8
+python -m rs_demo build-gemini-query-embeddings --mode image_text --sleep-seconds 0.8
+python -m rs_demo build-gemini-query-embeddings --mode cropped_image_text --sleep-seconds 0.8
+```
+
+Outputs:
+
+```text
+data/embeddings/gemini/queries/text/
+data/embeddings/gemini/queries/image/
+data/embeddings/gemini/queries/image_text/
+data/embeddings/gemini/queries/cropped_image_text/
+```
+
+Use `--limit-queries` and `--max-requests` for quota-controlled dry runs. The query loader validates required text/image fields and image file existence before making API calls.
+
+### 11. Run Gemini retrieval evaluation
+
+```bash
+python -m rs_demo run-gemini-evaluation --mode text
+python -m rs_demo run-gemini-evaluation --mode image
+python -m rs_demo run-gemini-evaluation --mode image_text
+python -m rs_demo run-gemini-evaluation --mode cropped_image_text_to_image
+python -m rs_demo run-gemini-evaluation --mode cropped_image_text_to_multimodal
+```
+
+Output:
+
+```text
+data/eval/gemini_retrieval_report.json
+```
+
+The report includes these retrieval settings:
+
+```text
+text                                  text query -> product text
+text_to_multimodal                    text query -> product multimodal
+image                                 image query -> product image
+image_to_multimodal                   image query -> product multimodal
+image_text                            whole image + text query -> product multimodal
+cropped_image_text_to_image           cropped image + text query -> product image
+cropped_image_text_to_multimodal      cropped image + text query -> product multimodal
+```
+
+The `image` and `image_to_multimodal` sections each contain both cropped-bottle and whole-scene image queries; the review notebooks split them for easier inspection.
 
 ---
 
@@ -225,15 +306,28 @@ If the parser change only affects text fields and not image paths, the crop step
 
 ---
 
-## Next planned stage
+## Review outputs
 
-After the mock embedding pipeline is stable, replace the mock model with real embedding providers while keeping the same output contract:
+For manual catalogue review:
 
 ```text
-metadata.jsonl
-text_embeddings.npy
-image_embeddings.npy
-multimodal_embeddings.npy
+data/extracted/product_markdown/index.md
+data/extracted/catalogue_validation_report.md
 ```
 
-That enables comparing text-only, image-only, late-fusion, and native multimodal retrieval on the same product records.
+For retrieval review:
+
+```text
+data/eval/gemini_retrieval_report.json
+notebooks/gemini_review_01_text_to_product_text.ipynb
+notebooks/gemini_review_02_text_to_product_multimodal.ipynb
+notebooks/gemini_review_03_cropped_image_to_product_image.ipynb
+notebooks/gemini_review_04_whole_image_to_product_image.ipynb
+notebooks/gemini_review_05_cropped_image_to_product_multimodal.ipynb
+notebooks/gemini_review_06_whole_image_to_product_multimodal.ipynb
+notebooks/gemini_review_07_image_text_to_product_multimodal.ipynb
+notebooks/gemini_review_08_cropped_image_text_to_product_image.ipynb
+notebooks/gemini_review_09_cropped_image_text_to_product_multimodal.ipynb
+```
+
+These notebooks load local embeddings and reports only. They do not make API calls.
