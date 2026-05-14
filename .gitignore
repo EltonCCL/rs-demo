@@ -46,3 +46,5 @@ data/demo_notebook/*
 *.pdf
 *.bcf
 *.run.xml
+
+rs-vector-embeddings/*
