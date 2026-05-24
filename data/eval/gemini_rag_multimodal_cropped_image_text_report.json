@@ -1,0 +1,460 @@
+{
+  "diagnostics": {
+    "invalid_product_ids": [
+      "p0108",
+      "p0161",
+      "p0173",
+      "p0232"
+    ],
+    "returned_product_id_count": 26,
+    "valid_product_id_count": 21,
+    "valid_product_id_rate": 0.8076923076923077
+  },
+  "rag_multimodal_cropped_image_text": {
+    "metrics": {
+      "hit_at_1": 0.5454545454545454,
+      "hit_at_5": 0.5454545454545454,
+      "mrr": 0.5454545454545454
+    },
+    "metrics_by_query_style": {
+      "cropped_bottle_question": {
+        "hit_at_1": 0.5454545454545454,
+        "hit_at_5": 0.5454545454545454,
+        "mrr": 0.5454545454545454
+      }
+    },
+    "query_count": 11,
+    "query_results": [
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq001",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0244-the-macallan-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0231-the-last-drop"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq002",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0334-suntory-hibiki-17-year-old",
+          "p0334-suntory-hibiki-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0334-suntory-hibiki-17-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq003",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label",
+          "p0209-johnnie-walker-blue-label"
+        ],
+        "retrieved_product_ids": [
+          "p0208-johnnie-walker-black-label"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq004",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0057-blanton-s-single-barrel"
+        ],
+        "retrieved_product_ids": [
+          "p0161",
+          "p0108",
+          "p0232",
+          "p0173"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq005",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0199-jack-daniel-s-old-no-7",
+          "p0199-jack-daniel-s-single-barrel"
+        ],
+        "retrieved_product_ids": [
+          "p0199-jack-daniel-s-old-no-7",
+          "p0199-jack-daniel-s-single-barrel",
+          "p0128-george-dickel-no-12",
+          "p0128-george-dickel-barrel-select",
+          "p0278-old-grand-dad"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq006",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0228-laphroaig10-year-old",
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0229-laphroaig-quarter-cask",
+          "p0229-laphroaig-25-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0232"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq007",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0224-lagavulin-16-year-old",
+          "p0224-lagavulin-12-year-old",
+          "p0225-lagavulin-distillers-edition",
+          "p0225-lagavulin-21-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0104-dalwhinnie-15-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq008",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-blasda",
+          "p0022-ardbeg-uigeadail"
+        ],
+        "retrieved_product_ids": [
+          "p0021-ardbeg-10-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq009",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-25-year-old",
+          "p0244-the-macallan-30-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0244-the-macallan-25-year-old",
+          "p0244-the-macallan-30-year-old",
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0070-bunnahabhain-18-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "citq010",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0074-canadian-club-reserve",
+          "p0074-canadian-club-6-year-old-100-proof",
+          "p0075-canadian-club-premium",
+          "p0075-canadian-club-classic"
+        ],
+        "retrieved_product_ids": [
+          "p0075-canadian-club-premium",
+          "p0075-canadian-club-classic",
+          "p0074-canadian-club-reserve",
+          "p0074-canadian-club-6-year-old-100-proof",
+          "p0377-wiser-s-deluxe"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": false
+        },
+        "query_id": "citq011",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0209-johnnie-walker-blue-label",
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label"
+        ],
+        "retrieved_product_ids": [
+          "p0267-nikka-whiskey-from-the-barrel"
+        ]
+      }
+    ]
+  },
+  "raw_results": [
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq001",
+      "ranked_products": [
+        {
+          "product_id": "p0231-the-last-drop",
+          "product_name": "THE LAST DROP",
+          "rank": 1,
+          "reason": "The image provided matches the bottle of 'The Last Drop' whisky, which features the text '1960' on its label as described in the catalogue."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0231-the-last-drop\",\"product_name\":\"THE LAST DROP\",\"reason\":\"The image provided matches the bottle of 'The Last Drop' whisky, which features the text '1960' on its label as described in the catalogue.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq002",
+      "ranked_products": [
+        {
+          "product_id": "p0334-suntory-hibiki-17-year-old",
+          "product_name": "SUNTORY HIBIKI 17-YEAR-OLD",
+          "rank": 1,
+          "reason": "The image clearly shows a bottle of Suntory Hibiki 17-Year-Old, which matches the product name and details in the catalogue."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0334-suntory-hibiki-17-year-old\",\"product_name\":\"SUNTORY HIBIKI 17-YEAR-OLD\",\"reason\":\"The image clearly shows a bottle of Suntory Hibiki 17-Year-Old, which matches the product name and details in the catalogue.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq003",
+      "ranked_products": [
+        {
+          "product_id": "p0208-johnnie-walker-black-label",
+          "product_name": "JOHNNIE WALKER BLACK LABEL",
+          "rank": 1,
+          "reason": "The bottle in the image is a Johnnie Walker Black Label edition, specifically the 'Director's Cut' version as indicated by the text on the label."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0208-johnnie-walker-black-label\",\"product_name\":\"JOHNNIE WALKER BLACK LABEL\",\"reason\":\"The bottle in the image is a Johnnie Walker Black Label edition, specifically the 'Director's Cut' version as indicated by the text on the label.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq004",
+      "ranked_products": [
+        {
+          "product_id": "p0161",
+          "product_name": "The Glenrothes Select Reserve",
+          "rank": 1,
+          "reason": "The bottle shape, label placement, and overall silhouette in the image match the catalogue entry for The Glenrothes Select Reserve [1.5]."
+        },
+        {
+          "product_id": "p0108",
+          "product_name": "Dimple 18 Year Old",
+          "rank": 2,
+          "reason": "The bottle has a similar rounded, dimpled shape characteristic of the Dimple brand [1.1]."
+        },
+        {
+          "product_id": "p0232",
+          "product_name": "Lauder's",
+          "rank": 4,
+          "reason": "The bottle has a rounded body shape similar to the one in the image [1.3]."
+        },
+        {
+          "product_id": "p0173",
+          "product_name": "Guillon No. 1",
+          "rank": 5,
+          "reason": "While the bottle has a different neck, it is a rounded whisky bottle found in the catalogue [1.4]."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0161\",\"product_name\":\"The Glenrothes Select Reserve\",\"reason\":\"The bottle shape, label placement, and overall silhouette in the image match the catalogue entry for The Glenrothes Select Reserve [1.5].\"},{\"rank\":2,\"product_id\":\"p0108\",\"product_name\":\"Dimple 18 Year Old\",\"reason\":\"The bottle has a similar rounded, dimpled shape characteristic of the Dimple brand [1.1].\"},{\"rank\":3,\"product_id\":\"p0108\",\"product_name\":\"Dimple 12 Year Old\",\"reason\":\"The bottle shares the distinct rounded, dimpled design associated with the Dimple product line [1.2].\"},{\"rank\":4,\"product_id\":\"p0232\",\"product_name\":\"Lauder's\",\"reason\":\"The bottle has a rounded body shape similar to the one in the image [1.3].\"},{\"rank\":5,\"product_id\":\"p0173\",\"product_name\":\"Guillon No. 1\",\"reason\":\"While the bottle has a different neck, it is a rounded whisky bottle found in the catalogue [1.4].\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq005",
+      "ranked_products": [
+        {
+          "product_id": "p0199-jack-daniel-s-old-no-7",
+          "product_name": "JACK DANIELS OLD NO. 7",
+          "rank": 1,
+          "reason": "The image shows a bottle with the distinctive square shape and label text 'JACK DANIEL'S' and 'OLD NO. 7', which matches the product description and branding for Jack Daniel's Old No. 7."
+        },
+        {
+          "product_id": "p0199-jack-daniel-s-single-barrel",
+          "product_name": "JACK DANIELS SINGLE BARREL",
+          "rank": 2,
+          "reason": "This is another product from the Jack Daniel's brand, which shares similar branding elements, though the specific bottle in the image is identified as the Old No. 7."
+        },
+        {
+          "product_id": "p0128-george-dickel-no-12",
+          "product_name": "GEORGE DICKEL NO. 12",
+          "rank": 3,
+          "reason": "This is a Tennessee Whiskey, similar in style to the product in the image, though it is a different brand."
+        },
+        {
+          "product_id": "p0128-george-dickel-barrel-select",
+          "product_name": "GEORGE DICKEL BARREL SELECT",
+          "rank": 4,
+          "reason": "Another Tennessee Whiskey option from the same brand as George Dickel No. 12."
+        },
+        {
+          "product_id": "p0278-old-grand-dad",
+          "product_name": "OLD GRAND-DAD",
+          "rank": 5,
+          "reason": "A whiskey product listed in the catalogue, though it is a different style and brand than the one shown in the image."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0199-jack-daniel-s-old-no-7\",\"product_name\":\"JACK DANIELS OLD NO. 7\",\"reason\":\"The image shows a bottle with the distinctive square shape and label text 'JACK DANIEL'S' and 'OLD NO. 7', which matches the product description and branding for Jack Daniel's Old No. 7.\"},{\"rank\":2,\"product_id\":\"p0199-jack-daniel-s-single-barrel\",\"product_name\":\"JACK DANIELS SINGLE BARREL\",\"reason\":\"This is another product from the Jack Daniel's brand, which shares similar branding elements, though the specific bottle in the image is identified as the Old No. 7.\"},{\"rank\":3,\"product_id\":\"p0128-george-dickel-no-12\",\"product_name\":\"GEORGE DICKEL NO. 12\",\"reason\":\"This is a Tennessee Whiskey, similar in style to the product in the image, though it is a different brand.\"},{\"rank\":4,\"product_id\":\"p0128-george-dickel-barrel-select\",\"product_name\":\"GEORGE DICKEL BARREL SELECT\",\"reason\":\"Another Tennessee Whiskey option from the same brand as George Dickel No. 12.\"},{\"rank\":5,\"product_id\":\"p0278-old-grand-dad\",\"product_name\":\"OLD GRAND-DAD\",\"reason\":\"A whiskey product listed in the catalogue, though it is a different style and brand than the one shown in the image.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq006",
+      "ranked_products": [
+        {
+          "product_id": "p0232",
+          "product_name": "Lauder's Finest Scotch Whisky",
+          "rank": 1,
+          "reason": "The label in the image clearly shows 'LAUDER'S', which matches the product name and branding of this whisky."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0232\",\"product_name\":\"Lauder's Finest Scotch Whisky\",\"reason\":\"The label in the image clearly shows 'LAUDER'S', which matches the product name and branding of this whisky.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq007",
+      "ranked_products": [
+        {
+          "product_id": "p0104-dalwhinnie-15-year-old",
+          "product_name": "DALWHINNIE 15-YEAR-OLD",
+          "rank": 1,
+          "reason": "The bottle shape, label design, and visible text in the provided image match the catalogue record for Dalwhinnie 15-Year-Old."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0104-dalwhinnie-15-year-old\",\"product_name\":\"DALWHINNIE 15-YEAR-OLD\",\"reason\":\"The bottle shape, label design, and visible text in the provided image match the catalogue record for Dalwhinnie 15-Year-Old.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq008",
+      "ranked_products": [
+        {
+          "product_id": "p0021-ardbeg-10-year-old",
+          "product_name": "ARDBEG 10-YEAR-OLD",
+          "rank": 1,
+          "reason": "The image clearly shows a bottle of Ardbeg Ten, which matches the product name and branding in the catalogue [1.1]."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0021-ardbeg-10-year-old\",\"product_name\":\"ARDBEG 10-YEAR-OLD\",\"reason\":\"The image clearly shows a bottle of Ardbeg Ten, which matches the product name and branding in the catalogue [1.1].\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq009",
+      "ranked_products": [
+        {
+          "product_id": "p0244-the-macallan-25-year-old",
+          "product_name": "THE MACALLAN 25-YEAR-OLD",
+          "rank": 1,
+          "reason": "The image shows a bottle of The Macallan, and while the label is blurry, the brand and style are consistent with The Macallan range found in the catalogue."
+        },
+        {
+          "product_id": "p0244-the-macallan-30-year-old",
+          "product_name": "THE MACALLAN 30-YEAR-OLD",
+          "rank": 2,
+          "reason": "The image shows a bottle of The Macallan, which is a brand represented in the catalogue."
+        },
+        {
+          "product_id": "p0243-the-macallan-10-year-old",
+          "product_name": "THE MACALLAN 10-YEAR-OLD",
+          "rank": 3,
+          "reason": "The image shows a bottle of The Macallan, which is a brand represented in the catalogue."
+        },
+        {
+          "product_id": "p0243-the-macallan-fine-oak-10-year-old",
+          "product_name": "THE MACALLAN FINE OAK 10-YEAR-OLD",
+          "rank": 4,
+          "reason": "The image shows a bottle of The Macallan, which is a brand represented in the catalogue."
+        },
+        {
+          "product_id": "p0070-bunnahabhain-18-year-old",
+          "product_name": "BUNNAHABHAIN 18-YEAR-OLD",
+          "rank": 5,
+          "reason": "The user query is about a whisky, and this is an 18-year-old whisky from the catalogue."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0244-the-macallan-25-year-old\",\"product_name\":\"THE MACALLAN 25-YEAR-OLD\",\"reason\":\"The image shows a bottle of The Macallan, and while the label is blurry, the brand and style are consistent with The Macallan range found in the catalogue.\"},{\"rank\":2,\"product_id\":\"p0244-the-macallan-30-year-old\",\"product_name\":\"THE MACALLAN 30-YEAR-OLD\",\"reason\":\"The image shows a bottle of The Macallan, which is a brand represented in the catalogue.\"},{\"rank\":3,\"product_id\":\"p0243-the-macallan-10-year-old\",\"product_name\":\"THE MACALLAN 10-YEAR-OLD\",\"reason\":\"The image shows a bottle of The Macallan, which is a brand represented in the catalogue.\"},{\"rank\":4,\"product_id\":\"p0243-the-macallan-fine-oak-10-year-old\",\"product_name\":\"THE MACALLAN FINE OAK 10-YEAR-OLD\",\"reason\":\"The image shows a bottle of The Macallan, which is a brand represented in the catalogue.\"},{\"rank\":5,\"product_id\":\"p0070-bunnahabhain-18-year-old\",\"product_name\":\"BUNNAHABHAIN 18-YEAR-OLD\",\"reason\":\"The user query is about a whisky, and this is an 18-year-old whisky from the catalogue.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq010",
+      "ranked_products": [
+        {
+          "product_id": "p0075-canadian-club-premium",
+          "product_name": "CANADIAN CLUB PREMIUM",
+          "rank": 1,
+          "reason": "The bottle in the image matches the visual characteristics and branding of the Canadian Club Premium product found in the catalogue."
+        },
+        {
+          "product_id": "p0075-canadian-club-classic",
+          "product_name": "CANADIAN CLUB CLASSIC",
+          "rank": 2,
+          "reason": "This is a variant of the Canadian Club brand, which shares similar branding elements to the bottle in the image."
+        },
+        {
+          "product_id": "p0074-canadian-club-reserve",
+          "product_name": "CANADIAN CLUB RESERVE",
+          "rank": 3,
+          "reason": "This is a Canadian Club product, sharing the brand identity visible in the image."
+        },
+        {
+          "product_id": "p0074-canadian-club-6-year-old-100-proof",
+          "product_name": "CANADIAN CLUB 6-YEAR-OLD 100 PROOF",
+          "rank": 4,
+          "reason": "This is another Canadian Club product, sharing the brand identity visible in the image."
+        },
+        {
+          "product_id": "p0377-wiser-s-deluxe",
+          "product_name": "WISERS DELUXE",
+          "rank": 5,
+          "reason": "This is a Canadian whisky brand, though it is a different brand than the one shown in the image."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0075-canadian-club-premium\",\"product_name\":\"CANADIAN CLUB PREMIUM\",\"reason\":\"The bottle in the image matches the visual characteristics and branding of the Canadian Club Premium product found in the catalogue.\"},{\"rank\":2,\"product_id\":\"p0075-canadian-club-classic\",\"product_name\":\"CANADIAN CLUB CLASSIC\",\"reason\":\"This is a variant of the Canadian Club brand, which shares similar branding elements to the bottle in the image.\"},{\"rank\":3,\"product_id\":\"p0074-canadian-club-reserve\",\"product_name\":\"CANADIAN CLUB RESERVE\",\"reason\":\"This is a Canadian Club product, sharing the brand identity visible in the image.\"},{\"rank\":4,\"product_id\":\"p0074-canadian-club-6-year-old-100-proof\",\"product_name\":\"CANADIAN CLUB 6-YEAR-OLD 100 PROOF\",\"reason\":\"This is another Canadian Club product, sharing the brand identity visible in the image.\"},{\"rank\":5,\"product_id\":\"p0377-wiser-s-deluxe\",\"product_name\":\"WISERS DELUXE\",\"reason\":\"This is a Canadian whisky brand, though it is a different brand than the one shown in the image.\"}]}"
+    },
+    {
+      "query": "What is the whisky in this image?",
+      "query_id": "citq011",
+      "ranked_products": [
+        {
+          "product_id": "p0267-nikka-whiskey-from-the-barrel",
+          "product_name": "Nikka Whisky From The Barrel",
+          "rank": 1,
+          "reason": "The bottle shape, label placement, and overall aesthetic in the user's image match the distinctive square-shouldered, compact bottle design of Nikka Whisky From The Barrel."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0267-nikka-whiskey-from-the-barrel\",\"product_name\":\"Nikka Whisky From The Barrel\",\"reason\":\"The bottle shape, label placement, and overall aesthetic in the user's image match the distinctive square-shouldered, compact bottle design of Nikka Whisky From The Barrel.\"}]}"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "model": "gemini-3.1-flash-lite",
+  "queries": [
+    {
+      "query": "I want to buy a whisky with round bottle",
+      "query_id": "visual_round_bottle"
+    },
+    {
+      "query": "I want to buy a whisky in green bottle.",
+      "query_id": "visual_green_bottle"
+    },
+    {
+      "query": "I want to buy a whisky in ball-shaped bottle",
+      "query_id": "visual_ball_shaped_bottle"
+    }
+  ],
+  "query_type": "text",
+  "raw_results": [
+    {
+      "query": "I want to buy a whisky with round bottle",
+      "query_id": "visual_round_bottle",
+      "ranked_products": [
+        {
+          "product_id": "p0108-dimple-15-year-old",
+          "product_name": "Dimple 15 Year Old",
+          "rank": 1,
+          "reason": "The bottle has a distinct, rounded, dimpled shape."
+        },
+        {
+          "product_id": "p0108-dimple-12-year-old",
+          "product_name": "Dimple 12 Year Old",
+          "rank": 2,
+          "reason": "The bottle has a distinct, rounded, dimpled shape."
+        },
+        {
+          "product_id": "p0161-the-glenrothes-select-reserve",
+          "product_name": "The Glenrothes Select Reserve",
+          "rank": 3,
+          "reason": "The bottle features a rounded, bulbous body design."
+        },
+        {
+          "product_id": "p0161-the-glenrothes-1975",
+          "product_name": "The Glenrothes 1975",
+          "rank": 4,
+          "reason": "The bottle features a rounded, bulbous body design."
+        },
+        {
+          "product_id": "p0173-guillon-no-1",
+          "product_name": "Guillon N\u00b01",
+          "rank": 5,
+          "reason": "The bottle has a rounded, decanter-style body."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0108-dimple-15-year-old\",\"product_name\":\"Dimple 15 Year Old\",\"reason\":\"The bottle has a distinct, rounded, dimpled shape.\"},{\"rank\":2,\"product_id\":\"p0108-dimple-12-year-old\",\"product_name\":\"Dimple 12 Year Old\",\"reason\":\"The bottle has a distinct, rounded, dimpled shape.\"},{\"rank\":3,\"product_id\":\"p0161-the-glenrothes-select-reserve\",\"product_name\":\"The Glenrothes Select Reserve\",\"reason\":\"The bottle features a rounded, bulbous body design.\"},{\"rank\":4,\"product_id\":\"p0161-the-glenrothes-1975\",\"product_name\":\"The Glenrothes 1975\",\"reason\":\"The bottle features a rounded, bulbous body design.\"},{\"rank\":5,\"product_id\":\"p0173-guillon-no-1\",\"product_name\":\"Guillon N\u00b01\",\"reason\":\"The bottle has a rounded, decanter-style body.\"}]}"
+    },
+    {
+      "query": "I want to buy a whisky in green bottle.",
+      "query_id": "visual_green_bottle",
+      "ranked_products": [
+        {
+          "product_id": "p0148-glenfiddich-15-year-old-solera-reserve",
+          "product_name": "Glenfiddich 15 Year Old Solera Reserve",
+          "rank": 1,
+          "reason": "The product image shows a whisky in a green bottle."
+        },
+        {
+          "product_id": "p0148-glenfiddich-12-year-old",
+          "product_name": "Glenfiddich 12 Year Old",
+          "rank": 2,
+          "reason": "The product image shows a whisky in a green bottle."
+        },
+        {
+          "product_id": "p0155-the-glenlivet-french-oak-reserve-15-year-old",
+          "product_name": "The Glenlivet French Oak Reserve 15 Year Old",
+          "rank": 3,
+          "reason": "The product image shows a whisky in a green bottle."
+        },
+        {
+          "product_id": "p0155-the-glenlivet-12-year-old",
+          "product_name": "The Glenlivet 12 Year Old",
+          "rank": 4,
+          "reason": "The product image shows a whisky in a green bottle."
+        },
+        {
+          "product_id": "p0085-clan-macgregor",
+          "product_name": "Clan MacGregor",
+          "rank": 5,
+          "reason": "The product image shows a whisky in a green bottle."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0148-glenfiddich-15-year-old-solera-reserve\",\"product_name\":\"Glenfiddich 15 Year Old Solera Reserve\",\"reason\":\"The product image shows a whisky in a green bottle.\"},{\"rank\":2,\"product_id\":\"p0148-glenfiddich-12-year-old\",\"product_name\":\"Glenfiddich 12 Year Old\",\"reason\":\"The product image shows a whisky in a green bottle.\"},{\"rank\":3,\"product_id\":\"p0155-the-glenlivet-french-oak-reserve-15-year-old\",\"product_name\":\"The Glenlivet French Oak Reserve 15 Year Old\",\"reason\":\"The product image shows a whisky in a green bottle.\"},{\"rank\":4,\"product_id\":\"p0155-the-glenlivet-12-year-old\",\"product_name\":\"The Glenlivet 12 Year Old\",\"reason\":\"The product image shows a whisky in a green bottle.\"},{\"rank\":5,\"product_id\":\"p0085-clan-macgregor\",\"product_name\":\"Clan MacGregor\",\"reason\":\"The product image shows a whisky in a green bottle.\"}]}"
+    },
+    {
+      "query": "I want to buy a whisky in ball-shaped bottle",
+      "query_id": "visual_ball_shaped_bottle",
+      "ranked_products": [
+        {
+          "product_id": "p0108-dimple-15-year-old",
+          "product_name": "Dimple 15 Year Old",
+          "rank": 1,
+          "reason": "The bottle has a distinct, rounded, ball-like shape."
+        },
+        {
+          "product_id": "p0108-dimple-12-year-old",
+          "product_name": "Dimple 12 Year Old",
+          "rank": 2,
+          "reason": "The bottle features the signature rounded, ball-like design associated with the Dimple brand."
+        },
+        {
+          "product_id": "p0057-blanton-s-single-barrel",
+          "product_name": "Blanton's Single Barrel",
+          "rank": 3,
+          "reason": "The bottle has a rounded, globe-like shape."
+        },
+        {
+          "product_id": "p0161-the-glenrothes-select-reserve",
+          "product_name": "The Glenrothes Select Reserve",
+          "rank": 4,
+          "reason": "The bottle has a rounded, bulbous shape."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0108-dimple-15-year-old\",\"product_name\":\"Dimple 15 Year Old\",\"reason\":\"The bottle has a distinct, rounded, ball-like shape.\"},{\"rank\":2,\"product_id\":\"p0108-dimple-12-year-old\",\"product_name\":\"Dimple 12 Year Old\",\"reason\":\"The bottle features the signature rounded, ball-like design associated with the Dimple brand.\"},{\"rank\":3,\"product_id\":\"p0057-blanton-s-single-barrel\",\"product_name\":\"Blanton's Single Barrel\",\"reason\":\"The bottle has a rounded, globe-like shape.\"},{\"rank\":4,\"product_id\":\"p0161-the-glenrothes-select-reserve\",\"product_name\":\"The Glenrothes Select Reserve\",\"reason\":\"The bottle has a rounded, bulbous shape.\"}]}"
+    }
+  ],
+  "store_manifest": "data/rag/rag_product_image_store.json",
+  "store_name": "fileSearchStores/ragproductimagestore-dppy5hhkl8n5",
+  "target_store": "rag_product_image_store",
+  "top_k": 5
+}

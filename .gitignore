@@ -22,6 +22,8 @@ data/embeddings/*
 !data/embeddings/gemini/**
 !data/embeddings/mock/
 !data/embeddings/mock/**
+data/rag/*
+!data/rag/.gitkeep
 data/demo_notebook/*
 
 .env.*

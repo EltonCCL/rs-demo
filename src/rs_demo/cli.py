@@ -29,6 +29,21 @@ from rs_demo.markdown_export import MarkdownExportConfig, ProductMarkdownExporte
 from rs_demo.pdf_extraction import PdfExtractionConfig, PdfExtractor
 from rs_demo.product_parser import ProductParser, ProductParserConfig
 from rs_demo.queries import EvalQueryLoader
+from rs_demo.rag import (
+    DEFAULT_FILE_SEARCH_EMBEDDING_MODEL,
+    DEFAULT_RAG_GENERATION_MODEL,
+    ProductImageRagCorpusBuilder,
+    ProductMultimodalRagCorpusBuilder,
+    ProductTextRagCorpusBuilder,
+    RagImageCorpusConfig,
+    RagMultimodalCorpusConfig,
+    RagTextCorpusConfig,
+    RagTextEvaluationConfig,
+    RagTextEvaluationPipeline,
+    RagTextStoreConfig,
+    RagTextStoreIngestionPipeline,
+    load_store_name,
+)
 from rs_demo.retrieval import ProductRetriever
 
 
@@ -200,6 +215,182 @@ def build_parser() -> argparse.ArgumentParser:
     )
     gemini_eval.add_argument("--out", type=Path, default=Path("data/eval/gemini_retrieval_report.json"))
     gemini_eval.add_argument("--top-k", type=int, default=10)
+
+    rag_corpus = subparsers.add_parser(
+        "build-rag-text-corpus",
+        help="Build one text document per product for the File Search RAG baseline.",
+    )
+    rag_corpus.add_argument("--catalogue", type=Path, default=Path("data/extracted/product_parse_sample.jsonl"))
+    rag_corpus.add_argument("--out-dir", type=Path, default=Path("data/rag/product_text_corpus"))
+    rag_corpus.add_argument("--manifest", type=Path, default=None)
+    rag_corpus.add_argument("--limit-products", type=int, default=None)
+
+    rag_store = subparsers.add_parser(
+        "create-rag-text-store",
+        help="Create/upload the text-only product File Search store.",
+    )
+    rag_store.add_argument(
+        "--corpus-manifest",
+        type=Path,
+        default=Path("data/rag/product_text_corpus/manifest.jsonl"),
+    )
+    rag_store.add_argument("--out", type=Path, default=Path("data/rag/rag_product_text_store.json"))
+    rag_store.add_argument("--display-name", default="rag_product_text_store")
+    rag_store.add_argument(
+        "--store-name",
+        default=None,
+        help="Use an existing File Search store instead of creating a new one.",
+    )
+    rag_store.add_argument("--embedding-model", default=DEFAULT_FILE_SEARCH_EMBEDDING_MODEL)
+    rag_store.add_argument("--limit-products", type=int, default=None)
+    rag_store.add_argument("--no-wait", action="store_true")
+    rag_store.add_argument("--poll-interval-seconds", type=float, default=5.0)
+    rag_store.add_argument("--timeout-seconds", type=float, default=600.0)
+    rag_store.add_argument("--sleep-seconds", type=float, default=0.5)
+    rag_store.add_argument("--concurrency", type=int, default=1)
+    rag_store.add_argument("--no-resume", action="store_true")
+    rag_store.add_argument("--progress-every", type=int, default=25)
+
+    rag_image_corpus = subparsers.add_parser(
+        "build-rag-image-corpus",
+        help="Build one compressed product image per product for the File Search image RAG baseline.",
+    )
+    rag_image_corpus.add_argument(
+        "--catalogue",
+        type=Path,
+        default=Path("data/extracted/product_parse_sample.jsonl"),
+    )
+    rag_image_corpus.add_argument(
+        "--out-dir",
+        type=Path,
+        default=Path("data/rag/product_image_corpus"),
+    )
+    rag_image_corpus.add_argument("--manifest", type=Path, default=None)
+    rag_image_corpus.add_argument("--limit-products", type=int, default=None)
+
+    rag_image_store = subparsers.add_parser(
+        "create-rag-image-store",
+        help="Create/upload the product image File Search store.",
+    )
+    rag_image_store.add_argument(
+        "--corpus-manifest",
+        type=Path,
+        default=Path("data/rag/product_image_corpus/manifest.jsonl"),
+    )
+    rag_image_store.add_argument(
+        "--out",
+        type=Path,
+        default=Path("data/rag/rag_product_image_store.json"),
+    )
+    rag_image_store.add_argument("--display-name", default="rag_product_image_store")
+    rag_image_store.add_argument(
+        "--store-name",
+        default=None,
+        help="Use an existing File Search store instead of creating a new one.",
+    )
+    rag_image_store.add_argument("--embedding-model", default=DEFAULT_FILE_SEARCH_EMBEDDING_MODEL)
+    rag_image_store.add_argument("--limit-products", type=int, default=None)
+    rag_image_store.add_argument("--no-wait", action="store_true")
+    rag_image_store.add_argument("--poll-interval-seconds", type=float, default=5.0)
+    rag_image_store.add_argument("--timeout-seconds", type=float, default=600.0)
+    rag_image_store.add_argument("--sleep-seconds", type=float, default=0.0)
+    rag_image_store.add_argument("--concurrency", type=int, default=5)
+    rag_image_store.add_argument("--no-resume", action="store_true")
+    rag_image_store.add_argument("--progress-every", type=int, default=25)
+
+    rag_multimodal_corpus = subparsers.add_parser(
+        "build-rag-multimodal-corpus",
+        help="Build one PDF product sheet per product for the File Search multimodal RAG baseline.",
+    )
+    rag_multimodal_corpus.add_argument(
+        "--catalogue",
+        type=Path,
+        default=Path("data/extracted/product_parse_sample.jsonl"),
+    )
+    rag_multimodal_corpus.add_argument(
+        "--out-dir",
+        type=Path,
+        default=Path("data/rag/product_multimodal_corpus"),
+    )
+    rag_multimodal_corpus.add_argument("--manifest", type=Path, default=None)
+    rag_multimodal_corpus.add_argument("--limit-products", type=int, default=None)
+
+    rag_multimodal_store = subparsers.add_parser(
+        "create-rag-multimodal-store",
+        help="Create/upload the multimodal product PDF File Search store.",
+    )
+    rag_multimodal_store.add_argument(
+        "--corpus-manifest",
+        type=Path,
+        default=Path("data/rag/product_multimodal_corpus/manifest.jsonl"),
+    )
+    rag_multimodal_store.add_argument(
+        "--out",
+        type=Path,
+        default=Path("data/rag/rag_product_multimodal_store.json"),
+    )
+    rag_multimodal_store.add_argument("--display-name", default="rag_product_multimodal_store")
+    rag_multimodal_store.add_argument(
+        "--store-name",
+        default=None,
+        help="Use an existing File Search store instead of creating a new one.",
+    )
+    rag_multimodal_store.add_argument("--embedding-model", default=DEFAULT_FILE_SEARCH_EMBEDDING_MODEL)
+    rag_multimodal_store.add_argument("--limit-products", type=int, default=None)
+    rag_multimodal_store.add_argument("--no-wait", action="store_true")
+    rag_multimodal_store.add_argument("--poll-interval-seconds", type=float, default=5.0)
+    rag_multimodal_store.add_argument("--timeout-seconds", type=float, default=600.0)
+    rag_multimodal_store.add_argument("--sleep-seconds", type=float, default=0.0)
+    rag_multimodal_store.add_argument("--concurrency", type=int, default=5)
+    rag_multimodal_store.add_argument("--no-resume", action="store_true")
+    rag_multimodal_store.add_argument("--progress-every", type=int, default=25)
+
+    rag_eval = subparsers.add_parser(
+        "run-rag-text-evaluation",
+        help="Run text queries against a File Search product text store.",
+    )
+    rag_eval.add_argument("--store-name", default=None)
+    rag_eval.add_argument(
+        "--store-manifest",
+        type=Path,
+        default=Path("data/rag/rag_product_text_store.json"),
+        help="Read store_name from this manifest when --store-name is omitted.",
+    )
+    rag_eval.add_argument("--queries", type=Path, default=Path("data/eval/text_queries.jsonl"))
+    rag_eval.add_argument("--catalogue", type=Path, default=Path("data/extracted/product_parse_sample.jsonl"))
+    rag_eval.add_argument("--out", type=Path, default=Path("data/eval/gemini_rag_text_report.json"))
+    rag_eval.add_argument("--top-k", type=int, default=5)
+    rag_eval.add_argument("--model", default=DEFAULT_RAG_GENERATION_MODEL)
+    rag_eval.add_argument("--sleep-seconds", type=float, default=0.0)
+    rag_eval.add_argument("--limit-queries", type=int, default=None)
+    rag_eval.add_argument("--no-resume", action="store_true")
+    rag_eval.add_argument("--max-retries", type=int, default=2)
+    rag_eval.add_argument("--retry-sleep-seconds", type=float, default=10.0)
+    rag_eval.add_argument("--continue-on-error", action="store_true")
+
+    rag_generic_eval = subparsers.add_parser(
+        "run-rag-evaluation",
+        help="Run any eval query file against a File Search store.",
+    )
+    rag_generic_eval.add_argument("--store-name", default=None)
+    rag_generic_eval.add_argument(
+        "--store-manifest",
+        type=Path,
+        default=Path("data/rag/rag_product_multimodal_store.json"),
+        help="Read store_name from this manifest when --store-name is omitted.",
+    )
+    rag_generic_eval.add_argument("--queries", type=Path, required=True)
+    rag_generic_eval.add_argument("--catalogue", type=Path, default=Path("data/extracted/product_parse_sample.jsonl"))
+    rag_generic_eval.add_argument("--out", type=Path, required=True)
+    rag_generic_eval.add_argument("--report-key", default="rag")
+    rag_generic_eval.add_argument("--top-k", type=int, default=5)
+    rag_generic_eval.add_argument("--model", default=DEFAULT_RAG_GENERATION_MODEL)
+    rag_generic_eval.add_argument("--sleep-seconds", type=float, default=0.0)
+    rag_generic_eval.add_argument("--limit-queries", type=int, default=None)
+    rag_generic_eval.add_argument("--no-resume", action="store_true")
+    rag_generic_eval.add_argument("--max-retries", type=int, default=2)
+    rag_generic_eval.add_argument("--retry-sleep-seconds", type=float, default=10.0)
+    rag_generic_eval.add_argument("--continue-on-error", action="store_true")
 
     return parser
 
@@ -427,6 +618,170 @@ def main(argv: list[str] | None = None) -> None:
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(json.dumps(reports, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(f"Wrote Gemini {args.mode} retrieval report to {args.out}")
+        return
+
+    if args.command == "build-rag-text-corpus":
+        documents = ProductTextRagCorpusBuilder().build(
+            RagTextCorpusConfig(
+                catalogue_path=args.catalogue,
+                output_dir=args.out_dir,
+                manifest_path=args.manifest,
+                limit=args.limit_products,
+            )
+        )
+        manifest = args.manifest or args.out_dir / "manifest.jsonl"
+        print(f"Wrote RAG text corpus to {args.out_dir} documents={len(documents)} manifest={manifest}")
+        return
+
+    if args.command == "create-rag-text-store":
+        manifest = RagTextStoreIngestionPipeline().run(
+            RagTextStoreConfig(
+                corpus_manifest_path=args.corpus_manifest,
+                output_path=args.out,
+                display_name=args.display_name,
+                store_name=args.store_name,
+                embedding_model=args.embedding_model,
+                limit=args.limit_products,
+                wait=not args.no_wait,
+                poll_interval_seconds=args.poll_interval_seconds,
+                timeout_seconds=args.timeout_seconds,
+                sleep_seconds=args.sleep_seconds,
+                concurrency=args.concurrency,
+                resume=not args.no_resume,
+                progress_every=args.progress_every,
+            )
+        )
+        print(
+            "Wrote RAG text store manifest to "
+            f"{args.out} store_name={manifest['store_name']} documents={manifest['document_count']}"
+        )
+        return
+
+    if args.command == "build-rag-image-corpus":
+        documents = ProductImageRagCorpusBuilder().build(
+            RagImageCorpusConfig(
+                catalogue_path=args.catalogue,
+                output_dir=args.out_dir,
+                manifest_path=args.manifest,
+                limit=args.limit_products,
+            )
+        )
+        manifest = args.manifest or args.out_dir / "manifest.jsonl"
+        print(f"Wrote RAG image corpus to {args.out_dir} documents={len(documents)} manifest={manifest}")
+        return
+
+    if args.command == "create-rag-image-store":
+        manifest = RagTextStoreIngestionPipeline().run(
+            RagTextStoreConfig(
+                corpus_manifest_path=args.corpus_manifest,
+                output_path=args.out,
+                display_name=args.display_name,
+                store_name=args.store_name,
+                embedding_model=args.embedding_model,
+                limit=args.limit_products,
+                wait=not args.no_wait,
+                poll_interval_seconds=args.poll_interval_seconds,
+                timeout_seconds=args.timeout_seconds,
+                sleep_seconds=args.sleep_seconds,
+                concurrency=args.concurrency,
+                resume=not args.no_resume,
+                progress_every=args.progress_every,
+            )
+        )
+        print(
+            "Wrote RAG image store manifest to "
+            f"{args.out} store_name={manifest['store_name']} documents={manifest['document_count']}"
+        )
+        return
+
+    if args.command == "run-rag-text-evaluation":
+        store_name = args.store_name or load_store_name(args.store_manifest)
+        output = RagTextEvaluationPipeline().run(
+            RagTextEvaluationConfig(
+                store_name=store_name,
+                query_path=args.queries,
+                catalogue_path=args.catalogue,
+                output_path=args.out,
+                report_key="rag_text",
+                top_k=args.top_k,
+                model_name=args.model,
+                sleep_seconds=args.sleep_seconds,
+                limit=args.limit_queries,
+                resume=not args.no_resume,
+                max_retries=args.max_retries,
+                retry_sleep_seconds=args.retry_sleep_seconds,
+                continue_on_error=args.continue_on_error,
+            )
+        )
+        print(
+            f"Wrote RAG text evaluation report to {args.out} "
+            f"queries={output.report.query_count} store_name={store_name}"
+        )
+        return
+
+    if args.command == "run-rag-evaluation":
+        store_name = args.store_name or load_store_name(args.store_manifest)
+        output = RagTextEvaluationPipeline().run(
+            RagTextEvaluationConfig(
+                store_name=store_name,
+                query_path=args.queries,
+                catalogue_path=args.catalogue,
+                output_path=args.out,
+                report_key=args.report_key,
+                top_k=args.top_k,
+                model_name=args.model,
+                sleep_seconds=args.sleep_seconds,
+                limit=args.limit_queries,
+                resume=not args.no_resume,
+                max_retries=args.max_retries,
+                retry_sleep_seconds=args.retry_sleep_seconds,
+                continue_on_error=args.continue_on_error,
+            )
+        )
+        print(
+            f"Wrote RAG evaluation report to {args.out} "
+            f"queries={output.report.query_count} store_name={store_name} report_key={args.report_key}"
+        )
+        return
+
+    if args.command == "build-rag-multimodal-corpus":
+        documents = ProductMultimodalRagCorpusBuilder().build(
+            RagMultimodalCorpusConfig(
+                catalogue_path=args.catalogue,
+                output_dir=args.out_dir,
+                manifest_path=args.manifest,
+                limit=args.limit_products,
+            )
+        )
+        manifest = args.manifest or args.out_dir / "manifest.jsonl"
+        print(
+            "Wrote RAG multimodal corpus to "
+            f"{args.out_dir} documents={len(documents)} manifest={manifest}"
+        )
+        return
+
+    if args.command == "create-rag-multimodal-store":
+        manifest = RagTextStoreIngestionPipeline().run(
+            RagTextStoreConfig(
+                corpus_manifest_path=args.corpus_manifest,
+                output_path=args.out,
+                display_name=args.display_name,
+                store_name=args.store_name,
+                embedding_model=args.embedding_model,
+                limit=args.limit_products,
+                wait=not args.no_wait,
+                poll_interval_seconds=args.poll_interval_seconds,
+                timeout_seconds=args.timeout_seconds,
+                sleep_seconds=args.sleep_seconds,
+                concurrency=args.concurrency,
+                resume=not args.no_resume,
+                progress_every=args.progress_every,
+            )
+        )
+        print(
+            "Wrote RAG multimodal store manifest to "
+            f"{args.out} store_name={manifest['store_name']} documents={manifest['document_count']}"
+        )
         return
 
     parser.error(f"unknown command: {args.command}")

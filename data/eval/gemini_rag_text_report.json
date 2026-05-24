@@ -1,0 +1,1023 @@
+{
+  "diagnostics": {
+    "invalid_product_ids": [],
+    "returned_product_id_count": 74,
+    "valid_product_id_count": 74,
+    "valid_product_id_rate": 1.0
+  },
+  "rag_text": {
+    "metrics": {
+      "hit_at_1": 0.8,
+      "hit_at_5": 0.9,
+      "mrr": 0.8291666666666666
+    },
+    "metrics_by_query_style": {
+      "metadata_abv": {
+        "hit_at_1": 1.0,
+        "hit_at_5": 1.0,
+        "mrr": 1.0
+      },
+      "metadata_brand": {
+        "hit_at_1": 1.0,
+        "hit_at_5": 1.0,
+        "mrr": 1.0
+      },
+      "semantic_brand_description": {
+        "hit_at_1": 0.8,
+        "hit_at_5": 0.8,
+        "mrr": 0.8
+      },
+      "semantic_flavour": {
+        "hit_at_1": 0.5,
+        "hit_at_5": 0.8333333333333334,
+        "mrr": 0.5972222222222222
+      }
+    },
+    "query_count": 20,
+    "query_results": [
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq001",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-blasda",
+          "p0022-ardbeg-uigeadail"
+        ],
+        "retrieved_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0022-ardbeg-uigeadail",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-blasda"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq002",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-30-year-old",
+          "p0244-the-macallan-25-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0243-the-macallan-10-year-old",
+          "p0243-the-macallan-fine-oak-10-year-old",
+          "p0244-the-macallan-30-year-old",
+          "p0244-the-macallan-25-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq003",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0158-glenmorangie-original",
+          "p0158-glenmorangie-18-year-old",
+          "p0159-glenmorangie-25-year-old",
+          "p0159-glenmorangie-nectar-d-or"
+        ],
+        "retrieved_product_ids": [
+          "p0158-glenmorangie-18-year-old",
+          "p0158-glenmorangie-original",
+          "p0159-glenmorangie-25-year-old",
+          "p0159-glenmorangie-nectar-d-or"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq004",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0208-johnnie-walker-black-label",
+          "p0208-johnnie-walker-green-label",
+          "p0209-johnnie-walker-gold-label",
+          "p0209-johnnie-walker-blue-label"
+        ],
+        "retrieved_product_ids": [
+          "p0209-johnnie-walker-blue-label",
+          "p0209-johnnie-walker-gold-label",
+          "p0208-johnnie-walker-green-label",
+          "p0208-johnnie-walker-black-label"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq005",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0378-woodford-reserve-distiller-s-select",
+          "p0378-master-s-collection-four-grain",
+          "p0379-master-s-collection-sonoma-cutrer-finish",
+          "p0379-master-s-collection-1838-sweet-mash"
+        ],
+        "retrieved_product_ids": [
+          "p0378-woodford-reserve-distiller-s-select",
+          "p0379-master-s-collection-1838-sweet-mash",
+          "p0378-master-s-collection-four-grain",
+          "p0379-master-s-collection-sonoma-cutrer-finish"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": false
+        },
+        "query_id": "tq006",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0021-ardbeg-airigh-nam-beist",
+          "p0022-ardbeg-blasda",
+          "p0022-ardbeg-uigeadail"
+        ],
+        "retrieved_product_ids": [
+          "p0228-laphroaig10-year-old",
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0224-lagavulin-16-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq007",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0378-woodford-reserve-distiller-s-select",
+          "p0378-master-s-collection-four-grain",
+          "p0379-master-s-collection-sonoma-cutrer-finish",
+          "p0379-master-s-collection-1838-sweet-mash"
+        ],
+        "retrieved_product_ids": [
+          "p0378-woodford-reserve-distiller-s-select",
+          "p0379-master-s-collection-1838-sweet-mash",
+          "p0378-master-s-collection-four-grain"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq008",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0071-bushmills-original",
+          "p0071-bushmills-black-bush",
+          "p0072-bushmills-malt-10-year-old",
+          "p0072-bushmills-malt-16-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0071-bushmills-original",
+          "p0071-bushmills-black-bush",
+          "p0072-bushmills-malt-10-year-old",
+          "p0072-bushmills-malt-16-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq009",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0335-the-yamazaki-12-year-old",
+          "p0335-the-yamazaki-18-year-old",
+          "p0336-suntory-vintage-1984",
+          "p0336-the-cask-of-yamazaki-1990-sherry-butt"
+        ],
+        "retrieved_product_ids": [
+          "p0336-the-cask-of-yamazaki-1990-sherry-butt",
+          "p0336-suntory-vintage-1984",
+          "p0335-the-yamazaki-12-year-old",
+          "p0218-karuizawa-1986-cask-no-7387-bottled-2008",
+          "p0331-suntory-hakushu-12-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq010",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0065-bruichladdich-18-year-old",
+          "p0065-bruichladdich-21-year-old",
+          "p0066-bruichladdich-waves",
+          "p0066-bruichladdich-peat"
+        ],
+        "retrieved_product_ids": [
+          "p0066-bruichladdich-waves",
+          "p0065-bruichladdich-18-year-old",
+          "p0066-bruichladdich-peat"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq011",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0022-ardbeg-blasda"
+        ],
+        "retrieved_product_ids": [
+          "p0022-ardbeg-blasda"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq012",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0065-bruichladdich-18-year-old",
+          "p0065-bruichladdich-21-year-old",
+          "p0066-bruichladdich-waves",
+          "p0066-bruichladdich-peat"
+        ],
+        "retrieved_product_ids": [
+          "p0066-bruichladdich-peat",
+          "p0065-bruichladdich-18-year-old",
+          "p0066-bruichladdich-waves"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq013",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0059-booker-s-kentucky-straight",
+          "p0129-george-t-stagg-2008-edition"
+        ],
+        "retrieved_product_ids": [
+          "p0129-george-t-stagg-2008-edition",
+          "p0059-booker-s-kentucky-straight"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq014",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0228-laphroaig-10-year-old-cask-strength"
+        ],
+        "retrieved_product_ids": [
+          "p0228-laphroaig-10-year-old-cask-strength"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq015",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0021-ardbeg-10-year-old",
+          "p0066-bruichladdich-peat",
+          "p0077-caol-ila-12-year-old",
+          "p0224-lagavulin-16-year-old",
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0228-laphroaig10-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0228-laphroaig-10-year-old-cask-strength",
+          "p0242-longrow-14-year-old",
+          "p0066-bruichladdich-peat",
+          "p0228-laphroaig10-year-old",
+          "p0233-ledaig-10-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": true
+        },
+        "query_id": "tq016",
+        "reciprocal_rank": 0.3333333333333333,
+        "relevant_product_ids": [
+          "p0013-aberlour-12-year-old-sherry-matured",
+          "p0013-aberlour-a-bunadh",
+          "p0147-glenfarclas-12-year-old",
+          "p0147-glenfarclas-15-year-old",
+          "p0156-the-glenlivet-xxv",
+          "p0264-mortlach-flora-fauna-16-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0328-strathisla-12-year-old",
+          "p0348-tobermory-15-year-old",
+          "p0013-aberlour-12-year-old-sherry-matured",
+          "p0153-glengoyne-21-year-old",
+          "p0147-glenfarclas-12-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq017",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0032-baker-s-7-year-old",
+          "p0057-blanton-s-single-barrel",
+          "p0068-buffalo-trace-kentucky-straight-bourbon",
+          "p0069-bulleit-bourbon",
+          "p0117-elijah-craig-12-year-old",
+          "p0277-old-forester-birthday-bourbon-2007"
+        ],
+        "retrieved_product_ids": [
+          "p0117-elijah-craig-12-year-old",
+          "p0277-old-forester-birthday-bourbon-2007",
+          "p0069-bulleit-bourbon",
+          "p0359-old-rip-van-winkle-10-year-old",
+          "p0015-american-spirit-15-year-old"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": true
+        },
+        "query_id": "tq018",
+        "reciprocal_rank": 0.25,
+        "relevant_product_ids": [
+          "p0012-aberfeldy-12-year-old",
+          "p0035-ballantine-s-finest",
+          "p0035-ballantine-s-12-year-old",
+          "p0083-chivas-regal-12-year-old",
+          "p0375-windsor-12-year-old"
+        ],
+        "retrieved_product_ids": [
+          "p0091-compass-box-asyla",
+          "p0303-robert-burns-single-malt",
+          "p0252-mcclelland-s-highland",
+          "p0012-aberfeldy-12-year-old",
+          "p0308-royal-lochnagar-selected-reserve"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": true,
+          "hit_at_5": true
+        },
+        "query_id": "tq019",
+        "reciprocal_rank": 1.0,
+        "relevant_product_ids": [
+          "p0187-hudson-manhattan-rye",
+          "p0280-old-potrero-rye",
+          "p0290-pikesville-supreme",
+          "p0310-russell-s-reserve-rye",
+          "p0312-sazerac-rye-18-year-old",
+          "p0347-thomas-h-handy-sazerac-2008-edition"
+        ],
+        "retrieved_product_ids": [
+          "p0310-russell-s-reserve-rye",
+          "p0280-old-potrero-rye",
+          "p0302-rittenhouse-rye-21-year-old",
+          "p0302-rittenhouse-rye-100-proof",
+          "p0346-templeton-rye-small-batch"
+        ]
+      },
+      {
+        "hits": {
+          "hit_at_1": false,
+          "hit_at_5": false
+        },
+        "query_id": "tq020",
+        "reciprocal_rank": 0.0,
+        "relevant_product_ids": [
+          "p0064-braunstein",
+          "p0108-dimple-15-year-old",
+          "p0172-gr-ner-hund",
+          "p0176-hankey-bannister-40-year-old",
+          "p0231-the-last-drop",
+          "p0378-woodford-reserve-distiller-s-select"
+        ],
+        "retrieved_product_ids": [
+          "p0190-five-of-spades-distilled-2000-bottled-2008",
+          "p0156-the-glenlivet-xxv",
+          "p0328-strathisla-12-year-old",
+          "p0153-glengoyne-21-year-old"
+        ]
+      }
+    ]
+  },
+  "raw_results": [
+    {
+      "query": "I want an Ardbeg whisky.",
+      "query_id": "tq001",
+      "ranked_products": [
+        {
+          "product_id": "p0021-ardbeg-10-year-old",
+          "product_name": "ARDBEG 10-YEAR-OLD",
+          "rank": 1,
+          "reason": "This is a standard Ardbeg single malt whisky from the Islay region."
+        },
+        {
+          "product_id": "p0022-ardbeg-uigeadail",
+          "product_name": "ARDBEG UIGEADAIL",
+          "rank": 2,
+          "reason": "An Ardbeg single malt named after the distillery's water source, Loch Uigeadail."
+        },
+        {
+          "product_id": "p0021-ardbeg-airigh-nam-beist",
+          "product_name": "ARDBEG AIRIGH NAM BEIST",
+          "rank": 3,
+          "reason": "An Ardbeg single malt aged for 16 years in bourbon casks."
+        },
+        {
+          "product_id": "p0022-ardbeg-blasda",
+          "product_name": "ARDBEG BLASDA",
+          "rank": 4,
+          "reason": "An Ardbeg single malt noted for having a gentler, less peated style."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0021-ardbeg-10-year-old\",\"product_name\":\"ARDBEG 10-YEAR-OLD\",\"reason\":\"This is a standard Ardbeg single malt whisky from the Islay region.\"},{\"rank\":2,\"product_id\":\"p0022-ardbeg-uigeadail\",\"product_name\":\"ARDBEG UIGEADAIL\",\"reason\":\"An Ardbeg single malt named after the distillery's water source, Loch Uigeadail.\"},{\"rank\":3,\"product_id\":\"p0021-ardbeg-airigh-nam-beist\",\"product_name\":\"ARDBEG AIRIGH NAM BEIST\",\"reason\":\"An Ardbeg single malt aged for 16 years in bourbon casks.\"},{\"rank\":4,\"product_id\":\"p0022-ardbeg-blasda\",\"product_name\":\"ARDBEG BLASDA\",\"reason\":\"An Ardbeg single malt noted for having a gentler, less peated style.\"}]}"
+    },
+    {
+      "query": "I want a Macallan whisky.",
+      "query_id": "tq002",
+      "ranked_products": [
+        {
+          "product_id": "p0243-the-macallan-10-year-old",
+          "product_name": "THE MACALLAN 10-YEAR-OLD",
+          "rank": 1,
+          "reason": "This is the signature Macallan whisky, matured in sherry butts."
+        },
+        {
+          "product_id": "p0243-the-macallan-fine-oak-10-year-old",
+          "product_name": "THE MACALLAN FINE OAK 10-YEAR-OLD",
+          "rank": 2,
+          "reason": "A Macallan whisky from the Fine Oak series, which uses bourbon casks alongside sherry butts."
+        },
+        {
+          "product_id": "p0244-the-macallan-30-year-old",
+          "product_name": "THE MACALLAN 30-YEAR-OLD",
+          "rank": 3,
+          "reason": "A premium Macallan single malt with a sweet, sherried nose and spicy flavors."
+        },
+        {
+          "product_id": "p0244-the-macallan-25-year-old",
+          "product_name": "THE MACALLAN 25-YEAR-OLD",
+          "rank": 4,
+          "reason": "A Macallan single malt featuring spicy citrus notes and a dried-fruit character from sherry casks."
+        }
+      ],
+      "raw_text": "{\n  \"results\": [\n    {\n      \"rank\": 1,\n      \"product_id\": \"p0243-the-macallan-10-year-old\",\n      \"product_name\": \"THE MACALLAN 10-YEAR-OLD\",\n      \"reason\": \"This is the signature Macallan whisky, matured in sherry butts.\"\n    },\n    {\n      \"rank\": 2,\n      \"product_id\": \"p0243-the-macallan-fine-oak-10-year-old\",\n      \"product_name\": \"THE MACALLAN FINE OAK 10-YEAR-OLD\",\n      \"reason\": \"A Macallan whisky from the Fine Oak series, which uses bourbon casks alongside sherry butts.\"\n    },\n    {\n      \"rank\": 3,\n      \"product_id\": \"p0244-the-macallan-30-year-old\",\n      \"product_name\": \"THE MACALLAN 30-YEAR-OLD\",\n      \"reason\": \"A premium Macallan single malt with a sweet, sherried nose and spicy flavors.\"\n    },\n    {\n      \"rank\": 4,\n      \"product_id\": \"p0244-the-macallan-25-year-old\",\n      \"product_name\": \"THE MACALLAN 25-YEAR-OLD\",\n      \"reason\": \"A Macallan single malt featuring spicy citrus notes and a dried-fruit character from sherry casks.\"\n    }\n  ]\n}"
+    },
+    {
+      "query": "I want a Glenmorangie whisky.",
+      "query_id": "tq003",
+      "ranked_products": [
+        {
+          "product_id": "p0158-glenmorangie-18-year-old",
+          "product_name": "GLENMORANGIE 18-YEAR-OLD",
+          "rank": 1,
+          "reason": "This is a Glenmorangie single malt whisky from the Highlands [1.1]."
+        },
+        {
+          "product_id": "p0158-glenmorangie-original",
+          "product_name": "GLENMORANGIE ORIGINAL",
+          "rank": 2,
+          "reason": "This is a Glenmorangie single malt whisky from the Highlands [1.2]."
+        },
+        {
+          "product_id": "p0159-glenmorangie-25-year-old",
+          "product_name": "GLENMORANGIE 25-YEAR-OLD",
+          "rank": 3,
+          "reason": "This is a Glenmorangie single malt whisky from the Highlands [1.3]."
+        },
+        {
+          "product_id": "p0159-glenmorangie-nectar-d-or",
+          "product_name": "GLENMORANGIE NECTAR D\u2019OR",
+          "rank": 4,
+          "reason": "This is a Glenmorangie single malt whisky from the Highlands [1.4]."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0158-glenmorangie-18-year-old\",\"product_name\":\"GLENMORANGIE 18-YEAR-OLD\",\"reason\":\"This is a Glenmorangie single malt whisky from the Highlands [1.1].\"},{\"rank\":2,\"product_id\":\"p0158-glenmorangie-original\",\"product_name\":\"GLENMORANGIE ORIGINAL\",\"reason\":\"This is a Glenmorangie single malt whisky from the Highlands [1.2].\"},{\"rank\":3,\"product_id\":\"p0159-glenmorangie-25-year-old\",\"product_name\":\"GLENMORANGIE 25-YEAR-OLD\",\"reason\":\"This is a Glenmorangie single malt whisky from the Highlands [1.3].\"},{\"rank\":4,\"product_id\":\"p0159-glenmorangie-nectar-d-or\",\"product_name\":\"GLENMORANGIE NECTAR D\u2019OR\",\"reason\":\"This is a Glenmorangie single malt whisky from the Highlands [1.4].\"}]}"
+    },
+    {
+      "query": "I want a Johnnie Walker whisky.",
+      "query_id": "tq004",
+      "ranked_products": [
+        {
+          "product_id": "p0209-johnnie-walker-blue-label",
+          "product_name": "JOHNNIE WALKER BLUE LABEL",
+          "rank": 1,
+          "reason": "This is a premium blended whisky from the Johnnie Walker brand [1.2]."
+        },
+        {
+          "product_id": "p0209-johnnie-walker-gold-label",
+          "product_name": "JOHNNIE WALKER GOLD LABEL",
+          "rank": 2,
+          "reason": "This is a blended whisky from the Johnnie Walker brand featuring honey and fruit notes [1.3]."
+        },
+        {
+          "product_id": "p0208-johnnie-walker-green-label",
+          "product_name": "JOHNNIE WALKER GREEN LABEL",
+          "rank": 3,
+          "reason": "This is a blended malt whisky from the Johnnie Walker brand [1.4]."
+        },
+        {
+          "product_id": "p0208-johnnie-walker-black-label",
+          "product_name": "JOHNNIE WALKER BLACK LABEL",
+          "rank": 4,
+          "reason": "This is the flagship blended whisky from the Johnnie Walker brand [1.5]."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0209-johnnie-walker-blue-label\",\"product_name\":\"JOHNNIE WALKER BLUE LABEL\",\"reason\":\"This is a premium blended whisky from the Johnnie Walker brand [1.2].\"},{\"rank\":2,\"product_id\":\"p0209-johnnie-walker-gold-label\",\"product_name\":\"JOHNNIE WALKER GOLD LABEL\",\"reason\":\"This is a blended whisky from the Johnnie Walker brand featuring honey and fruit notes [1.3].\"},{\"rank\":3,\"product_id\":\"p0208-johnnie-walker-green-label\",\"product_name\":\"JOHNNIE WALKER GREEN LABEL\",\"reason\":\"This is a blended malt whisky from the Johnnie Walker brand [1.4].\"},{\"rank\":4,\"product_id\":\"p0208-johnnie-walker-black-label\",\"product_name\":\"JOHNNIE WALKER BLACK LABEL\",\"reason\":\"This is the flagship blended whisky from the Johnnie Walker brand [1.5].\"}]}"
+    },
+    {
+      "query": "I want a Woodford Reserve bourbon.",
+      "query_id": "tq005",
+      "ranked_products": [
+        {
+          "product_id": "p0378-woodford-reserve-distiller-s-select",
+          "product_name": "WOODFORD RESERVE DISTILLER\u2019S SELECT",
+          "rank": 1,
+          "reason": "This is the core Woodford Reserve bourbon product."
+        },
+        {
+          "product_id": "p0379-master-s-collection-1838-sweet-mash",
+          "product_name": "MASTER\u2019S COLLECTION 1838 SWEET MASH",
+          "rank": 2,
+          "reason": "A bourbon from the Woodford Reserve Master's Collection."
+        },
+        {
+          "product_id": "p0378-master-s-collection-four-grain",
+          "product_name": "MASTER\u2019S COLLECTION FOUR GRAIN",
+          "rank": 3,
+          "reason": "A bourbon from the Woodford Reserve Master's Collection."
+        },
+        {
+          "product_id": "p0379-master-s-collection-sonoma-cutrer-finish",
+          "product_name": "MASTER\u2019S COLLECTION SONOMA-CUTRER FINISH",
+          "rank": 4,
+          "reason": "A bourbon from the Woodford Reserve Master's Collection."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0378-woodford-reserve-distiller-s-select\",\"product_name\":\"WOODFORD RESERVE DISTILLER\u2019S SELECT\",\"reason\":\"This is the core Woodford Reserve bourbon product.\"},{\"rank\":2,\"product_id\":\"p0379-master-s-collection-1838-sweet-mash\",\"product_name\":\"MASTER\u2019S COLLECTION 1838 SWEET MASH\",\"reason\":\"A bourbon from the Woodford Reserve Master's Collection.\"},{\"rank\":3,\"product_id\":\"p0378-master-s-collection-four-grain\",\"product_name\":\"MASTER\u2019S COLLECTION FOUR GRAIN\",\"reason\":\"A bourbon from the Woodford Reserve Master's Collection.\"},{\"rank\":4,\"product_id\":\"p0379-master-s-collection-sonoma-cutrer-finish\",\"product_name\":\"MASTER\u2019S COLLECTION SONOMA-CUTRER FINISH\",\"reason\":\"A bourbon from the Woodford Reserve Master's Collection.\"}]}"
+    },
+    {
+      "query": "I want whisky from the southern coast of Islay, famous for pungent heavily peated malts.",
+      "query_id": "tq006",
+      "ranked_products": [
+        {
+          "product_id": "p0228-laphroaig10-year-old",
+          "product_name": "LAPHROAIG10-YEAR-OLD",
+          "rank": 1,
+          "reason": "Laphroaig is a classic southern Islay distillery known for its pungent, medicinal, and heavily peated smokiness."
+        },
+        {
+          "product_id": "p0228-laphroaig-10-year-old-cask-strength",
+          "product_name": "LAPHROAIG 10-YEAR-OLD CASK STRENGTH",
+          "rank": 2,
+          "reason": "This expression from the southern coast of Islay features intense notes of tar, seaweed, salt, and hot peat."
+        },
+        {
+          "product_id": "p0224-lagavulin-16-year-old",
+          "product_name": "LAGAVULIN 16-YEAR-OLD",
+          "rank": 3,
+          "reason": "Lagavulin is a renowned southern Islay distillery, and this whisky is noted for its intensely smoky, peaty, and iodine-rich profile."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0228-laphroaig10-year-old\",\"product_name\":\"LAPHROAIG10-YEAR-OLD\",\"reason\":\"Laphroaig is a classic southern Islay distillery known for its pungent, medicinal, and heavily peated smokiness.\"},{\"rank\":2,\"product_id\":\"p0228-laphroaig-10-year-old-cask-strength\",\"product_name\":\"LAPHROAIG 10-YEAR-OLD CASK STRENGTH\",\"reason\":\"This expression from the southern coast of Islay features intense notes of tar, seaweed, salt, and hot peat.\"},{\"rank\":3,\"product_id\":\"p0224-lagavulin-16-year-old\",\"product_name\":\"LAGAVULIN 16-YEAR-OLD\",\"reason\":\"Lagavulin is a renowned southern Islay distillery, and this whisky is noted for its intensely smoky, peaty, and iodine-rich profile.\"}]}"
+    },
+    {
+      "query": "I want bourbon from a small Kentucky distillery that uses triple distillation and copper pot stills.",
+      "query_id": "tq007",
+      "ranked_products": [
+        {
+          "product_id": "p0378-woodford-reserve-distiller-s-select",
+          "product_name": "WOODFORD RESERVE DISTILLER\u2019S SELECT",
+          "rank": 1,
+          "reason": "Produced by Woodford Reserve, which is identified as the smallest distillery in Kentucky and uniquely uses triple distillation and three copper pot stills."
+        },
+        {
+          "product_id": "p0379-master-s-collection-1838-sweet-mash",
+          "product_name": "MASTER\u2019S COLLECTION 1838 SWEET MASH",
+          "rank": 2,
+          "reason": "Part of the Woodford Reserve range, which uses triple distillation and copper pot stills at their Kentucky distillery."
+        },
+        {
+          "product_id": "p0378-master-s-collection-four-grain",
+          "product_name": "MASTER\u2019S COLLECTION FOUR GRAIN",
+          "rank": 3,
+          "reason": "Part of the Woodford Reserve range, which uses triple distillation and copper pot stills at their Kentucky distillery."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0378-woodford-reserve-distiller-s-select\",\"product_name\":\"WOODFORD RESERVE DISTILLER\u2019S SELECT\",\"reason\":\"Produced by Woodford Reserve, which is identified as the smallest distillery in Kentucky and uniquely uses triple distillation and three copper pot stills.\"},{\"rank\":2,\"product_id\":\"p0379-master-s-collection-1838-sweet-mash\",\"product_name\":\"MASTER\u2019S COLLECTION 1838 SWEET MASH\",\"reason\":\"Part of the Woodford Reserve range, which uses triple distillation and copper pot stills at their Kentucky distillery.\"},{\"rank\":3,\"product_id\":\"p0378-master-s-collection-four-grain\",\"product_name\":\"MASTER\u2019S COLLECTION FOUR GRAIN\",\"reason\":\"Part of the Woodford Reserve range, which uses triple distillation and copper pot stills at their Kentucky distillery.\"}]}"
+    },
+    {
+      "query": "I want Irish whiskey from a Victorian distillery that sells both blends and single malts under the same name.",
+      "query_id": "tq008",
+      "ranked_products": [
+        {
+          "product_id": "p0071-bushmills-original",
+          "product_name": "BUSHMILLS ORIGINAL",
+          "rank": 1,
+          "reason": "Produced by Old Bushmills, a distillery housed in a Victorian building that sells both blends and single malts under the same brand name."
+        },
+        {
+          "product_id": "p0071-bushmills-black-bush",
+          "product_name": "BUSHMILLS BLACK BUSH",
+          "rank": 2,
+          "reason": "A blend from the Victorian-era Old Bushmills distillery, which is noted for selling both blends and single malts under the same brand."
+        },
+        {
+          "product_id": "p0072-bushmills-malt-10-year-old",
+          "product_name": "BUSHMILLS MALT 10-YEAR-OLD",
+          "rank": 3,
+          "reason": "A single malt from the Victorian-era Old Bushmills distillery, which is noted for selling both blends and single malts under the same brand."
+        },
+        {
+          "product_id": "p0072-bushmills-malt-16-year-old",
+          "product_name": "BUSHMILLS MALT 16-YEAR-OLD",
+          "rank": 4,
+          "reason": "A single malt from the Victorian-era Old Bushmills distillery, which is noted for selling both blends and single malts under the same brand."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0071-bushmills-original\",\"product_name\":\"BUSHMILLS ORIGINAL\",\"reason\":\"Produced by Old Bushmills, a distillery housed in a Victorian building that sells both blends and single malts under the same brand name.\"},{\"rank\":2,\"product_id\":\"p0071-bushmills-black-bush\",\"product_name\":\"BUSHMILLS BLACK BUSH\",\"reason\":\"A blend from the Victorian-era Old Bushmills distillery, which is noted for selling both blends and single malts under the same brand.\"},{\"rank\":3,\"product_id\":\"p0072-bushmills-malt-10-year-old\",\"product_name\":\"BUSHMILLS MALT 10-YEAR-OLD\",\"reason\":\"A single malt from the Victorian-era Old Bushmills distillery, which is noted for selling both blends and single malts under the same brand.\"},{\"rank\":4,\"product_id\":\"p0072-bushmills-malt-16-year-old\",\"product_name\":\"BUSHMILLS MALT 16-YEAR-OLD\",\"reason\":\"A single malt from the Victorian-era Old Bushmills distillery, which is noted for selling both blends and single malts under the same brand.\"}]}"
+    },
+    {
+      "query": "I want Japanese whisky from the country's first malt distillery, especially sweet fruity single malts and older sherry cask releases.",
+      "query_id": "tq009",
+      "ranked_products": [
+        {
+          "product_id": "p0336-the-cask-of-yamazaki-1990-sherry-butt",
+          "product_name": "THE CASK OF YAMAZAKI 1990 SHERRY BUTT",
+          "rank": 1,
+          "reason": "From Japan's first malt distillery, this is an older single-cask release aged in ex-sherry casks with notes of date, prune, and fig."
+        },
+        {
+          "product_id": "p0336-suntory-vintage-1984",
+          "product_name": "SUNTORY VINTAGE 1984",
+          "rank": 2,
+          "reason": "An older, heavily sherried expression from Japan's first malt distillery featuring notes of black cherry, prune, and molasses toffee."
+        },
+        {
+          "product_id": "p0335-the-yamazaki-12-year-old",
+          "product_name": "THE YAMAZAKI 12-YEAR-OLD",
+          "rank": 3,
+          "reason": "The mainstay single malt from Japan's first malt distillery, specifically noted for its sweet, fruity expression."
+        },
+        {
+          "product_id": "p0218-karuizawa-1986-cask-no-7387-bottled-2008",
+          "product_name": "KARUIZAWA 1986: CASK NO. 7387, BOTTLED 2008",
+          "rank": 4,
+          "reason": "An older single malt matured in ex-sherry casks, offering a profile of dried fruits, fig, and spice."
+        },
+        {
+          "product_id": "p0331-suntory-hakushu-12-year-old",
+          "product_name": "SUNTORY HAKUSHU 12-YEAR-OLD",
+          "rank": 5,
+          "reason": "A Japanese single malt that provides a sweet, fruity character with notes of apricot."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0336-the-cask-of-yamazaki-1990-sherry-butt\",\"product_name\":\"THE CASK OF YAMAZAKI 1990 SHERRY BUTT\",\"reason\":\"From Japan's first malt distillery, this is an older single-cask release aged in ex-sherry casks with notes of date, prune, and fig.\"},{\"rank\":2,\"product_id\":\"p0336-suntory-vintage-1984\",\"product_name\":\"SUNTORY VINTAGE 1984\",\"reason\":\"An older, heavily sherried expression from Japan's first malt distillery featuring notes of black cherry, prune, and molasses toffee.\"},{\"rank\":3,\"product_id\":\"p0335-the-yamazaki-12-year-old\",\"product_name\":\"THE YAMAZAKI 12-YEAR-OLD\",\"reason\":\"The mainstay single malt from Japan's first malt distillery, specifically noted for its sweet, fruity expression.\"},{\"rank\":4,\"product_id\":\"p0218-karuizawa-1986-cask-no-7387-bottled-2008\",\"product_name\":\"KARUIZAWA 1986: CASK NO. 7387, BOTTLED 2008\",\"reason\":\"An older single malt matured in ex-sherry casks, offering a profile of dried fruits, fig, and spice.\"},{\"rank\":5,\"product_id\":\"p0331-suntory-hakushu-12-year-old\",\"product_name\":\"SUNTORY HAKUSHU 12-YEAR-OLD\",\"reason\":\"A Japanese single malt that provides a sweet, fruity character with notes of apricot.\"}]}"
+    },
+    {
+      "query": "I want Islay whisky from the shore of Loch Indaal, a distillery revived by Murray McDavid that bottles on the island.",
+      "query_id": "tq010",
+      "ranked_products": [
+        {
+          "product_id": "p0066-bruichladdich-waves",
+          "product_name": "BRUICHLADDICH WAVES",
+          "rank": 1,
+          "reason": "This distillery is located on the shores of Loch Indaal, was rescued by Murray McDavid in 2000, and was the first on Islay to bottle its whiskies on the island [1.3]."
+        },
+        {
+          "product_id": "p0065-bruichladdich-18-year-old",
+          "product_name": "BRUICHLADDICH 18-YEAR-OLD",
+          "rank": 2,
+          "reason": "This distillery is located on the shores of Loch Indaal, was rescued by Murray McDavid in 2000, and was the first on Islay to bottle its whiskies on the island [1.4]."
+        },
+        {
+          "product_id": "p0066-bruichladdich-peat",
+          "product_name": "BRUICHLADDICH PEAT",
+          "rank": 3,
+          "reason": "This distillery is located on the shores of Loch Indaal, was rescued by Murray McDavid in 2000, and was the first on Islay to bottle its whiskies on the island [1.5]."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0066-bruichladdich-waves\",\"product_name\":\"BRUICHLADDICH WAVES\",\"reason\":\"This distillery is located on the shores of Loch Indaal, was rescued by Murray McDavid in 2000, and was the first on Islay to bottle its whiskies on the island [1.3].\"},{\"rank\":2,\"product_id\":\"p0065-bruichladdich-18-year-old\",\"product_name\":\"BRUICHLADDICH 18-YEAR-OLD\",\"reason\":\"This distillery is located on the shores of Loch Indaal, was rescued by Murray McDavid in 2000, and was the first on Islay to bottle its whiskies on the island [1.4].\"},{\"rank\":3,\"product_id\":\"p0066-bruichladdich-peat\",\"product_name\":\"BRUICHLADDICH PEAT\",\"reason\":\"This distillery is located on the shores of Loch Indaal, was rescued by Murray McDavid in 2000, and was the first on Islay to bottle its whiskies on the island [1.5].\"}]}"
+    },
+    {
+      "query": "I want an Ardbeg whisky around 40 percent ABV.",
+      "query_id": "tq011",
+      "ranked_products": [
+        {
+          "product_id": "p0022-ardbeg-blasda",
+          "product_name": "ARDBEG BLASDA",
+          "rank": 1,
+          "reason": "This is the only Ardbeg product in the catalogue that matches the requested 40% ABV."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0022-ardbeg-blasda\",\"product_name\":\"ARDBEG BLASDA\",\"reason\":\"This is the only Ardbeg product in the catalogue that matches the requested 40% ABV.\"}]}"
+    },
+    {
+      "query": "I want Bruichladdich single malts bottled at 46 percent ABV.",
+      "query_id": "tq012",
+      "ranked_products": [
+        {
+          "product_id": "p0066-bruichladdich-peat",
+          "product_name": "BRUICHLADDICH PEAT",
+          "rank": 1,
+          "reason": "This is a Bruichladdich single malt whisky with an ABV of 46%."
+        },
+        {
+          "product_id": "p0065-bruichladdich-18-year-old",
+          "product_name": "BRUICHLADDICH 18-YEAR-OLD",
+          "rank": 2,
+          "reason": "This is a Bruichladdich single malt whisky with an ABV of 46%."
+        },
+        {
+          "product_id": "p0066-bruichladdich-waves",
+          "product_name": "BRUICHLADDICH WAVES",
+          "rank": 3,
+          "reason": "This is a Bruichladdich single malt whisky with an ABV of 46%."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0066-bruichladdich-peat\",\"product_name\":\"BRUICHLADDICH PEAT\",\"reason\":\"This is a Bruichladdich single malt whisky with an ABV of 46%.\"},{\"rank\":2,\"product_id\":\"p0065-bruichladdich-18-year-old\",\"product_name\":\"BRUICHLADDICH 18-YEAR-OLD\",\"reason\":\"This is a Bruichladdich single malt whisky with an ABV of 46%.\"},{\"rank\":3,\"product_id\":\"p0066-bruichladdich-waves\",\"product_name\":\"BRUICHLADDICH WAVES\",\"reason\":\"This is a Bruichladdich single malt whisky with an ABV of 46%.\"}]}"
+    },
+    {
+      "query": "I want a very high proof bourbon over 60 percent ABV.",
+      "query_id": "tq013",
+      "ranked_products": [
+        {
+          "product_id": "p0129-george-t-stagg-2008-edition",
+          "product_name": "GEORGE T. STAGG 2008 EDITION",
+          "rank": 1,
+          "reason": "This bourbon has an ABV of 72.4%, which is well above the 60% threshold."
+        },
+        {
+          "product_id": "p0059-booker-s-kentucky-straight",
+          "product_name": "BOOKER\u2019S KENTUCKY STRAIGHT",
+          "rank": 2,
+          "reason": "This bourbon has an ABV of 63.5%, meeting the requirement of being over 60%."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0129-george-t-stagg-2008-edition\",\"product_name\":\"GEORGE T. STAGG 2008 EDITION\",\"reason\":\"This bourbon has an ABV of 72.4%, which is well above the 60% threshold.\"},{\"rank\":2,\"product_id\":\"p0059-booker-s-kentucky-straight\",\"product_name\":\"BOOKER\u2019S KENTUCKY STRAIGHT\",\"reason\":\"This bourbon has an ABV of 63.5%, meeting the requirement of being over 60%.\"}]}"
+    },
+    {
+      "query": "I want Laphroaig cask strength whisky around 57 percent ABV.",
+      "query_id": "tq014",
+      "ranked_products": [
+        {
+          "product_id": "p0228-laphroaig-10-year-old-cask-strength",
+          "product_name": "LAPHROAIG 10-YEAR-OLD CASK STRENGTH",
+          "rank": 1,
+          "reason": "This product is a Laphroaig cask strength whisky with an ABV of 57.3%, which perfectly matches the user's request."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0228-laphroaig-10-year-old-cask-strength\",\"product_name\":\"LAPHROAIG 10-YEAR-OLD CASK STRENGTH\",\"reason\":\"This product is a Laphroaig cask strength whisky with an ABV of 57.3%, which perfectly matches the user's request.\"}]}"
+    },
+    {
+      "query": "I want smoky peaty whisky with seaweed iodine tar and a long coastal finish.",
+      "query_id": "tq015",
+      "ranked_products": [
+        {
+          "product_id": "p0228-laphroaig-10-year-old-cask-strength",
+          "product_name": "LAPHROAIG 10-YEAR-OLD CASK STRENGTH",
+          "rank": 1,
+          "reason": "Features explicit notes of tar, seaweed, iodine, and a long, dramatic finish with hot peat."
+        },
+        {
+          "product_id": "p0242-longrow-14-year-old",
+          "product_name": "LONGROW 14-YEAR-OLD",
+          "rank": 2,
+          "reason": "Contains industrial notes of hot tar, brine, and coal smoke, appealing to phenol-lovers."
+        },
+        {
+          "product_id": "p0066-bruichladdich-peat",
+          "product_name": "BRUICHLADDICH PEAT",
+          "rank": 3,
+          "reason": "A powerful phenolic whisky with scents of bonfires, seaweed, and smoke."
+        },
+        {
+          "product_id": "p0228-laphroaig10-year-old",
+          "product_name": "LAPHROAIG10-YEAR-OLD",
+          "rank": 4,
+          "reason": "Offers dense peat smoke and salty sea spray, characteristic of the coastal Islay style."
+        },
+        {
+          "product_id": "p0233-ledaig-10-year-old",
+          "product_name": "LEDAIG 10-YEAR-OLD",
+          "rank": 5,
+          "reason": "Provides a medicinal character with dry, dusty peat smoke."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0228-laphroaig-10-year-old-cask-strength\",\"product_name\":\"LAPHROAIG 10-YEAR-OLD CASK STRENGTH\",\"reason\":\"Features explicit notes of tar, seaweed, iodine, and a long, dramatic finish with hot peat.\"}, {\"rank\":2,\"product_id\":\"p0242-longrow-14-year-old\",\"product_name\":\"LONGROW 14-YEAR-OLD\",\"reason\":\"Contains industrial notes of hot tar, brine, and coal smoke, appealing to phenol-lovers.\"}, {\"rank\":3,\"product_id\":\"p0066-bruichladdich-peat\",\"product_name\":\"BRUICHLADDICH PEAT\",\"reason\":\"A powerful phenolic whisky with scents of bonfires, seaweed, and smoke.\"}, {\"rank\":4,\"product_id\":\"p0228-laphroaig10-year-old\",\"product_name\":\"LAPHROAIG10-YEAR-OLD\",\"reason\":\"Offers dense peat smoke and salty sea spray, characteristic of the coastal Islay style.\"}, {\"rank\":5,\"product_id\":\"p0233-ledaig-10-year-old\",\"product_name\":\"LEDAIG 10-YEAR-OLD\",\"reason\":\"Provides a medicinal character with dry, dusty peat smoke.\"}]}"
+    },
+    {
+      "query": "I want sherry matured whisky with raisins fruitcake oloroso spice and rich sweetness.",
+      "query_id": "tq016",
+      "ranked_products": [
+        {
+          "product_id": "p0328-strathisla-12-year-old",
+          "product_name": "STRATHISLA 12-YEAR-OLD",
+          "rank": 1,
+          "reason": "Features a rich, sumptuous nose and a spicy, fruitcake character directly attributed to sherry influence."
+        },
+        {
+          "product_id": "p0348-tobermory-15-year-old",
+          "product_name": "TOBERMORY 15-YEAR-OLD",
+          "rank": 2,
+          "reason": "Aged in sherry casks, providing rich fruitcake notes and a distinct spicy character."
+        },
+        {
+          "product_id": "p0013-aberlour-12-year-old-sherry-matured",
+          "product_name": "ABERLOUR 12-YEAR-OLD SHERRY MATURED",
+          "rank": 3,
+          "reason": "Matured in new sherry wood, resulting in a nutty, fruitcake character and creamy texture."
+        },
+        {
+          "product_id": "p0153-glengoyne-21-year-old",
+          "product_name": "GLENGLOYNE 21-YEAR-OLD",
+          "rank": 4,
+          "reason": "Matured entirely in first-fill sherry casks, offering a rich profile with sweet spice and brandy butter notes."
+        },
+        {
+          "product_id": "p0147-glenfarclas-12-year-old",
+          "product_name": "GLENFARCLAS 12-YEAR-OLD",
+          "rank": 5,
+          "reason": "Exhibits a distinct sherry nose with spicy flavors of cinnamon and stewed fruit."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0328-strathisla-12-year-old\",\"product_name\":\"STRATHISLA 12-YEAR-OLD\",\"reason\":\"Features a rich, sumptuous nose and a spicy, fruitcake character directly attributed to sherry influence.\"},{\"rank\":2,\"product_id\":\"p0348-tobermory-15-year-old\",\"product_name\":\"TOBERMORY 15-YEAR-OLD\",\"reason\":\"Aged in sherry casks, providing rich fruitcake notes and a distinct spicy character.\"},{\"rank\":3,\"product_id\":\"p0013-aberlour-12-year-old-sherry-matured\",\"product_name\":\"ABERLOUR 12-YEAR-OLD SHERRY MATURED\",\"reason\":\"Matured in new sherry wood, resulting in a nutty, fruitcake character and creamy texture.\"},{\"rank\":4,\"product_id\":\"p0153-glengoyne-21-year-old\",\"product_name\":\"GLENGLOYNE 21-YEAR-OLD\",\"reason\":\"Matured entirely in first-fill sherry casks, offering a rich profile with sweet spice and brandy butter notes.\"},{\"rank\":5,\"product_id\":\"p0147-glenfarclas-12-year-old\",\"product_name\":\"GLENFARCLAS 12-YEAR-OLD\",\"reason\":\"Exhibits a distinct sherry nose with spicy flavors of cinnamon and stewed fruit.\"}]}"
+    },
+    {
+      "query": "I want bourbon with vanilla caramel honey oak and a rounded sweet palate.",
+      "query_id": "tq017",
+      "ranked_products": [
+        {
+          "product_id": "p0117-elijah-craig-12-year-old",
+          "product_name": "ELIJAH CRAIG 12-YEAR-OLD",
+          "rank": 1,
+          "reason": "Matches all requested notes: caramel, vanilla, honey, sweet oak, and a rounded, mellow palate."
+        },
+        {
+          "product_id": "p0277-old-forester-birthday-bourbon-2007",
+          "product_name": "OLD FORESTER BIRTHDAY BOURBON (2007)",
+          "rank": 2,
+          "reason": "Features caramel, vanilla, and vanilla oak with a full, complex palate."
+        },
+        {
+          "product_id": "p0069-bulleit-bourbon",
+          "product_name": "BULLEIT BOURBON",
+          "rank": 3,
+          "reason": "Contains the requested vanilla and honey notes with a mellow flavor profile."
+        },
+        {
+          "product_id": "p0359-old-rip-van-winkle-10-year-old",
+          "product_name": "OLD RIP VAN WINKLE 10-YEAR-OLD",
+          "rank": 4,
+          "reason": "Features caramel, honey, and a mellow palate with a sweet flavor profile derived from wheat."
+        },
+        {
+          "product_id": "p0015-american-spirit-15-year-old",
+          "product_name": "AMERICAN SPIRIT 15-YEAR-OLD",
+          "rank": 5,
+          "reason": "Includes vanilla and gentle oak notes with a silky-smooth mouthfeel."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0117-elijah-craig-12-year-old\",\"product_name\":\"ELIJAH CRAIG 12-YEAR-OLD\",\"reason\":\"Matches all requested notes: caramel, vanilla, honey, sweet oak, and a rounded, mellow palate.\"},{\"rank\":2,\"product_id\":\"p0277-old-forester-birthday-bourbon-2007\",\"product_name\":\"OLD FORESTER BIRTHDAY BOURBON (2007)\",\"reason\":\"Features caramel, vanilla, and vanilla oak with a full, complex palate.\"},{\"rank\":3,\"product_id\":\"p0069-bulleit-bourbon\",\"product_name\":\"BULLEIT BOURBON\",\"reason\":\"Contains the requested vanilla and honey notes with a mellow flavor profile.\"},{\"rank\":4,\"product_id\":\"p0359-old-rip-van-winkle-10-year-old\",\"product_name\":\"OLD RIP VAN WINKLE 10-YEAR-OLD\",\"reason\":\"Features caramel, honey, and a mellow palate with a sweet flavor profile derived from wheat.\"},{\"rank\":5,\"product_id\":\"p0015-american-spirit-15-year-old\",\"product_name\":\"AMERICAN SPIRIT 15-YEAR-OLD\",\"reason\":\"Includes vanilla and gentle oak notes with a silky-smooth mouthfeel.\"}]}"
+    },
+    {
+      "query": "I want whisky with honey apples orchard fruit vanilla and a smooth easy palate.",
+      "query_id": "tq018",
+      "ranked_products": [
+        {
+          "product_id": "p0091-compass-box-asyla",
+          "product_name": "COMPASS BOX ASYLA",
+          "rank": 1,
+          "reason": "Features a smooth palate with vanilla cream and subtle apple character, matching the request for vanilla, apple, and smoothness."
+        },
+        {
+          "product_id": "p0303-robert-burns-single-malt",
+          "product_name": "ROBERT BURNS SINGLE MALT",
+          "rank": 2,
+          "reason": "Contains notes of green apples and vanilla on both the nose and palate, fitting the orchard fruit and vanilla profile."
+        },
+        {
+          "product_id": "p0252-mcclelland-s-highland",
+          "product_name": "MCCLELLAND\u2019S HIGHLAND",
+          "rank": 3,
+          "reason": "Offers sweet buttercream, fresh vanilla, and fresh fruit hints, aligning with the requested flavor profile."
+        },
+        {
+          "product_id": "p0012-aberfeldy-12-year-old",
+          "product_name": "ABERFELDY 12-YEAR-OLD",
+          "rank": 4,
+          "reason": "Features an apple-scented nose and a fruity character, matching the orchard fruit requirement."
+        },
+        {
+          "product_id": "p0308-royal-lochnagar-selected-reserve",
+          "product_name": "ROYAL LOCHNAGAR SELECTED RESERVE",
+          "rank": 5,
+          "reason": "Includes notes of apple pie, providing an orchard fruit element."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0091-compass-box-asyla\",\"product_name\":\"COMPASS BOX ASYLA\",\"reason\":\"Features a smooth palate with vanilla cream and subtle apple character, matching the request for vanilla, apple, and smoothness.\"}, {\"rank\":2,\"product_id\":\"p0303-robert-burns-single-malt\",\"product_name\":\"ROBERT BURNS SINGLE MALT\",\"reason\":\"Contains notes of green apples and vanilla on both the nose and palate, fitting the orchard fruit and vanilla profile.\"}, {\"rank\":3,\"product_id\":\"p0252-mcclelland-s-highland\",\"product_name\":\"MCCLELLAND\u2019S HIGHLAND\",\"reason\":\"Offers sweet buttercream, fresh vanilla, and fresh fruit hints, aligning with the requested flavor profile.\"}, {\"rank\":4,\"product_id\":\"p0012-aberfeldy-12-year-old\",\"product_name\":\"ABERFELDY 12-YEAR-OLD\",\"reason\":\"Features an apple-scented nose and a fruity character, matching the orchard fruit requirement.\"}, {\"rank\":5,\"product_id\":\"p0308-royal-lochnagar-selected-reserve\",\"product_name\":\"ROYAL LOCHNAGAR SELECTED RESERVE\",\"reason\":\"Includes notes of apple pie, providing an orchard fruit element.\"}]}"
+    },
+    {
+      "query": "I want rye whiskey with pepper mint spice oak and a dry finish.",
+      "query_id": "tq019",
+      "ranked_products": [
+        {
+          "product_id": "p0310-russell-s-reserve-rye",
+          "product_name": "RUSSELL\u2019S RESERVE RYE",
+          "rank": 1,
+          "reason": "Features pepper on the palate, fresh oak on the nose, and a long, dry finish."
+        },
+        {
+          "product_id": "p0280-old-potrero-rye",
+          "product_name": "OLD POTRERO RYE",
+          "rank": 2,
+          "reason": "Contains pepper and sweet oak on the nose, with spicy rye and oak notes in the finish."
+        },
+        {
+          "product_id": "p0302-rittenhouse-rye-21-year-old",
+          "product_name": "RITTENHOUSE RYE 21-YEAR-OLD",
+          "rank": 3,
+          "reason": "Features powerful spices and oak on the palate with a classic rye finish."
+        },
+        {
+          "product_id": "p0302-rittenhouse-rye-100-proof",
+          "product_name": "RITTENHOUSE RYE 100 PROOF",
+          "rank": 4,
+          "reason": "Includes black pepper on the palate, though it lacks the specific dry finish mentioned."
+        },
+        {
+          "product_id": "p0346-templeton-rye-small-batch",
+          "product_name": "TEMPLETON RYE SMALL BATCH",
+          "rank": 5,
+          "reason": "A rye whiskey with a long finish, though it lacks specific descriptors for pepper, mint, or oak."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0310-russell-s-reserve-rye\",\"product_name\":\"RUSSELL\u2019S RESERVE RYE\",\"reason\":\"Features pepper on the palate, fresh oak on the nose, and a long, dry finish.\"},{\"rank\":2,\"product_id\":\"p0280-old-potrero-rye\",\"product_name\":\"OLD POTRERO RYE\",\"reason\":\"Contains pepper and sweet oak on the nose, with spicy rye and oak notes in the finish.\"},{\"rank\":3,\"product_id\":\"p0302-rittenhouse-rye-21-year-old\",\"product_name\":\"RITTENHOUSE RYE 21-YEAR-OLD\",\"reason\":\"Features powerful spices and oak on the palate with a classic rye finish.\"},{\"rank\":4,\"product_id\":\"p0302-rittenhouse-rye-100-proof\",\"product_name\":\"RITTENHOUSE RYE 100 PROOF\",\"reason\":\"Includes black pepper on the palate, though it lacks the specific dry finish mentioned.\"},{\"rank\":5,\"product_id\":\"p0346-templeton-rye-small-batch\",\"product_name\":\"TEMPLETON RYE SMALL BATCH\",\"reason\":\"A rye whiskey with a long finish, though it lacks specific descriptors for pepper, mint, or oak.\"}]}"
+    },
+    {
+      "query": "I want whisky with chocolate cocoa raisins figs and rich dessert notes.",
+      "query_id": "tq020",
+      "ranked_products": [
+        {
+          "product_id": "p0190-five-of-spades-distilled-2000-bottled-2008",
+          "product_name": "FIVE OF SPADES, DISTILLED 2000, BOTTLED 2008",
+          "rank": 1,
+          "reason": "Features explicit notes of dark chocolate and raisins, matching the user's request for these specific flavors."
+        },
+        {
+          "product_id": "p0156-the-glenlivet-xxv",
+          "product_name": "THE GLENLIVET XXV",
+          "rank": 2,
+          "reason": "Described as a sumptuous after-dinner malt with notes of raisins, fitting the rich dessert profile requested."
+        },
+        {
+          "product_id": "p0328-strathisla-12-year-old",
+          "product_name": "STRATHISLA 12-YEAR-OLD",
+          "rank": 3,
+          "reason": "Offers a rich, sumptuous character with fruitcake notes derived from sherry influence, aligning with rich dessert expectations."
+        },
+        {
+          "product_id": "p0153-glengoyne-21-year-old",
+          "product_name": "GLENGOYNE 21-YEAR-OLD",
+          "rank": 4,
+          "reason": "A rich, after-dinner malt matured in sherry casks, providing the dessert-like quality requested."
+        }
+      ],
+      "raw_text": "{\"results\":[{\"rank\":1,\"product_id\":\"p0190-five-of-spades-distilled-2000-bottled-2008\",\"product_name\":\"FIVE OF SPADES, DISTILLED 2000, BOTTLED 2008\",\"reason\":\"Features explicit notes of dark chocolate and raisins, matching the user's request for these specific flavors.\"},{\"rank\":2,\"product_id\":\"p0156-the-glenlivet-xxv\",\"product_name\":\"THE GLENLIVET XXV\",\"reason\":\"Described as a sumptuous after-dinner malt with notes of raisins, fitting the rich dessert profile requested.\"},{\"rank\":3,\"product_id\":\"p0328-strathisla-12-year-old\",\"product_name\":\"STRATHISLA 12-YEAR-OLD\",\"reason\":\"Offers a rich, sumptuous character with fruitcake notes derived from sherry influence, aligning with rich dessert expectations.\"},{\"rank\":4,\"product_id\":\"p0153-glengoyne-21-year-old\",\"product_name\":\"GLENGOYNE 21-YEAR-OLD\",\"reason\":\"A rich, after-dinner malt matured in sherry casks, providing the dessert-like quality requested.\"}]}"
+    }
+  ]
+}

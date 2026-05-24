@@ -2,7 +2,7 @@
 
 Step-by-step CLI flow from the PDF through product extraction, mock embeddings, Gemini embeddings, and retrieval evaluation. Run commands from the repository root unless noted.
 
-For **evaluation benchmark queries** (text, image, expected positives) and **links to the Gemini ranking notebooks** (`notebooks/gemini_review_*.ipynb`), see [evaluation_queries_and_labels.md](evaluation_queries_and_labels.md). For **PDF layout and parser context**, see [raw_data_characteristics.md](raw_data_characteristics.md).
+For **evaluation benchmark queries** (text, image, expected positives) and **links to the Gemini ranking notebooks** (`notebooks/gemini_review_*.ipynb`), see [evaluation_queries_and_labels.md](evaluation_queries_and_labels.md). For **Google File Search RAG design and developer handoff**, see [rag_approach.md](rag_approach.md). For **PDF layout and parser context**, see [raw_data_characteristics.md](raw_data_characteristics.md).
 
 ---
 
@@ -44,6 +44,11 @@ rs_demo.embeddings.MockEmbeddingPipeline
 rs_demo.embeddings.MockQueryEmbeddingPipeline
 rs_demo.gemini_embeddings.GeminiProductEmbeddingPipeline
 rs_demo.gemini_embeddings.GeminiQueryEmbeddingPipeline
+rs_demo.rag.ProductTextRagCorpusBuilder
+rs_demo.rag.ProductImageRagCorpusBuilder
+rs_demo.rag.ProductMultimodalRagCorpusBuilder
+rs_demo.rag.RagTextStoreIngestionPipeline
+rs_demo.rag.RagTextEvaluationPipeline
 rs_demo.queries.EvalQueryLoader
 rs_demo.retrieval.ProductRetriever
 rs_demo.evaluation.RetrievalEvaluator
@@ -283,6 +288,220 @@ cropped_image_text_to_multimodal      cropped image + text query -> product mult
 ```
 
 The `image` and `image_to_multimodal` sections each contain both cropped-bottle and whole-scene image queries; the review notebooks split them for easier inspection.
+
+### 12. Run the managed RAG text baseline
+
+The first managed RAG comparison is:
+
+```text
+text query -> Google File Search product text store -> generated top-k product IDs
+```
+
+It is comparable to the local `text query -> product text embeddings` experiment, but it is not a raw-vector comparison. File Search handles retrieval internally, then Gemini generates a JSON ranking from the retrieved catalogue context.
+
+Build the product text corpus locally:
+
+```bash
+python -m rs_demo build-rag-text-corpus
+```
+
+Outputs:
+
+```text
+data/rag/product_text_corpus/*.txt
+data/rag/product_text_corpus/manifest.jsonl
+```
+
+Create and populate the File Search store:
+
+```bash
+python -m rs_demo create-rag-text-store --sleep-seconds 0.8 --no-wait
+```
+
+Output:
+
+```text
+data/rag/rag_product_text_store.json
+```
+
+This step uses the Google API and indexes the product documents with `models/gemini-embedding-2`. It is the billable step. Use `--limit-products` for a small smoke test before uploading the full catalogue.
+
+The ingestion command writes its manifest incrementally and can resume from an existing manifest. For larger stores, use bounded concurrency:
+
+```bash
+python -m rs_demo create-rag-text-store \
+  --sleep-seconds 0.2 \
+  --concurrency 5 \
+  --progress-every 25 \
+  --no-wait
+```
+
+Run the text-query RAG evaluation:
+
+```bash
+python -m rs_demo run-rag-text-evaluation --top-k 5
+```
+
+Output:
+
+```text
+data/eval/gemini_rag_text_report.json
+```
+
+The report includes the same retrieval metrics (`hit@1`, `hit@5`, `MRR`) plus RAG diagnostics such as invalid generated product IDs.
+
+### 13. Prepare the managed RAG multimodal corpus
+
+Build one compact PDF product sheet per product. Each PDF contains product metadata, description text, brand context, and the cropped bottle image embedded directly in the file:
+
+```bash
+python -m rs_demo build-rag-multimodal-corpus
+```
+
+Outputs:
+
+```text
+data/rag/product_multimodal_corpus/*.pdf
+data/rag/product_multimodal_corpus/manifest.jsonl
+```
+
+Current generated size:
+
+```text
+533 product PDFs
+about 23 MB total
+```
+
+Create a separate File Search store for these multimodal product sheets:
+
+```bash
+python -m rs_demo create-rag-multimodal-store \
+  --concurrency 5 \
+  --progress-every 25 \
+  --no-wait
+```
+
+This must be a new store, for example:
+
+```text
+rag_product_multimodal_store
+```
+
+Do not reuse `rag_product_text_store`, because File Search store contents persist until deleted and the experiment needs separate text-only and multimodal baselines.
+
+Run all query sets against the multimodal File Search store:
+
+```bash
+python -m rs_demo run-rag-evaluation \
+  --store-manifest data/rag/rag_product_multimodal_store.json \
+  --queries data/eval/text_queries.jsonl \
+  --out data/eval/gemini_rag_multimodal_text_report.json \
+  --report-key rag_multimodal_text \
+  --model gemini-3.1-flash-lite \
+  --sleep-seconds 5
+
+python -m rs_demo run-rag-evaluation \
+  --store-manifest data/rag/rag_product_multimodal_store.json \
+  --queries data/eval/image_queries.jsonl \
+  --out data/eval/gemini_rag_multimodal_image_report.json \
+  --report-key rag_multimodal_image \
+  --model gemini-3.1-flash-lite \
+  --sleep-seconds 5 \
+  --continue-on-error
+
+python -m rs_demo run-rag-evaluation \
+  --store-manifest data/rag/rag_product_multimodal_store.json \
+  --queries data/eval/image_text_queries.jsonl \
+  --out data/eval/gemini_rag_multimodal_image_text_report.json \
+  --report-key rag_multimodal_image_text \
+  --model gemini-3.1-flash-lite \
+  --sleep-seconds 5 \
+  --continue-on-error
+
+python -m rs_demo run-rag-evaluation \
+  --store-manifest data/rag/rag_product_multimodal_store.json \
+  --queries data/eval/cropped_image_text_queries.jsonl \
+  --out data/eval/gemini_rag_multimodal_cropped_image_text_report.json \
+  --report-key rag_multimodal_cropped_image_text \
+  --model gemini-3.1-flash-lite \
+  --sleep-seconds 5 \
+  --continue-on-error
+```
+
+The combined manual-review summary is:
+
+```text
+data/eval/gemini_rag_multimodal_query_summary.md
+```
+
+### 14. Run the managed RAG image-store baseline
+
+The image-store RAG comparison mirrors the local product-image embedding experiments:
+
+```text
+image query -> Google File Search product image store -> generated top-k product IDs
+image + text query -> Google File Search product image store -> generated top-k product IDs
+```
+
+Build one compressed JPEG product image per product:
+
+```bash
+python -m rs_demo build-rag-image-corpus
+```
+
+Outputs:
+
+```text
+data/rag/product_image_corpus/*.jpg
+data/rag/product_image_corpus/manifest.jsonl
+```
+
+Create a separate File Search store for the product image corpus:
+
+```bash
+python -m rs_demo create-rag-image-store \
+  --concurrency 5 \
+  --progress-every 25
+```
+
+The upload manifest is resumable. If transient network failures occur, rerun the same command; completed uploads are skipped and incomplete records are retried.
+
+Run the three image-store query settings:
+
+```bash
+python -m rs_demo run-rag-evaluation \
+  --store-manifest data/rag/rag_product_image_store.json \
+  --queries data/eval/image_queries.jsonl \
+  --out data/eval/gemini_rag_image_image_report.json \
+  --report-key rag_image_image \
+  --model gemini-3.1-flash-lite \
+  --sleep-seconds 5 \
+  --continue-on-error
+
+python -m rs_demo run-rag-evaluation \
+  --store-manifest data/rag/rag_product_image_store.json \
+  --queries data/eval/image_text_queries.jsonl \
+  --out data/eval/gemini_rag_image_image_text_report.json \
+  --report-key rag_image_image_text \
+  --model gemini-3.1-flash-lite \
+  --sleep-seconds 5 \
+  --continue-on-error
+
+python -m rs_demo run-rag-evaluation \
+  --store-manifest data/rag/rag_product_image_store.json \
+  --queries data/eval/cropped_image_text_queries.jsonl \
+  --out data/eval/gemini_rag_image_cropped_image_text_report.json \
+  --report-key rag_image_cropped_image_text \
+  --model gemini-3.1-flash-lite \
+  --sleep-seconds 5 \
+  --continue-on-error
+```
+
+The combined manual-review summary is:
+
+```text
+data/eval/gemini_rag_image_query_summary.md
+```
 
 ---
 

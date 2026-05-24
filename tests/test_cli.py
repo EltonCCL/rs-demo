@@ -48,6 +48,58 @@ def test_cli_exposes_pipeline_commands() -> None:
     assert args.command == "run-gemini-evaluation"
     assert args.mode == "cropped_image_text_to_image"
 
+    args = parser.parse_args(["build-rag-text-corpus", "--limit-products", "3"])
+    assert args.command == "build-rag-text-corpus"
+    assert args.limit_products == 3
+
+    args = parser.parse_args(
+        ["create-rag-text-store", "--limit-products", "3", "--no-wait", "--concurrency", "2"]
+    )
+    assert args.command == "create-rag-text-store"
+    assert args.limit_products == 3
+    assert args.no_wait
+    assert args.concurrency == 2
+
+    args = parser.parse_args(["build-rag-multimodal-corpus", "--limit-products", "3"])
+    assert args.command == "build-rag-multimodal-corpus"
+    assert args.limit_products == 3
+
+    args = parser.parse_args(["build-rag-image-corpus", "--limit-products", "3"])
+    assert args.command == "build-rag-image-corpus"
+    assert args.limit_products == 3
+
+    args = parser.parse_args(["create-rag-image-store", "--concurrency", "5", "--no-resume"])
+    assert args.command == "create-rag-image-store"
+    assert args.concurrency == 5
+    assert args.no_resume
+
+    args = parser.parse_args(["create-rag-multimodal-store", "--concurrency", "5", "--no-resume"])
+    assert args.command == "create-rag-multimodal-store"
+    assert args.concurrency == 5
+    assert args.no_resume
+
+    args = parser.parse_args(["run-rag-text-evaluation", "--top-k", "5", "--sleep-seconds", "5"])
+    assert args.command == "run-rag-text-evaluation"
+    assert args.top_k == 5
+    assert args.sleep_seconds == 5
+
+    args = parser.parse_args(
+        [
+            "run-rag-evaluation",
+            "--queries",
+            "data/eval/image_queries.jsonl",
+            "--out",
+            "out.json",
+            "--report-key",
+            "rag_multimodal_image",
+            "--limit-queries",
+            "1",
+        ]
+    )
+    assert args.command == "run-rag-evaluation"
+    assert args.report_key == "rag_multimodal_image"
+    assert args.limit_queries == 1
+
 
 def test_build_mock_query_embeddings_fails_on_missing_modalities(tmp_path: Path) -> None:
     text_queries = tmp_path / "text_queries.jsonl"

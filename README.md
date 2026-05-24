@@ -1,6 +1,6 @@
 # Whisky Similarity Search Demo
 
-Small research/demo codebase for a **product-level** whisky catalogue and retrieval benchmark from a single PDF: extraction, parsing, image crops, validation, Markdown review, Gemini Embedding 2 vectors, and retrieval evaluation.
+Small research/demo codebase for a **product-level** whisky catalogue and retrieval benchmark from a single PDF: extraction, parsing, image crops, validation, Markdown review, Gemini Embedding 2 vectors, retrieval evaluation, and a managed RAG baseline.
 
 Target query modes: **text**, **image**, and **text + image**.
 
@@ -13,6 +13,7 @@ This is currently framed as **similarity search**, not a recommendation system. 
 | What you need | Where to go |
 |----------------|-------------|
 | **CLI pipeline** — extract → parse → crop → validate → Markdown → mock/Gemini embeddings → evaluation, with paths and outputs | [docs/pipeline.md](docs/pipeline.md) |
+| **RAG handoff** — Google File Search store design, corpus builders, evaluation commands, and extension notes | [docs/rag_approach.md](docs/rag_approach.md) |
 | **Evaluation benchmark** — queries, expected positives, scene thumbnails, **Gemini ranking notebook links** | [docs/evaluation_queries_and_labels.md](docs/evaluation_queries_and_labels.md) |
 | **PDF layout and parser context** — page structure, quirks, risks before changing extraction | [docs/raw_data_characteristics.md](docs/raw_data_characteristics.md) |
 
@@ -63,7 +64,7 @@ PDF → page text/images → product records → validation → review Markdown
   → product/query embeddings → retrieval evaluation → notebook/report review
 ```
 
-The mock embedding path is still available as a deterministic local sanity check. The main experiment now uses Gemini Embedding 2 with three product indexes: product text, product image, and product multimodal. See [docs/pipeline.md](docs/pipeline.md) for the full command sequence and file outputs.
+The mock embedding path is still available as a deterministic local sanity check. The main experiment now uses Gemini Embedding 2 with three product indexes: product text, product image, and product multimodal. Google File Search RAG baselines are available for product text, product image, and multimodal PDF stores. See [docs/pipeline.md](docs/pipeline.md) for the full command sequence and file outputs.
 
 ---
 
