@@ -13,6 +13,7 @@ This is currently framed as **similarity search**, not a recommendation system. 
 | What you need | Where to go |
 |----------------|-------------|
 | **CLI pipeline** — extract → parse → crop → validate → Markdown → mock/Gemini embeddings → evaluation, with paths and outputs | [docs/pipeline.md](docs/pipeline.md) |
+| **Agent handoff** — start-here checklist for a new Codex agent on another machine | [docs/agent_handoff.md](docs/agent_handoff.md) |
 | **RAG handoff** — Google File Search store design, corpus builders, evaluation commands, and extension notes | [docs/rag_approach.md](docs/rag_approach.md) |
 | **Evaluation benchmark** — queries, expected positives, scene thumbnails, **Gemini ranking notebook links** | [docs/evaluation_queries_and_labels.md](docs/evaluation_queries_and_labels.md) |
 | **PDF layout and parser context** — page structure, quirks, risks before changing extraction | [docs/raw_data_characteristics.md](docs/raw_data_characteristics.md) |
@@ -43,7 +44,7 @@ pytest -q
 ruff check .
 ```
 
-For real Gemini embeddings, put one of these variables in a local `.env` or shell environment:
+For real Gemini CLI runs, set one of these variables in the shell environment:
 
 ```bash
 GOOGLE_API_KEY=...
@@ -51,7 +52,8 @@ GOOGLE_API_KEY=...
 GEMINI_API_KEY=...
 ```
 
-Do not commit `.env`.
+The package CLI can also read a local uncommitted `.env`, but the live demo notebooks prompt for
+API keys inside notebook cells and do not read `.env`.
 
 ---
 
@@ -104,3 +106,17 @@ After Gemini evaluation, browse **real rankings** offline (loads `data/eval/gemi
 | 9 | Cropped image + text → product multimodal | [gemini_review_09_cropped_image_text_to_product_multimodal.ipynb](notebooks/gemini_review_09_cropped_image_text_to_product_multimodal.ipynb) |
 
 The same table appears in [docs/evaluation_queries_and_labels.md](docs/evaluation_queries_and_labels.md) (regenerate that file with `python scripts/render_evaluation_query_docs.py` after changing queries or images).
+
+---
+
+## Jupyter: live demo notebooks
+
+These notebooks make live API calls from user-provided keys typed into notebook cells:
+
+| Demo | What it shows | Notebook |
+|------|---------------|----------|
+| 1 | Direct Gemini Embedding 2 retrieval for live text/image queries against text, image, and multimodal product vectors | [demo_01_direct_embedding_results.ipynb](notebooks/demo_01_direct_embedding_results.ipynb) |
+| 2 | Google File Search RAG retrieval for live text/image queries against text, image, and multimodal stores | [demo_02_rag_results.ipynb](notebooks/demo_02_rag_results.ipynb) |
+
+Use these for presentations. Use the `gemini_review_*.ipynb` notebooks above for offline result
+inspection after batch evaluation has already been run.

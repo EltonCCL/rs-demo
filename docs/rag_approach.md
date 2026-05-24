@@ -2,7 +2,9 @@
 
 This document explains the Google File Search RAG baseline used in this project. It is meant for developers who need to continue the work without reverse-engineering the command history.
 
-For the full end-to-end CLI pipeline, see [pipeline.md](pipeline.md). For query labels and benchmark inputs, see [evaluation_queries_and_labels.md](evaluation_queries_and_labels.md).
+For the full end-to-end CLI pipeline, see [pipeline.md](pipeline.md). For the SSH/Codex handoff
+checklist, see [agent_handoff.md](agent_handoff.md). For query labels and benchmark inputs, see
+[evaluation_queries_and_labels.md](evaluation_queries_and_labels.md).
 
 ---
 
@@ -409,14 +411,15 @@ Use the JSON reports as the source of truth. The snapshot above is for orientati
 
 ### API Keys
 
-Set one of these in `.env`:
+For CLI runs, set one of these in the shell environment:
 
 ```text
 GOOGLE_API_KEY=...
 GEMINI_API_KEY=...
 ```
 
-Do not commit `.env`.
+The CLI can also read a local uncommitted `.env`. The live demo notebooks instead prompt for
+API keys inside notebook cells and do not read `.env`.
 
 ### Rate Limits
 
@@ -467,4 +470,3 @@ When adding a new RAG experiment:
 9. Run `pytest -q` and `ruff check .`.
 
 Avoid adding custom one-off scripts for new RAG experiments unless they are only for summary rendering. The main RAG logic should stay in `src/rs_demo/rag.py` and be reachable from `python -m rs_demo`.
-

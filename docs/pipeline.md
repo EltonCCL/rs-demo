@@ -2,7 +2,12 @@
 
 Step-by-step CLI flow from the PDF through product extraction, mock embeddings, Gemini embeddings, and retrieval evaluation. Run commands from the repository root unless noted.
 
-For **evaluation benchmark queries** (text, image, expected positives) and **links to the Gemini ranking notebooks** (`notebooks/gemini_review_*.ipynb`), see [evaluation_queries_and_labels.md](evaluation_queries_and_labels.md). For **Google File Search RAG design and developer handoff**, see [rag_approach.md](rag_approach.md). For **PDF layout and parser context**, see [raw_data_characteristics.md](raw_data_characteristics.md).
+For the **SSH/Codex handoff checklist**, see [agent_handoff.md](agent_handoff.md). For
+**evaluation benchmark queries** (text, image, expected positives) and **links to the Gemini
+ranking notebooks** (`notebooks/gemini_review_*.ipynb`), see
+[evaluation_queries_and_labels.md](evaluation_queries_and_labels.md). For **Google File Search
+RAG design and developer handoff**, see [rag_approach.md](rag_approach.md). For **PDF layout and
+parser context**, see [raw_data_characteristics.md](raw_data_characteristics.md).
 
 ---
 
@@ -219,7 +224,9 @@ This ranks products with cosine similarity and reports `hit@1`, `hit@5`, `hit@10
 
 ### 9. Generate Gemini product embeddings
 
-Real embeddings require `GOOGLE_API_KEY` or `GEMINI_API_KEY` in your shell environment or local `.env`. The code writes separate product arrays for text, image, and multimodal product representations:
+Real embedding CLI runs require `GOOGLE_API_KEY` or `GEMINI_API_KEY` in your shell environment
+or local uncommitted `.env`. The code writes separate product arrays for text, image, and
+multimodal product representations:
 
 ```bash
 python -m rs_demo build-gemini-embeddings --mode text --sleep-seconds 0.8
@@ -550,3 +557,10 @@ notebooks/gemini_review_09_cropped_image_text_to_product_multimodal.ipynb
 ```
 
 These notebooks load local embeddings and reports only. They do not make API calls.
+
+For live demos that do make API calls from keys typed into notebook cells, use:
+
+```text
+notebooks/demo_01_direct_embedding_results.ipynb
+notebooks/demo_02_rag_results.ipynb
+```

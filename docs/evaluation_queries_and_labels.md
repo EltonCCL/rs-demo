@@ -11,6 +11,7 @@ Scene and crop pictures are copied into [`docs/eval_query_images/`](eval_query_i
 - [Image + text queries](#image-text-queries)
 - [Cropped image + text queries](#cropped-image-text-queries)
 - [Gemini ranking notebooks](#gemini-ranking-notebooks)
+- [Live demo notebooks](#live-demo-notebooks)
 
 ## Source files
 
@@ -37,6 +38,16 @@ After you have run Gemini evaluation, open a notebook under `notebooks/` to brow
 | 7 | Whole image + text → product multimodal | [`gemini_review_07_image_text_to_product_multimodal.ipynb`](../notebooks/gemini_review_07_image_text_to_product_multimodal.ipynb) |
 | 8 | Cropped image + text → product image | [`gemini_review_08_cropped_image_text_to_product_image.ipynb`](../notebooks/gemini_review_08_cropped_image_text_to_product_image.ipynb) |
 | 9 | Cropped image + text → product multimodal | [`gemini_review_09_cropped_image_text_to_product_multimodal.ipynb`](../notebooks/gemini_review_09_cropped_image_text_to_product_multimodal.ipynb) |
+
+<a id="live-demo-notebooks"></a>
+## Live demo notebooks
+
+These notebooks make live API calls from API keys typed into notebook cells:
+
+| Demo | Purpose | Notebook |
+|------|---------|----------|
+| 1 | Direct embedding demo for live text/image queries | [`demo_01_direct_embedding_results.ipynb`](../notebooks/demo_01_direct_embedding_results.ipynb) |
+| 2 | Google File Search RAG demo for live text/image queries | [`demo_02_rag_results.ipynb`](../notebooks/demo_02_rag_results.ipynb) |
 
 ---
 
@@ -864,4 +875,3 @@ From the repository root:
 ```bash
 python scripts/render_evaluation_query_docs.py
 ```
-
