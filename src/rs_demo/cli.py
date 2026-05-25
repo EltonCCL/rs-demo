@@ -18,6 +18,14 @@ from rs_demo.evaluation import (
     validate_query_embedding_alignment,
     write_evaluation_report,
 )
+from rs_demo.experiments import (
+    ExperimentRunner,
+    MMEBV2DownloadConfig,
+    MMEBV2Vlm2VecSetupConfig,
+    download_mmeb_v2,
+    load_experiment_config,
+    setup_mmeb_v2_vlm2vec_eval,
+)
 from rs_demo.gemini_embeddings import (
     GeminiEmbeddingConfig,
     GeminiProductEmbeddingPipeline,
@@ -215,6 +223,56 @@ def build_parser() -> argparse.ArgumentParser:
     )
     gemini_eval.add_argument("--out", type=Path, default=Path("data/eval/gemini_retrieval_report.json"))
     gemini_eval.add_argument("--top-k", type=int, default=10)
+
+    experiment = subparsers.add_parser(
+        "run-experiment",
+        help="Run a config-driven multimodal embedding retrieval experiment.",
+    )
+    experiment.add_argument("config", type=Path, help="Path to an experiment TOML config.")
+
+    mmeb_download = subparsers.add_parser(
+        "download-mmeb-v2",
+        help="Download MMEB-V2 files into the preserved external data tree.",
+    )
+    mmeb_download.add_argument("--repo-id", default="TIGER-Lab/MMEB-V2")
+    mmeb_download.add_argument("--local-dir", type=Path, default=Path("data/external/mmeb-v2/hf-repo"))
+    mmeb_download.add_argument(
+        "--profile",
+        choices=["metadata", "image-smoke", "vlm2vec-eval", "full"],
+        default="metadata",
+        help=(
+            "metadata is small; image-smoke downloads the MMEB-V1 image tarball; "
+            "vlm2vec-eval downloads official eval asset archives; full is large."
+        ),
+    )
+    mmeb_download.add_argument("--revision", default=None)
+
+    mmeb_vlm2vec_setup = subparsers.add_parser(
+        "setup-mmeb-v2-vlm2vec",
+        help="Download and unpack MMEB-V2 eval assets in the VLM2Vec layout.",
+    )
+    mmeb_vlm2vec_setup.add_argument("--repo-id", default="TIGER-Lab/MMEB-V2")
+    mmeb_vlm2vec_setup.add_argument(
+        "--local-dir",
+        type=Path,
+        default=Path("data/external/mmeb-v2/vlm2vec_eval"),
+    )
+    mmeb_vlm2vec_setup.add_argument("--revision", default=None)
+    mmeb_vlm2vec_setup.add_argument(
+        "--skip-download",
+        action="store_true",
+        help="Only unpack files already present under --local-dir.",
+    )
+    mmeb_vlm2vec_setup.add_argument(
+        "--no-unpack",
+        action="store_true",
+        help="Download archives but do not unpack them.",
+    )
+    mmeb_vlm2vec_setup.add_argument(
+        "--force-unpack",
+        action="store_true",
+        help="Re-extract archives even if setup markers already exist.",
+    )
 
     rag_corpus = subparsers.add_parser(
         "build-rag-text-corpus",
@@ -545,7 +603,7 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     if args.command == "build-gemini-embeddings":
-        batch = GeminiProductEmbeddingPipeline().run(
+        product_embedding_batch = GeminiProductEmbeddingPipeline().run(
             GeminiEmbeddingConfig(
                 input_path=args.input,
                 output_dir=args.output,
@@ -557,7 +615,10 @@ def main(argv: list[str] | None = None) -> None:
                 force=args.force,
             )
         )
-        print(f"Wrote Gemini {args.mode} product embeddings to {args.output} records={len(batch.metadata)}")
+        print(
+            f"Wrote Gemini {args.mode} product embeddings to "
+            f"{args.output} records={len(product_embedding_batch.metadata)}"
+        )
         return
 
     if args.command == "build-gemini-query-embeddings":
@@ -569,7 +630,7 @@ def main(argv: list[str] | None = None) -> None:
         }
         query_path = query_paths[args.mode]
         output_dir = args.output_dir / args.mode
-        batch = GeminiQueryEmbeddingPipeline().run(
+        query_embedding_batch = GeminiQueryEmbeddingPipeline().run(
             GeminiQueryEmbeddingConfig(
                 input_path=query_path,
                 output_dir=output_dir,
@@ -580,7 +641,10 @@ def main(argv: list[str] | None = None) -> None:
                 force=args.force,
             )
         )
-        print(f"Wrote Gemini {args.mode} query embeddings to {output_dir} records={len(batch.metadata)}")
+        print(
+            f"Wrote Gemini {args.mode} query embeddings to "
+            f"{output_dir} records={len(query_embedding_batch.metadata)}"
+        )
         return
 
     if args.command == "run-gemini-evaluation":
@@ -611,13 +675,56 @@ def main(argv: list[str] | None = None) -> None:
         validate_query_embedding_alignment(queries, query_batch)
         rankings = ranker(retriever, query_batch, top_k=args.top_k)
         report = RetrievalEvaluator(k_values=(1, 5, args.top_k)).evaluate(queries, rankings)
-        reports = {}
+        reports: dict[str, dict[str, object]] = {}
         if args.out.exists():
             reports = json.loads(args.out.read_text(encoding="utf-8"))
         reports[args.mode] = report.to_dict()
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(json.dumps(reports, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(f"Wrote Gemini {args.mode} retrieval report to {args.out}")
+        return
+
+    if args.command == "run-experiment":
+        config = load_experiment_config(args.config)
+        experiment_result = ExperimentRunner(config).run()
+        print(
+            f"Wrote experiment run to {experiment_result.run_dir} "
+            f"dataset={experiment_result.dataset_id} model={experiment_result.model_id} "
+            f"queries={experiment_result.metrics.query_count}"
+        )
+        return
+
+    if args.command == "download-mmeb-v2":
+        download_result = download_mmeb_v2(
+            MMEBV2DownloadConfig(
+                repo_id=args.repo_id,
+                local_dir=args.local_dir,
+                profile=args.profile,
+                revision=args.revision,
+            )
+        )
+        print(
+            f"Downloaded MMEB-V2 profile={download_result.profile} "
+            f"repo={download_result.repo_id} local_dir={download_result.local_dir}"
+        )
+        return
+
+    if args.command == "setup-mmeb-v2-vlm2vec":
+        setup_result = setup_mmeb_v2_vlm2vec_eval(
+            MMEBV2Vlm2VecSetupConfig(
+                repo_id=args.repo_id,
+                local_dir=args.local_dir,
+                revision=args.revision,
+                download=not args.skip_download,
+                unpack=not args.no_unpack,
+                force_unpack=args.force_unpack,
+            )
+        )
+        print(
+            "Prepared MMEB-V2 VLM2Vec eval data "
+            f"local_dir={setup_result.local_dir} unpacked={list(setup_result.unpacked)} "
+            f"skipped={list(setup_result.skipped)} manifest={setup_result.manifest_path}"
+        )
         return
 
     if args.command == "build-rag-text-corpus":

@@ -48,6 +48,14 @@ def test_cli_exposes_pipeline_commands() -> None:
     assert args.command == "run-gemini-evaluation"
     assert args.mode == "cropped_image_text_to_image"
 
+    args = parser.parse_args(["run-experiment", "experiments/configs/whisky_gemini_qwen.toml"])
+    assert args.command == "run-experiment"
+    assert str(args.config) == "experiments/configs/whisky_gemini_qwen.toml"
+
+    args = parser.parse_args(["download-mmeb-v2", "--profile", "metadata"])
+    assert args.command == "download-mmeb-v2"
+    assert args.profile == "metadata"
+
     args = parser.parse_args(["build-rag-text-corpus", "--limit-products", "3"])
     assert args.command == "build-rag-text-corpus"
     assert args.limit_products == 3

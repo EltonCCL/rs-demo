@@ -12,6 +12,14 @@ rs-demo = "rs_demo.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest==8.4.2", "ruff==0.11.13"]
+qwen = [
+  "torch>=2.8.0",
+  "transformers>=4.57.0",
+  "qwen-vl-utils>=0.0.14",
+  "sentence-transformers>=5.0.0",
+]
+qwen-vllm = ["vllm>=0.14.0", "qwen-vl-utils>=0.0.14"]
+mmeb = ["huggingface-hub[cli]>=0.36.0", "hf-xet>=1.1.0"]
 
 [tool.ruff]
 line-length = 100

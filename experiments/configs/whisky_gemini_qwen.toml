@@ -1,0 +1,36 @@
+[run]
+run_id = "whisky_mock_smoke"
+description = "Template for whisky benchmark embedding comparisons. Switch provider.name to gemini_embedding_2 or qwen3_vl_embedding for real runs."
+top_k = 10
+
+[dataset]
+adapter = "whisky"
+catalogue_path = "data/extracted/product_parse_sample.jsonl"
+dataset_id = "whisky"
+
+[provider]
+name = "mock"
+dimension = 32
+
+# Gemini Embedding 2 real run:
+# name = "gemini_embedding_2"
+# model_name = "gemini-embedding-2"
+# dimension = 768
+#
+# Qwen3-VL-Embedding real run after `pip install -e '.[qwen]'`:
+# name = "qwen3_vl_embedding"
+# model_name = "Qwen/Qwen3-VL-Embedding-8B"
+# dimension = 4096
+# runtime = "sentence-transformers"
+# normalize = true
+# device = "cuda:0"
+# local_files_only = true
+# batch_size = 2
+
+[limits]
+queries = 5
+corpus = 100
+
+[output]
+runs_root = "data/experiments/runs"
+datasets_root = "data/experiments/datasets"

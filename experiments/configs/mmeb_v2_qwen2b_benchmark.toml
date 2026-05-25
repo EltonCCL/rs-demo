@@ -1,0 +1,31 @@
+[run]
+run_id = "mmeb_v2_qwen2b_benchmark"
+description = "Qwen3-VL-Embedding-2B run on benchmark-comparable MMEB-V2 candidate-ranking files."
+top_k = 10
+
+[dataset]
+adapter = "mmeb_v2"
+dataset_root = "data/external/mmeb-v2/hf-repo"
+dataset_id = "mmeb_v2"
+
+[provider]
+name = "qwen3_vl_embedding"
+model_name = "Qwen/Qwen3-VL-Embedding-2B"
+dimension = 2048
+runtime = "official"
+normalize = true
+local_files_only = true
+batch_size = 4
+
+# Qwen3-VL-Embedding reports MMEB-V2 with a 16,384-token context, 64 video frames,
+# an image-token cap of 1,800, and a video-token cap of 15,000. The official
+# runtime exposes stable constructor knobs for the context and frame policy here;
+# keep pixel-token caps aligned with the cloned Qwen evaluation scripts when
+# running an exact reproduction.
+max_length = 16384
+fps = 1.0
+max_frames = 64
+
+[output]
+runs_root = "data/experiments/runs"
+datasets_root = "data/experiments/datasets"

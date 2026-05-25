@@ -15,6 +15,7 @@ This is currently framed as **similarity search**, not a recommendation system. 
 | **CLI pipeline** — extract → parse → crop → validate → Markdown → mock/Gemini embeddings → evaluation, with paths and outputs | [docs/pipeline.md](docs/pipeline.md) |
 | **Agent handoff** — start-here checklist for a new Codex agent on another machine | [docs/agent_handoff.md](docs/agent_handoff.md) |
 | **RAG handoff** — Google File Search store design, corpus builders, evaluation commands, and extension notes | [docs/rag_approach.md](docs/rag_approach.md) |
+| **Embedding experiments** — whisky/Gemini experiments, official Qwen MMEB-V2 reproduction, and next Gemini-MMEB notes | [docs/experiment_framework.md](docs/experiment_framework.md) |
 | **Evaluation benchmark** — queries, expected positives, scene thumbnails, **Gemini ranking notebook links** | [docs/evaluation_queries_and_labels.md](docs/evaluation_queries_and_labels.md) |
 | **PDF layout and parser context** — page structure, quirks, risks before changing extraction | [docs/raw_data_characteristics.md](docs/raw_data_characteristics.md) |
 
@@ -67,6 +68,24 @@ PDF → page text/images → product records → validation → review Markdown
 ```
 
 The mock embedding path is still available as a deterministic local sanity check. The main experiment now uses Gemini Embedding 2 with three product indexes: product text, product image, and product multimodal. Google File Search RAG baselines are available for product text, product image, and multimodal PDF stores. See [docs/pipeline.md](docs/pipeline.md) for the full command sequence and file outputs.
+
+MMEB-V2 benchmark setup is also available for model-level sanity checks beyond the whisky catalogue.
+The completed Qwen3-VL-Embedding-2B reproduction uses the official Qwen evaluator rather than the
+local generic runner. It finished all 78 MMEB-V2 tasks with:
+
+```text
+Image 74.9 | Video 62.2 | VisDoc 79.2 | All 73.3
+```
+
+Results are under:
+
+```text
+data/experiments/qwen3_mmeb_v2_results/Qwen3-VL-Embedding-2B/
+```
+
+This matches the reported Qwen table closely (`Image 75.0`, `Video 61.9`, `VisDoc 79.2`, `All 73.2`).
+For exact commands, local patches, and next steps for Gemini Embedding 2 on MMEB-V2, start from
+[docs/experiment_framework.md](docs/experiment_framework.md) and [docs/agent_handoff.md](docs/agent_handoff.md).
 
 ---
 

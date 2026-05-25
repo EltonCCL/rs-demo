@@ -52,7 +52,8 @@ def relative_link(from_dir: Path, target: str | None) -> str | None:
 def markdown_table(rows: list[tuple[str, Any]]) -> str:
     lines = ["| Field | Value |", "|---|---|"]
     for key, value in rows:
-        lines.append(f"| {key} | {format_value(value).replace('|', '\\|')} |")
+        escaped_value = format_value(value).replace("|", r"\|")
+        lines.append(f"| {key} | {escaped_value} |")
     return "\n".join(lines)
 
 

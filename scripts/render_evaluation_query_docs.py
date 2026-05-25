@@ -315,6 +315,12 @@ GEMINI_REVIEW_NOTEBOOKS: list[tuple[str, str, str]] = [
 ]
 
 
+LIVE_DEMO_NOTEBOOKS: list[tuple[str, str, str]] = [
+    ("1", "Direct embedding demo for live text/image queries", "demo_01_direct_embedding_results.ipynb"),
+    ("2", "Google File Search RAG demo for live text/image queries", "demo_02_rag_results.ipynb"),
+]
+
+
 def gemini_review_notebooks_section() -> list[str]:
     lines: list[str] = []
     lines.append('<a id="gemini-ranking-notebooks"></a>')
@@ -332,6 +338,21 @@ def gemini_review_notebooks_section() -> list[str]:
         lines.append(
             f"| {num} | {title} | [`{filename}`](../notebooks/{filename}) |"
         )
+    lines.append("")
+    return lines
+
+
+def live_demo_notebooks_section() -> list[str]:
+    lines: list[str] = []
+    lines.append('<a id="live-demo-notebooks"></a>')
+    lines.append("## Live demo notebooks")
+    lines.append("")
+    lines.append("These notebooks make live API calls from API keys typed into notebook cells:")
+    lines.append("")
+    lines.append("| Demo | Purpose | Notebook |")
+    lines.append("|------|---------|----------|")
+    for num, purpose, filename in LIVE_DEMO_NOTEBOOKS:
+        lines.append(f"| {num} | {purpose} | [`{filename}`](../notebooks/{filename}) |")
     lines.append("")
     return lines
 
@@ -390,6 +411,7 @@ def render() -> str:
     lines.append("- [Image + text queries](#image-text-queries)")
     lines.append("- [Cropped image + text queries](#cropped-image-text-queries)")
     lines.append("- [Gemini ranking notebooks](#gemini-ranking-notebooks)")
+    lines.append("- [Live demo notebooks](#live-demo-notebooks)")
     lines.append("")
     lines.append("## Source files")
     lines.append("")
@@ -403,6 +425,7 @@ def render() -> str:
     )
     lines.append("")
     lines.extend(gemini_review_notebooks_section())
+    lines.extend(live_demo_notebooks_section())
     lines.append("---")
     lines.append("")
     lines.append('<a id="text-queries"></a>')
@@ -457,8 +480,8 @@ def render() -> str:
     lines.append("```bash")
     lines.append("python scripts/render_evaluation_query_docs.py")
     lines.append("```")
-    lines.append("")
     if log:
+        lines.append("")
         lines.append("<!-- Generator warnings:")
         for w in log:
             lines.append(f"  - {w}")

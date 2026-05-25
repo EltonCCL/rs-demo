@@ -1,0 +1,29 @@
+[run]
+run_id = "mmeb_v2_qwen2b_metadata_smoke"
+description = "Qwen3-VL-Embedding-2B text-only smoke run on MMEB-V2 metadata profile. Not benchmark-comparable."
+top_k = 2
+force = true
+
+[dataset]
+adapter = "mmeb_v2_metadata_smoke"
+dataset_root = "data/external/mmeb-v2/hf-repo"
+metadata_path = "video-tasks/data/activitynetqa.jsonl"
+dataset_id = "mmeb_v2_metadata_smoke"
+
+[provider]
+name = "qwen3_vl_embedding"
+model_name = "Qwen/Qwen3-VL-Embedding-2B"
+dimension = 2048
+runtime = "sentence-transformers"
+normalize = true
+device = "cuda:0"
+local_files_only = true
+batch_size = 4
+
+[limits]
+queries = 20
+corpus = 2
+
+[output]
+runs_root = "data/experiments/runs"
+datasets_root = "data/experiments/datasets"

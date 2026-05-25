@@ -1,0 +1,43 @@
+[run]
+run_id = "mmeb_v2_mock_smoke"
+description = "Template for MMEB-V2 multimodal embedding comparisons. Switch provider.name for real Gemini or Qwen runs."
+top_k = 10
+
+[dataset]
+adapter = "mmeb_v2"
+dataset_root = "data/external/mmeb-v2/hf-repo"
+dataset_id = "mmeb_v2"
+
+[provider]
+name = "mock"
+dimension = 32
+
+# Gemini Embedding 2 real run:
+# name = "gemini_embedding_2"
+# model_name = "gemini-embedding-2"
+# dimension = 768
+#
+# Qwen3-VL-Embedding real run after `pip install -e '.[qwen]'`:
+# name = "qwen3_vl_embedding"
+# model_name = "Qwen/Qwen3-VL-Embedding-8B"
+# dimension = 4096
+# runtime = "sentence-transformers"
+# normalize = true
+# device = "cuda:0"
+# local_files_only = true
+# batch_size = 2
+#
+# Qwen3-VL-Embedding vLLM run after `pip install -e '.[qwen-vllm]'`:
+# name = "qwen3_vl_embedding_vllm"
+# model_name = "Qwen/Qwen3-VL-Embedding-2B"
+# dimension = 2048
+# dtype = "bfloat16"
+# tensor_parallel_size = 1
+
+[limits]
+queries = 10
+corpus = 100
+
+[output]
+runs_root = "data/experiments/runs"
+datasets_root = "data/experiments/datasets"

@@ -25,6 +25,15 @@ data/embeddings/*
 data/rag/*
 !data/rag/.gitkeep
 data/demo_notebook/*
+data/external/*
+!data/external/.gitkeep
+data/experiments/runs/*
+!data/experiments/runs/.gitkeep
+data/experiments/datasets/*
+!data/experiments/datasets/.gitkeep
+data/experiments/*_results/
+external/repos/*
+!external/repos/.gitkeep
 
 .env.*
 !.env.example
